@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/controller/provider/signin_and_login/signin.dart';
 import 'package:flutter_application_1/core/core.dart';
 import 'package:flutter_application_1/presentetion/veryfypage/veryfeying_page.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:otp_text_field/otp_field.dart';
 import 'package:otp_text_field/style.dart';
+import 'package:provider/provider.dart';
 
 class OtpVerificationpScreen extends StatelessWidget {
   const OtpVerificationpScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    OtpFieldController otpcontroller=OtpFieldController();
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
@@ -67,6 +70,7 @@ class OtpVerificationpScreen extends StatelessWidget {
               Row(
                 children: [
                   OTPTextField(
+                   controller:otpcontroller ,
                     length: 4,
                     textFieldAlignment: MainAxisAlignment.spaceAround,
                     width: MediaQuery.of(context).size.width,
@@ -86,6 +90,7 @@ class OtpVerificationpScreen extends StatelessWidget {
                   width: 160,
                   child: ElevatedButton(
                       onPressed: () {
+                       Provider.of<SigninPageLogin>(context,listen: false).phoneSignin(context,otpcontroller.toString() ); 
                         Navigator.push(
                             context,
                             MaterialPageRoute(

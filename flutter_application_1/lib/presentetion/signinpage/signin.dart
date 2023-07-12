@@ -1,161 +1,180 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/controller/provider/signin_and_login/signin.dart';
+import 'package:flutter_application_1/core/core.dart';
 import 'package:flutter_application_1/presentetion/signinpage/login_page.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
 class SigninPage extends StatefulWidget {
-  const   SigninPage({super.key});
+  SigninPage({super.key});
 
   @override
   State<SigninPage> createState() => _SigninPageState();
- 
+  FirebaseAuth auth = FirebaseAuth.instance;
 }
- final formkey=GlobalKey<FormState>();
+
+final formkey = GlobalKey<FormState>();
+
 class _SigninPageState extends State<SigninPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: ListView(
-        children:[ Column(
+      body: ListView(children: [
+        Column(
           children: [
-            const SizedBox(
-              height: 200,
-            ),
+            box,
+          
             Align(
               alignment: Alignment.center,
               child: Container(
-                height: 200,
-                width: 200,
-                // child: Lottie.asset('asset/lf30_4FGi6N.html',fit: BoxFit.cover),
+                height: 340,
+                width: 350,
                 decoration: const BoxDecoration(
                     image: DecorationImage(
                         image: AssetImage(
-                            'asset/young-handsome-physician-medical-robe-with-stethoscope.jpg'),
+                            'asset/man-doctor-woman-nurse-stand-with-patient-card-medical-staff-uniform-study-discuss-examination-result-make-note-therapist-giving-treatment-recommendation-prescription-putting-signature_575670-1316.avif'),
                         fit: BoxFit.cover)),
               ),
             ),
-           Padding(
-             padding: const EdgeInsets.fromLTRB(20, 20, 0, 0),
-             child: Align(
+            Padding(
+              padding: const EdgeInsets.fromLTRB(20, 20, 0, 0),
+              child: Align(
                 alignment: Alignment.bottomLeft,
-                child: Text(
-                  'Sign in',
-                  style: GoogleFonts.kadwa( textStyle:  const TextStyle(
-                    decoration: TextDecoration.none,
-                    fontSize: 30,
-                  ), )
-                ),
+                child: Text('Sign Up',
+                    style: GoogleFonts.kadwa(
+                      textStyle: const TextStyle(
+                        decoration: TextDecoration.none,
+                        fontSize: 30,
+                      ),
+                    )),
               ),
-           ),
-             Align(
+            ),
+            Align(
                 alignment: Alignment.centerLeft,
                 child: Padding(
-                  padding: const EdgeInsets.only(top: 0,left: 19),
+                  padding: const EdgeInsets.only(top: 0, left: 19),
                   child: Text(
                     'Log -in using password',
-                    style:GoogleFonts.kadwa( textStyle:  const TextStyle(color: Colors.black38,fontSize: 12)),
+                    style: GoogleFonts.kadwa(
+                        textStyle: const TextStyle(
+                            color: Colors.black38, fontSize: 12)),
                   ),
                 )),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                       Center(
-              child: Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: SizedBox(
-                  width: double.infinity,
-                  height: 80,
-                  child: TextFormField(
-                    decoration: InputDecoration(
-                        labelText: ' Email/Username/phone  ',
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10)
-                        )),
-                        validator: (value) {
-                          if(value==null ||value.isEmpty){
-                            return 'please compleate process';
-      
-                          }else{
-                           return null;
-                          }
-                        },
+            Form(
+              key: formkey,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Consumer<SigninPageLogin>(
+                    builder: (context, signUp, child) => Center(
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: TextFormField(
+                          obscureText: false,
+                          controller: signUp.emailController,
+                          decoration: InputDecoration(
+                              labelText: ' Email',
+                              border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10))),
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Please enter your email address.';
+                            } else if (!RegExp(r'\S+@\S+\.\S+')
+                                .hasMatch(value)) {
+                              return 'invalid emil';
+                            } else {
+                              return null;
+                            }
+                          },
+                        ),
+                      ),
+                    ),
                   ),
-                ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Consumer<SigninPageLogin>(
+                      builder: (context, value1, child) => SizedBox(
+                        height: 80,
+                        width: double.infinity,
+                        child: TextFormField(
+                          controller: value1.passwordController,
+                          decoration: InputDecoration(
+                              labelText: 'password',
+                              border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10))),
+                          validator: (value) =>
+                              value!.length < 6 ? 'Password to Short' : null,
+                          onSaved: (value) => value1.passwordController,
+                          obscureText: true,
+
+                          // if (value == null || value.isEmpty) {
+                          //   return 'please compleate process';
+                          // } else if (value == '') {
+                          //   return 'please compleate process';
+                          // } else {
+                          //   return null;
+                          // }
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
-             Padding(
-               padding: const EdgeInsets.all(10.0),
-               child: SizedBox(
-                 height: 80,
-                 width: double.infinity,
-                 child: TextFormField(
-                   decoration: InputDecoration(
-                       labelText: 'password', border: OutlineInputBorder(
-                         borderRadius: BorderRadius.circular(10)
-                       )),
-                       validator: (value) {
-                         if( value==null || value.isEmpty){
-                          return 'please compleate process';
-                        }else{
-                          return null;
-                        }
-                       },
-                 ),
-               ),
-             ),
-                  ],
-                ),
-           
           
-            const SizedBox(
-              height: 10,
-            ),
             SizedBox(
               height: 40,
               width: 150,
-              child: ElevatedButton(
-                  onPressed: () {
-                  final CollectionReference usersCollection =
-      FirebaseFirestore.instance.collection('users');
-       usersCollection.add({
-      'name': 'John Doe',
-      'email': 'johndoe@example.com',
-      // Additional fields and values
-    });
-                     Navigator.push(context, MaterialPageRoute(builder: (context)=> const LoginPageScreen()));
-                   
-                  },
-                  style: const ButtonStyle(
-                    backgroundColor: MaterialStatePropertyAll(Colors.blueGrey),
-                  ),
-                  child:  Text(
-                    'Sign in',
-                    style: GoogleFonts.kadwa( textStyle: const  TextStyle(fontSize: 15)),
-                  )),
+              child: Consumer<SigninPageLogin>(
+                builder: (context, signinPageLogin, child) => ElevatedButton(
+                    onPressed: () {
+                      if (formkey.currentState!.validate()) {
+                        signinPageLogin.signUp(
+                            signinPageLogin.emailController.text,
+                            signinPageLogin.passwordController.text);
+                        signinPageLogin.emailController.text = '';
+                        signinPageLogin.passwordController.text = '';
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => LoginPageScreen()));
+                      }
+                    },
+                    style: const ButtonStyle(
+                      backgroundColor:
+                          MaterialStatePropertyAll(Colors.blueGrey),
+                    ),
+                    child: Text(
+                      'Sign in',
+                      style: GoogleFonts.kadwa(
+                          textStyle: const TextStyle(fontSize: 15)),
+                    )),
+              ),
             ),
             const SizedBox(
               height: 8,
             ),
-             Text(
+            Text(
               'By Clicking proceed, I agree to the',
-              style:   GoogleFonts.kadwa(
-                textStyle: const  TextStyle(color: Colors.black45,fontSize:12 )
-              ),
+              style: GoogleFonts.kadwa(
+                  textStyle:
+                      const TextStyle(color: Colors.black45, fontSize: 12)),
             ),
             Padding(
               padding: const EdgeInsets.only(bottom: 15),
               child: TextButton(
                   onPressed: () {},
-                  child:  Text(
+                  child: Text(
                     'Terms & Condtions',
-                    style: GoogleFonts.kadwa( textStyle: const  TextStyle(color: Colors.black87, fontSize: 10)),
+                    style: GoogleFonts.kadwa(
+                        textStyle: const TextStyle(
+                            color: Colors.black87, fontSize: 10)),
                   )),
             )
           ],
         ),
-        ]
-      ),
+      ]),
     );
   }
 }

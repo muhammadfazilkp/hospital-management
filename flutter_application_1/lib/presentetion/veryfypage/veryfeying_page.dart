@@ -34,7 +34,7 @@ class _VeryfyingPageScreenState extends State<VeryfyingPageScreen> {
                               context,
                               MaterialPageRoute(
                                   builder: (context) =>
-                                      const LoginPageScreen()));
+                                     LoginPageScreen()));
                         },
                         icon: Text(
                           'LOGOUT',
@@ -160,44 +160,44 @@ class _VeryfyingPageScreenState extends State<VeryfyingPageScreen> {
               ],
             ),
             box,
-            const Padding(
-              padding: EdgeInsets.only(left: 15, top: 10, bottom: 1),
-              child: Align(
-                alignment: Alignment.topLeft,
-                child: CircleAvatar(
-                  // ignore: sort_child_properties_last
-                  child: Icon(
-                    Icons.location_on_outlined,
-                    color: Colors.black,
+           
+            Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: Row(
+                children: [
+                  const  CircleAvatar(
+                    // ignore: sort_child_properties_last
+                    child: Icon(
+                      Icons.location_on_outlined,
+                      color: Colors.black,
+                    ),
+                    backgroundColor: Colors.grey,
                   ),
-                  backgroundColor: Colors.grey,
-                ),
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 0),
+                    child: Column(
+                    children: [
+                      Text(
+                        'Your Location ',
+                        style: fonts,
+                      ),
+                      Text(
+                        'Town you live in',
+                        style: terms,
+                      ),
+                      ElevatedButton(
+                          onPressed: () {},
+                          child: Text(
+                            'Update',
+                            style: fonts,
+                          ))
+                    ],
+                                  ),
+                  ),
+                ],
               ),
             ),
-            Align(
-              alignment: Alignment.centerLeft,
-              child: Padding(
-                padding: const EdgeInsets.fromLTRB(50, 0, 0, 0),
-                child: Column(
-                  children: [
-                    Text(
-                      'Your Location ',
-                      style: fonts,
-                    ),
-                    Text(
-                      'Town you live in',
-                      style: terms,
-                    ),
-                    ElevatedButton(
-                        onPressed: () {},
-                        child: Text(
-                          'Update',
-                          style: fonts,
-                        ))
-                  ],
-                ),
-              ),
-            ),
+           
           ],
         ),
       ),

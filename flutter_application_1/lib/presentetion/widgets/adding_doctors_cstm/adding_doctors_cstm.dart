@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 
 class CostomeDoctor extends StatelessWidget {
-  const CostomeDoctor(
-      {super.key, required this.controller1, required this.hintText1});
-  final String hintText1;
-  final TextEditingController controller1;
+   CostomeDoctor(
+      {super.key,  this.controller1,  this.hintText1});
+     
+   String? hintText1;
+   TextEditingController? controller1;
+ 
+
+ 
   @override
   Widget build(BuildContext context) {
     return Padding(

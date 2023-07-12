@@ -26,4 +26,6 @@ TextStyle homep = GoogleFonts.kadwa(
 //buttons
   // ElevatedButton(onPressed: (){} ,style: const  ButtonStyle(backgroundColor: MaterialStatePropertyAll(Colors.green)), child: Text('submit',style: fonts,))
 
-    
+    //color
+   
+  
