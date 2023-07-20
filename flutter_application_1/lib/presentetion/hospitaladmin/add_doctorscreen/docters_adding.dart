@@ -54,7 +54,7 @@ class DoctorsAddingScreen extends StatelessWidget {
                   child: Consumer<AdminAddinProvider>(
                     builder: (context, value, child) => Column(
                       children: List.generate(
-                          5,
+                          6,
                           (index) => CostomeDoctor(
                               controller1: index == 0
                                   ? value.userNameController
@@ -63,8 +63,12 @@ class DoctorsAddingScreen extends StatelessWidget {
                                       : index == 2
                                           ? value.yearOldController
                                           : index == 3
-                                              ? value.categoryController
-                                              : value.placeController,
+                                            ?value.categoryController
+                                              :index==4
+                                                ?value.placeController
+                                                :value.pymentController,
+                                              // ? value.categoryController
+                                              // : value.placeController,
                               hintText1: value.addingDoctorsHintTextes[index])),
                     ),
                   ),
@@ -79,6 +83,9 @@ class DoctorsAddingScreen extends StatelessWidget {
                             value1.categoryController.text.trim(),
                             value1.placeController.text.trim(),
                             value1.phoneNumberController.text.trim(),
+                            value1.pymentController.text.trim()
+                          
+
                           );
                         }
                       },

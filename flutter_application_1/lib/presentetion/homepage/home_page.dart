@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/controller/provider/admin_side/admin_adding_side.dart';
 import 'package:flutter_application_1/core/core.dart';
+import 'package:flutter_application_1/presentetion/doctore_side/home_screen/home_screen.dart';
+import 'package:flutter_application_1/presentetion/search_page/search_screen.dart';
+import 'package:flutter_application_1/presentetion/user_appoiment/appoiment.dart';
+import 'package:provider/provider.dart';
 import '../widgets/listtile_costome.dart';
 
 class HomePageScreen extends StatefulWidget {
@@ -13,175 +18,219 @@ class _HomePageScreenState extends State<HomePageScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: SafeArea(
-            child: ListView(children: [
-      Column(
-        children: [
-          const SizedBox(
-            height: 40,
-          ),
-          Align(
-              alignment: Alignment.topLeft,
-              child: Padding(
-                padding: const EdgeInsets.only(left: 10),
-                child: Text(
-                  'Hai!!',
-                  style: homep,
-                ),
-              )),
-          Align(
-              alignment: Alignment.topLeft,
-              child: Padding(
-                padding: const EdgeInsets.only(left: 10),
-                child: Text(
-                  'Aswin',
-                  style: homep,
-                ),
-              )),
-          const Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              Padding(
-                padding: EdgeInsets.fromLTRB(0, 2, 20, 20),
-                child: Icon(
-                  Icons.notification_important_sharp,
-                  color: Colors.black,
-                ),
-              )
-            ],
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: SizedBox(
-              height: 50,
-              width: double.infinity,
-              child: TextField(
-                decoration: InputDecoration(
-                    labelText: 'Search',
-                    suffixIcon: const Icon(
-                      Icons.search,
-                      color: Colors.lightGreen,
-                    ),
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10))),
-              ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: SizedBox(
-              height: 250,
-              width: double.infinity,
-              child: Card(
-                color: Colors.green,
-                shape: RoundedRectangleBorder(
-                    side: const BorderSide(color: Colors.grey),
-                    borderRadius: BorderRadius.circular(10)),
-                child: Container(
-                  // height: 150,
-                  // width: 300,
-                  decoration: const BoxDecoration(
-                      image: DecorationImage(
-                          image: AssetImage(
-                              'asset/young-handsome-physician-medical-robe-with-stethoscope.jpg'),
-                          fit: BoxFit.cover)),
-                ),
-              ),
-            ),
-          ),
-          box,
-          Padding(
-            padding: const EdgeInsets.only(left: 35),
-            child: Row(
-              children: [
-                Container(
-                  height: 40,
-                  width: 100,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    color: Colors.grey,
+      body: SafeArea(
+        child: Consumer<AdminAddinProvider>(
+            builder: (context, addingprovider, child) => FutureBuilder(
+                  future: addingprovider.getAllDoctors(),
+                  builder: (context, snapshot) => Column(
+                    children: [
+                      const SizedBox(
+                        height: 40,
+                      ),
+                      Align(
+                          alignment: Alignment.topLeft,
+                          child: Padding(
+                            padding: const EdgeInsets.only(left: 10),
+                            child: Text(
+                              'Hai!!',
+                              style: homep,
+                            ),
+                          )),
+                      Align(
+                          alignment: Alignment.topLeft,
+                          child: Padding(
+                            padding: const EdgeInsets.only(left: 10),
+                            child: Text(
+                              'Aswin',
+                              style: homep,
+                            ),
+                          )),
+                      const Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          Padding(
+                            padding: EdgeInsets.fromLTRB(0, 2, 20, 20),
+                            child: Icon(
+                              Icons.notification_important_sharp,
+                              color: Colors.black,
+                            ),
+                          )
+                        ],
+                      ),
+
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: GestureDetector(
+                          onTap: () {
+                            Navigator.push(context, MaterialPageRoute(builder: (context) =>  const SearchPage(),));
+                          },
+                          child: Container(
+                            height: 40,
+                            width: double.infinity,
+                            decoration: BoxDecoration(
+                              color: Colors.grey[300],
+                              borderRadius: BorderRadius.circular(20),
+                        
+                            ),
+                               // ignore: prefer_const_constructors
+                               child:   Padding(
+                                 padding:  const EdgeInsets.only(left: 325),
+                                 child: const Icon(Icons. search,color: Colors.black,
+                                                         ),
+                               ),
+                                
+                             
+                          ),
+                        ),
+                      ),
+                     
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: SizedBox(
+                          height: 250,
+                          width: double.infinity,
+                          child: Card(
+                            color: Colors.green,
+                            shape: RoundedRectangleBorder(
+                                side: const BorderSide(color: Colors.grey),
+                                borderRadius: BorderRadius.circular(10)),
+                            child: Container(
+                              // height: 150,
+                              // width: 300,
+                              decoration: const BoxDecoration(
+                                  image: DecorationImage(
+                                      image: AssetImage(
+                                          'asset/young-handsome-physician-medical-robe-with-stethoscope.jpg'),
+                                      fit: BoxFit.cover)),
+                            ),
+                          ),
+                        ),
+                      ),
+                      box,
+                      Padding(
+                        padding: const EdgeInsets.only(left: 20),
+                        child: SingleChildScrollView(
+                          scrollDirection: Axis.horizontal,
+                          child: Row(
+                            children: [
+                              Container(
+                                  height: 40,
+                                  width: 120,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(10),
+                                    color: Colors.green[200],
+                                  ),
+                                  child: TextButton.icon(
+                                      onPressed: () {
+                                        // Navigator.push(context, MaterialPageRoute(builder: (context) => t,))
+                                      },
+                                      icon: const Icon(
+                                        Icons.local_hospital_outlined,
+                                        color: Colors.white,
+                                      ),
+                                      label: Text(
+                                        'General',
+                                        style: homep,
+                                      ))),
+                              Padding(
+                                padding: const EdgeInsets.only(left: 20),
+                                child: Container(
+                                  height: 40,
+                                  width: 100,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(10),
+                                    color: Colors.green[200],
+                                  ),
+                                  child: TextButton(
+                                      onPressed: () {
+                                        Navigator.push(context, MaterialPageRoute(builder: (context)=> const DoctorHomePage()));
+                                      },
+                                      child: Text(
+                                        'Cold',
+                                        style: fonts,
+                                      )),
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(left: 20),
+                                child: Container(
+                                  height: 40,
+                                  width: 100,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(10),
+                                    color: Colors.green[200],
+                                  ),
+                                  child: TextButton(
+                                      onPressed: () {
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (context) =>
+                                                  const AppoimentPage(),
+                                            ));
+                                      },
+                                      child: Text(
+                                        'More',
+                                        style: fonts,
+                                      )),
+                                ),
+                              ),
+                                Padding(
+                                  padding: const EdgeInsets.only(left: 20),
+                                  child: Container(
+                                    height: 40,
+                                    width: 120,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(10),
+                                      color: Colors.green[200],
+                                    ),
+                                    child: TextButton.icon(
+                                        onPressed: () {},
+                                        icon: const Icon(
+                                          Icons.local_hospital_outlined,
+                                          color: Colors.white,
+                                        ),
+                                        label: Text(
+                                          'General',
+                                          style: homep,
+                                        ))),
+                                ),
+                            ],
+                          ),
+                        ),
+                      ),
+                      box,
+                      Row(
+                        children: [
+                          Align(
+                              alignment: Alignment.centerLeft,
+                              child: Padding(
+                                padding: const EdgeInsets.only(left: 15),
+                                child: Text(
+                                  'Our Docters',
+                                  style: homep,
+                                ),
+                              )),
+                          Padding(
+                            padding: const EdgeInsets.only(left: 230),
+                            child: TextButton(
+                                onPressed: () {
+                                 
+                                },
+                                child: Text(
+                                  'See all',
+                                  style: homep,
+                                )),
+                          ),
+                        ],
+                      ),
+                      const Divider(),
+                      const ListileCustome(),
+                    ],
                   ),
-                  child: TextButton(
-                      onPressed: () {},
-                      child: Text(
-                        'fever',
-                        style: fonts,
-                      )),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 20),
-                  child: Container(
-                    height: 40,
-                    width: 100,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      color: Colors.grey,
-                    ),
-                    child: TextButton(
-                        onPressed: () {},
-                        child: Text(
-                          'Could',
-                          style: fonts,
-                        )),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 20),
-                  child: Container(
-                    height: 40,
-                    width: 100,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      color: Colors.grey,
-                    ),
-                    child: TextButton(
-                        onPressed: () {},
-                        child: Text(
-                          'More',
-                          style: fonts,
-                        )),
-                  ),
-                ),
-              ],
-            ),
-          ),
-          box,
-          Row(
-            children: [
-              Align(
-                  alignment: Alignment.centerLeft,
-                  child: Padding(
-                    padding: const EdgeInsets.only(left: 15),
-                    child: Text(
-                      'Our Docters',
-                      style: homep,
-                    ),
-                  )),
-              Padding(
-                padding: const EdgeInsets.only(left: 230),
-                child: TextButton(
-                    onPressed: () {},
-                    child: Text(
-                      'See all',
-                      style: homep,
-                    )),
-              ),
-            ],
-          ),
-          const Divider(),
-          const ListileCustome(name: 'Shinsha'),
-          const Divider(),
-          const ListileCustome(
-            name: 'Dr.vishnu',
-          ),
-          const ListileCustome(
-            name: 'Dr.Pranav',
-          ),
-          const ListileCustome(
-            name: 'Dr.Ajay',
-          ),
-        ],
+                )),
       ),
-    ])));
+      // bottomNavigationBar: BottomNavigationPage(),
+    );
   }
 }

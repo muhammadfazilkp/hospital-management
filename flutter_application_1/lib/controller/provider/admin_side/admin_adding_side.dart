@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
@@ -12,6 +11,7 @@ class AdminAddinProvider extends ChangeNotifier {
   TextEditingController yearOldController = TextEditingController();
   TextEditingController categoryController = TextEditingController();
   TextEditingController placeController = TextEditingController();
+  TextEditingController pymentController = TextEditingController();
   File? profileImage;
   List<Doctor> doctors = [];
 
@@ -35,10 +35,11 @@ class AdminAddinProvider extends ChangeNotifier {
     'expiriance',
     'catagory',
     'place',
+    'pyment',
   ];
 
   Future<void> addtToFirebase(String userName, String expriance,
-      String catgagory, String place, String phonenumber) async {
+      String catgagory, String place, String phonenumber, String pyment) async {
     String imageUrl = await cloudAdd(profileImage!);
     Map<String, dynamic> adding = {
       'doctor': userName,
@@ -46,7 +47,8 @@ class AdminAddinProvider extends ChangeNotifier {
       'experience': expriance,
       'category': catgagory,
       'place': place,
-      'image': imageUrl
+      'pyment': pyment,
+      'image': imageUrl,
     };
 
     await firestoreInstence.add(adding);

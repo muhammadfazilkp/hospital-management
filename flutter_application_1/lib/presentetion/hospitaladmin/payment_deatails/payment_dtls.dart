@@ -1,11 +1,23 @@
+
+
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/controller/provider/pyment_provider/rozer_pay.dart';
 import 'package:flutter_application_1/core/core.dart';
+import 'package:provider/provider.dart';
+
+
 
 class PaymentDetailsPage extends StatelessWidget {
-  const PaymentDetailsPage({super.key});
-
+   const  PaymentDetailsPage({super.key});
+   
   @override
   Widget build(BuildContext context) {
+    
+  final  paymentProvider= Provider.of<PaymentProvider>(context);
+  final paymentList= paymentProvider.ditailsList;
+
+
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -14,40 +26,32 @@ class PaymentDetailsPage extends StatelessWidget {
         ),
       ),
       body: SafeArea(
-        child: Column(
-          children: [
-            box,
-            Card(
-              child: ListTile(
-                title: const Text('Dr.Shinsha'),
-                subtitle: const Text('midlaj'),
+        child: ListView.builder(
+          itemCount: paymentList.length,
+          itemBuilder: (context, index) {
+          QueryDocumentSnapshot<Object?> payment =paymentList[index] ;
+            
+          
+          return  Column(
+            children: [
+              
+              
+              box,
+              ListTile(
+                title: Text('userName : ${payment.get('userName')}'),
+                subtitle:  Text('doctorName :${payment.get('doctorName')}'),
+
                 trailing: TextButton.icon(
                     onPressed: () {},
                     icon: const Icon(Icons.currency_rupee_outlined),
                     label: const Text('300')),
               ),
-            ),
-            Card(
-              child: ListTile(
-                title: const Text('Dr.Shinsha'),
-                subtitle: const Text('midlaj'),
-                trailing: TextButton.icon(
-                    onPressed: () {},
-                    icon: const Icon(Icons.currency_rupee_outlined),
-                    label: const Text('300')),
-              ),
-            ),
-            Card(
-              child: ListTile(
-                title: const Text('Dr.Shinsha'),
-                subtitle: const Text('midlaj'),
-                trailing: TextButton.icon(
-                    onPressed: () {},
-                    icon: const Icon(Icons.currency_rupee_outlined),
-                    label: const Text('300')),
-              ),
-            )
-          ],
+             
+              
+            ],
+          );
+          
+          }
         ),
       ),
     );

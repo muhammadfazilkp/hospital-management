@@ -22,6 +22,9 @@ TextStyle veryfeyin = GoogleFonts.kadwa(
 
 TextStyle homep = GoogleFonts.kadwa(
     textStyle: const TextStyle(color: Colors.black, fontSize: 14));
+    TextStyle booking = GoogleFonts.kadwa(
+    textStyle: const TextStyle(color: Colors.green, fontSize: 14));
+
 
 //buttons
   // ElevatedButton(onPressed: (){} ,style: const  ButtonStyle(backgroundColor: MaterialStatePropertyAll(Colors.green)), child: Text('submit',style: fonts,))

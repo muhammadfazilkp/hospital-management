@@ -21,21 +21,16 @@ class ViewDoctorsScreen extends StatelessWidget {
       ),
       body: SafeArea(
         child: Consumer<AdminAddinProvider>(
-          builder: (context, value, child)=> FutureBuilder(
-            
-            future: value.getAllDoctors(),
-            
-            builder: (context, snapshot) => const Column(
-              
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                box,
-                Vewdoctors(),
-              ],
-            ),
-          )
-          
-        ),
+            builder: (context, value, child) => FutureBuilder(
+                  future: value.getAllDoctors(),
+                  builder: (context, snapshot) => const Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      box,
+                      Vewdoctors(),
+                    ],
+                  ),
+                )),
       ),
     );
   }

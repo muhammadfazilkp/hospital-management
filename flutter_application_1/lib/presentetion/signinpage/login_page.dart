@@ -1,16 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/controller/provider/otp_loodin_widget/otp.dart';
+
+import 'package:flutter_application_1/presentetion/homepage/home_page.dart';
 import 'package:flutter_application_1/presentetion/hospitaladmin/admin_homepage/admin_homepage.dart';
 import 'package:flutter_application_1/presentetion/otp_page/otp_verification_page.dart';
 import 'package:flutter_application_1/presentetion/signinpage/signin.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
+
+import '../../servises/auth.dart';
 
 class LoginPageScreen extends StatelessWidget {
-  LoginPageScreen({super.key});
+  LoginPageScreen({
+    super.key,
+    Key? kay,
+  });
+
+  final loginKey = GlobalKey<FormState>();
+  final phoneController =TextEditingController();
 
   @override
-  // ignore: override_on_non_overriding_member
-  final loginKey = GlobalKey<FormState>();
-  
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
@@ -26,11 +35,11 @@ class LoginPageScreen extends StatelessWidget {
                 Center(
                   child: Container(
                     height: 290,
-                    width: 280,
+                    width: 300,
                     decoration: const BoxDecoration(
                         image: DecorationImage(
                             image: AssetImage(
-                              'asset/young-handsome-physician-medical-robe-with-stethoscope.jpg',
+                              'asset/medical-workers-analyzing-electronic-record_1262-19834-removebg-preview.png',
                             ),
                             fit: BoxFit.cover)),
                   ),
@@ -63,16 +72,18 @@ class LoginPageScreen extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: TextFormField(
-                    keyboardType: TextInputType.phone,
+                    keyboardType: TextInputType.number,
                     validator: (value) {
                       if (value == null || value.isEmpty) {
                         return 'please enter your number';
-                      } else {
-                        return null;
                       }
+                      if (value.length != 10) {
+                        return 'Phone number must be 10 digits.';
+                      }
+                      return null;
                     },
                     decoration: InputDecoration(
-                        labelText: '+91',
+                        prefixText: '+91',
                         fillColor: Colors.black,
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10),
@@ -85,26 +96,38 @@ class LoginPageScreen extends StatelessWidget {
                 SizedBox(
                   height: 50,
                   width: 400,
-                  child: ElevatedButton(
-                      onPressed: () {
-                        if (loginKey.currentState!.validate()) {
-                        
-                        }
-                          Navigator.push(
+                  child: Consumer<AuthenticationProvider>(
+                    builder:(context, value, child) {
+
+                     return value.loading
+                     ?  const Center(child: CircularProgressIndicator(),)
+
+                     : ElevatedButton(
+                        onPressed: () {
+                          if (loginKey.currentState!.validate()) {
+                            value.loading=true;
+                               AuthenticationService.sendPhoneNumber(phoneController.text, context) ;
+                                 
+                          }
+                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => const AdminHomePage()));
-
-                        // Navigator.push(context, MaterialPageRoute(builder: (context)=>))
-                      },
-                      style: const ButtonStyle(
-                          backgroundColor:
-                              MaterialStatePropertyAll(Colors.grey)),
-                      child: Text(
-                        'Login/Signup',
-                        style: GoogleFonts.kadwa(
-                            fontSize: 15, color: Colors.black),
-                      )),
+                                  builder: (context) => const  HomePageScreen()));
+                        
+                  
+                          // Navigator.push(context, MaterialPageRoute(builder: (context)=>))
+                        },
+                        style: const ButtonStyle(
+                            backgroundColor:
+                                MaterialStatePropertyAll(Colors.grey)),
+                        child: Text(
+                          'Login/Signup',
+                          style: GoogleFonts.kadwa(
+                              fontSize: 15, color: Colors.black),
+                        )
+                        );
+                    }
+                  ),
                 ),
                 const SizedBox(
                   height: 10,
@@ -147,8 +170,7 @@ class LoginPageScreen extends StatelessWidget {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) =>
-                                      const OtpVerificationpScreen()));
+                                  builder: (context) => const AdminHomePage()));
                         },
                         child: Text(
                           'Terms & Condtions',

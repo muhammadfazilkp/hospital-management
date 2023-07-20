@@ -6,6 +6,7 @@ class Doctor {
   String experience;
   String place;
   String image;
+  String pyment; 
 
   Doctor(
      this.id,
@@ -15,6 +16,7 @@ class Doctor {
      this.experience,
      this.place,
      this.image,
+     this.pyment,
   );
 
   factory Doctor.fromJson(Map<String, dynamic> json) {
@@ -26,6 +28,7 @@ class Doctor {
        json['experience'],
        json['place'],
        json['image'],
+       json['pyment']
 
     );
   }
@@ -39,6 +42,7 @@ class Doctor {
       'experience': experience,
       'place': place,
       'image': image,
+      'pyment':pyment
     };
   }
 }

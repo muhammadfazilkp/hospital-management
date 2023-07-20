@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/core/core.dart';
 import 'package:flutter_application_1/presentetion/signinpage/login_page.dart';
-
 
 class SpalashScreen extends StatelessWidget {
   const SpalashScreen({super.key});
@@ -48,7 +48,10 @@ class SpalashScreen extends StatelessWidget {
                           backgroundColor:
                               MaterialStatePropertyAll(Colors.white54),
                         ),
-                        child: const Text('GETSTART')),
+                        child: Text(
+                          'GET START',
+                          style: homep,
+                        )),
                   )
                 ],
               ),

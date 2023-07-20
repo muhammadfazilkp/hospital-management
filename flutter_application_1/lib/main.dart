@@ -1,12 +1,15 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/controller/provider/admin_side/admin_adding_side.dart';
+import 'package:flutter_application_1/controller/provider/otp_authentication_pv/otp_auth.dart';
+import 'package:flutter_application_1/controller/provider/search/searh.dart';
 import 'package:flutter_application_1/controller/provider/signin_and_login/signin.dart';
 import 'package:flutter_application_1/presentetion/splash/splash.dart';
 import 'package:provider/provider.dart';
-
+import 'controller/provider/otp_loodin_widget/otp.dart';
+import 'controller/provider/pyment_provider/rozer_pay.dart';
+import 'controller/provider/slot_checking_provider/slot.dart';
 import 'firebase_options.dart';
-import 'presentetion/bottom_nav_page/bottom_nav.dart';
 
 
 void main()async{
@@ -25,7 +28,12 @@ class Myapp extends StatelessWidget {
     return  MultiProvider(
       providers: [
         ChangeNotifierProvider(create:(context) => SigninPageLogin(), ),
-        ChangeNotifierProvider(create: (context)=>AdminAddinProvider())
+        ChangeNotifierProvider(create: (context)=>AdminAddinProvider()),
+        ChangeNotifierProvider(create: (context)=>PaymentProvider()),
+        ChangeNotifierProvider(create: (context) => OtpAuthenticationRepository('jfhgf'),),
+        ChangeNotifierProvider(create: (context) =>  AuthenticationProvider(),),
+        ChangeNotifierProvider(create: (context) => DoctorProvider(),),
+        ChangeNotifierProvider(create: (context) => SlotChekingProvider(),)
       ],
       child: MaterialApp(
         title: 'Hospital Management',

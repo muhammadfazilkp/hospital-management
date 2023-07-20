@@ -38,7 +38,8 @@ class Vewdoctors extends StatelessWidget {
                   ),
                   Text(viewProvider.doctors[index].experience,style: homep,),
                   Text(viewProvider.doctors[index].phonenumber,style: homep,),
-                  Text(viewProvider.doctors[index].place)
+                  Text(viewProvider.doctors[index].place),
+                  Text(viewProvider.doctors[index].pyment)
                   ],
                   
                 ),
