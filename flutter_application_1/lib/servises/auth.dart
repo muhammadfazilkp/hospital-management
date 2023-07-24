@@ -1,3 +1,5 @@
+
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/presentetion/otp_page/otp_verification_page.dart';
@@ -11,10 +13,10 @@ class AuthenticationService {
         verificationCompleted: (PhoneAuthCredential phoneAuthCredential) async {
           await auth.signInWithCredential(phoneAuthCredential);
           // ignore: use_build_context_synchronously
-          Navigator.push(context, MaterialPageRoute(builder: (context) {
-            return OtpVerificationpScreen(
-                verificationId: phoneAuthCredential.smsCode ?? '');
-          }));
+          // Navigator.push(context, MaterialPageRoute(builder: (context) {
+          //   return OtpVerificationpScreen(
+          //       verificationId: phoneAuthCredential.smsCode ?? '');
+          // }));
         },
         verificationFailed: (error) {
           throw Exception(error.message);
@@ -31,4 +33,6 @@ class AuthenticationService {
       print(e.toString());
     }
   }
+
+  
 }

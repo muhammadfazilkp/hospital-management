@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/controller/provider/otp_loodin_widget/otp.dart';
-
-import 'package:flutter_application_1/presentetion/homepage/home_page.dart';
 import 'package:flutter_application_1/presentetion/hospitaladmin/admin_homepage/admin_homepage.dart';
-import 'package:flutter_application_1/presentetion/otp_page/otp_verification_page.dart';
 import 'package:flutter_application_1/presentetion/signinpage/signin.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -17,7 +14,7 @@ class LoginPageScreen extends StatelessWidget {
   });
 
   final loginKey = GlobalKey<FormState>();
-  final phoneController =TextEditingController();
+  final phoneController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -72,9 +69,10 @@ class LoginPageScreen extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: TextFormField(
+                    controller: phoneController,
                     keyboardType: TextInputType.number,
                     validator: (value) {
-                      if (value == null || value.isEmpty) {
+                      if (value == null || value.isEmpty || value == '') {
                         return 'please enter your number';
                       }
                       if (value.length != 10) {
@@ -97,37 +95,36 @@ class LoginPageScreen extends StatelessWidget {
                   height: 50,
                   width: 400,
                   child: Consumer<AuthenticationProvider>(
-                    builder:(context, value, child) {
-
-                     return value.loading
-                     ?  const Center(child: CircularProgressIndicator(),)
-
-                     : ElevatedButton(
-                        onPressed: () {
-                          if (loginKey.currentState!.validate()) {
-                            value.loading=true;
-                               AuthenticationService.sendPhoneNumber(phoneController.text, context) ;
-                                 
-                          }
-                             Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => const  HomePageScreen()));
-                        
-                  
-                          // Navigator.push(context, MaterialPageRoute(builder: (context)=>))
-                        },
-                        style: const ButtonStyle(
-                            backgroundColor:
-                                MaterialStatePropertyAll(Colors.grey)),
-                        child: Text(
-                          'Login/Signup',
-                          style: GoogleFonts.kadwa(
-                              fontSize: 15, color: Colors.black),
-                        )
-                        );
-                    }
-                  ),
+                      builder: (context, value, child) {
+                    return 
+                    // value.loading
+                    //     ? const Center(
+                    //         child: CircularProgressIndicator(),
+                    //       )
+                    //     : 
+                        ElevatedButton(
+                            onPressed: () {
+                              if (loginKey.currentState!.validate()) {
+                                value.loading = true;
+                                AuthenticationService.sendPhoneNumber(
+                                    phoneController.text, context);
+                              }
+                              // Navigator.push(
+                              //     context,
+                              //     MaterialPageRoute(
+                              //         builder: (context) =>
+                              //             const HomePageScreen()));
+                            },
+                            style: const ButtonStyle(
+                                backgroundColor:
+                                    MaterialStatePropertyAll(Colors.grey)),
+                            child: Text(
+                              'Login/Signup',
+                              style: GoogleFonts.kadwa(
+                                  fontSize: 15, color: Colors.black),
+                            ));
+                            
+                  }),
                 ),
                 const SizedBox(
                   height: 10,

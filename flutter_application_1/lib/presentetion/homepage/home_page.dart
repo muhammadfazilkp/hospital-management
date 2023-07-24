@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/controller/provider/admin_side/admin_adding_side.dart';
 import 'package:flutter_application_1/core/core.dart';
 import 'package:flutter_application_1/presentetion/doctore_side/home_screen/home_screen.dart';
+import 'package:flutter_application_1/presentetion/pyment_screen_rz/pyment.dart';
 import 'package:flutter_application_1/presentetion/search_page/search_screen.dart';
 import 'package:flutter_application_1/presentetion/user_appoiment/appoiment.dart';
 import 'package:provider/provider.dart';
@@ -122,7 +123,7 @@ class _HomePageScreenState extends State<HomePageScreen> {
                                   ),
                                   child: TextButton.icon(
                                       onPressed: () {
-                                        // Navigator.push(context, MaterialPageRoute(builder: (context) => t,))
+                                        Navigator.push(context, MaterialPageRoute(builder: (context) =>   const PymentScreen(),));
                                       },
                                       icon: const Icon(
                                         Icons.local_hospital_outlined,

@@ -19,7 +19,7 @@ class OtpAuthenticationRepository extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<bool> verifyOtp(BuildContext context, String userOtp) async {
+  Future<bool> verifyOtp({required BuildContext context,required String userOtp}) async {
     FirebaseAuth auth = FirebaseAuth.instance;
 
     try {

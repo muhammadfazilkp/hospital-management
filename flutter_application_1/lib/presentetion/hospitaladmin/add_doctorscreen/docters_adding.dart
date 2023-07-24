@@ -85,9 +85,10 @@ class DoctorsAddingScreen extends StatelessWidget {
                             value1.phoneNumberController.text.trim(),
                             value1.pymentController.text.trim()
                           
-
+                 
                           );
-                        }
+                              Navigator.pop(context); 
+                        } 
                       },
                       style: const ButtonStyle(
                           backgroundColor:
