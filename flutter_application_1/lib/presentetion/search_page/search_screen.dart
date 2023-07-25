@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/core/core.dart';
+import 'package:flutter_application_1/model/doctor/doctor.dart';
 import 'package:provider/provider.dart';
 
 import '../../controller/provider/search/searh.dart';
@@ -26,7 +27,7 @@ class SearchPage extends StatelessWidget {
                       .searchDoctors(query);
                 },
                 decoration:   InputDecoration(
-                  hintText: 'Enter the doctor\'s name...',
+                  hintText: 'search catagories/doctors\'',
                   suffixIcon: const  Icon(Icons.search),
                    border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(20)
@@ -38,7 +39,10 @@ class SearchPage extends StatelessWidget {
             Expanded(
               child: Consumer<DoctorProvider>(
                 builder: (context, doctorProvider, _) {
-                  final searchResults = doctorProvider.searchResults;
+                 
+                  // final searchResults = doctorProvider.searchResults;
+
+                    List<Doctor> searchResults = doctorProvider.searchResults;
                   return ListView.builder(
                     itemCount: searchResults.length,
                     itemBuilder: (context, index) {

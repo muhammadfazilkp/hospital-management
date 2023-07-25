@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/controller/provider/signin_and_login/signin.dart';
 import 'package:flutter_application_1/core/core.dart';
+import 'package:flutter_application_1/presentetion/homepage/home_page.dart';
 import 'package:flutter_application_1/presentetion/signinpage/login_page.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -108,13 +109,7 @@ class _SigninPageState extends State<SigninPage> {
                           onSaved: (value) => value1.passwordController,
                           obscureText: true,
 
-                          // if (value == null || value.isEmpty) {
-                          //   return 'please compleate process';
-                          // } else if (value == '') {
-                          //   return 'please compleate process';
-                          // } else {
-                          //   return null;
-                          // }
+                        
                         ),
                       ),
                     ),
@@ -135,10 +130,7 @@ class _SigninPageState extends State<SigninPage> {
                             signinPageLogin.passwordController.text);
                         signinPageLogin.emailController.text = '';
                         signinPageLogin.passwordController.text = '';
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => LoginPageScreen()));
+                        Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) =>  const HomePageScreen(),), (route) => false);
                       }
                     },
                     style: const ButtonStyle(

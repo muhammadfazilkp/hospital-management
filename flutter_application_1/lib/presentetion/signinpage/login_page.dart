@@ -97,11 +97,11 @@ class LoginPageScreen extends StatelessWidget {
                   child: Consumer<AuthenticationProvider>(
                       builder: (context, value, child) {
                     return 
-                    // value.loading
-                    //     ? const Center(
-                    //         child: CircularProgressIndicator(),
-                    //       )
-                    //     : 
+                    value.loading
+                        ? const Center(
+                            child: CircularProgressIndicator(),
+                          )
+                        : 
                         ElevatedButton(
                             onPressed: () {
                               if (loginKey.currentState!.validate()) {

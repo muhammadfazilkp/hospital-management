@@ -20,6 +20,8 @@ class SlotChekingProvider extends ChangeNotifier {
   TextEditingController slotsController = TextEditingController();
   TextEditingController timeSheduleController = TextEditingController();
   DateTime? pickedDate;
+
+  // SlotChekingProvider(int index);
   Future<void> selectDate(BuildContext context) async {
     pickedDate = await showDatePicker(
       context: context,

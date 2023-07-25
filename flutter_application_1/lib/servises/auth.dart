@@ -1,5 +1,3 @@
-
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/presentetion/otp_page/otp_verification_page.dart';
@@ -22,9 +20,13 @@ class AuthenticationService {
           throw Exception(error.message);
         },
         codeSent: (verificationId, forceResendingToken) {
-          Navigator.push(context, MaterialPageRoute(builder: (context) {
-            return OtpVerificationpScreen(verificationId: verificationId);
-          }));
+          Navigator.pushAndRemoveUntil(
+              context,
+              MaterialPageRoute(
+                builder: (context) =>
+                    OtpVerificationpScreen(verificationId: verificationId),
+              ),
+              (route) => false);
         },
         codeAutoRetrievalTimeout: (verificationId) {},
         timeout: const Duration(seconds: 60),
@@ -33,6 +35,4 @@ class AuthenticationService {
       print(e.toString());
     }
   }
-
-  
 }

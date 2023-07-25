@@ -12,7 +12,7 @@ class DoctorProvider with ChangeNotifier {
 
   void _fetchAllDoctors() async {
     QuerySnapshot snapshot =
-        await FirebaseFirestore.instance.collection('doctors').get();
+        await FirebaseFirestore.instance.collection('Doctors').get();
     
     _allDoctors = snapshot.docs.map((doc) {
       return Doctor.fromJson(doc.data() as Map<String, dynamic>);
