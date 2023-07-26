@@ -10,10 +10,10 @@ class PymentScreen extends StatefulWidget {
   const PymentScreen({Key? key}) : super(key: key);
 
   @override
-  State<PymentScreen> createState() => _PymentScreenState();
+  State<PymentScreen> createState() => PymentScreenState();
 }
 
-class _PymentScreenState extends State<PymentScreen> {
+class PymentScreenState extends State<PymentScreen> {
   void _handlePaymentSuccess(PaymentSuccessResponse response) {
     Fluttertoast.showToast(
       msg: 'Success Payment: ${response.paymentId}',

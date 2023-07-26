@@ -6,11 +6,10 @@ class DoctorSide {
   // String? times;
 
   DoctorSide(
-    // this.datetime,
+    
     this.strtingtime,
     this.endingTime,
-    // this.slotes,
-    // this.times,
+   
   );
 
   factory DoctorSide.fromJson(Map<String, dynamic> json) {

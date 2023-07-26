@@ -58,6 +58,8 @@ class PaymentProvider extends ChangeNotifier {
       ditailsList.add(doc);
     }
     notifyListeners();
+
   }
+  
 }
 //            

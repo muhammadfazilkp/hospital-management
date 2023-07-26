@@ -52,7 +52,7 @@ class AdminAddinProvider extends ChangeNotifier {
     };
 
     await firestoreInstence.add(adding);
-  }
+  } 
 
   Future<void> getAllDoctors() async {
     final QuerySnapshot<Map<String, dynamic>> querySnapshot =
@@ -66,7 +66,7 @@ class AdminAddinProvider extends ChangeNotifier {
       doctors.add(doctor);
       notifyListeners();
     }
-  }
+  } 
 
   Future<String> cloudAdd(File file) async {
     final Reference storegeref = FirebaseStorage.instance

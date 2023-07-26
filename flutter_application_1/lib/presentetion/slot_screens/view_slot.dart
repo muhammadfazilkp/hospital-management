@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/core/core.dart';
 import 'package:flutter_application_1/model/doctor/doctor.dart';
 import 'package:flutter_application_1/model/doctor/doctor_side.dart';
-import 'package:flutter_chat_ui/flutter_chat_ui.dart';
+import 'package:flutter_application_1/presentetion/pyment_screen_rz/pyment.dart';
 
 class SloteCheckingScreen extends StatelessWidget {
   const SloteCheckingScreen({super.key, required this.doctor});
@@ -12,6 +12,8 @@ class SloteCheckingScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    PymentScreenState pymentScreen = PymentScreenState();
+
     return Scaffold(
       // appBar: AppBar(
       //   title: Text(
@@ -47,25 +49,33 @@ class SloteCheckingScreen extends StatelessWidget {
                     alignment: Alignment.centerLeft,
                     child: Column(
                       children: [
-                        Text(doctor.doctor,style: view,),
+                        Text(
+                          doctor.doctor,
+                          style: view,
+                        ),
                         Padding(
                           padding: const EdgeInsets.only(left: 18),
-                          child: Text(doctor.category,style: view,),
+                          child: Text(
+                            doctor.category,
+                            style: view,
+                          ),
                         ),
-                       
                       ],
                     ),
                   ),
-
                   Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: Text('Hospitality is almost impossible to teachn Its all about hiring the right people \Hospital are about healing ',style: homep,),
+                    child: Text(
+                      'Hospitality is almost impossible to teachn Its all about hiring the right people \nHospital are about healing  ',
+                      style: homep,
+                    ),
                   ),
-                   box,
-                   Text('Today available Times',style: view,),
-                  const  Divider(),
-                   
-
+                  box,
+                  Text(
+                    'Today available Times',
+                    style: view,
+                  ),
+                  const Divider(),
                   Expanded(
                     child: GridView.builder(
                       gridDelegate:
@@ -118,20 +128,22 @@ class SloteCheckingScreen extends StatelessWidget {
                       itemCount: categorrySnapshot.docs.length,
                     ),
                   ),
-
-
-
                   Padding(
                     padding: const EdgeInsets.fromLTRB(50, 0, 50, 30),
-                    child: ElevatedButton(onPressed: (){},style: ButtonStyle(
-                            shape: MaterialStatePropertyAll<RoundedRectangleBorder>(
-                                RoundedRectangleBorder(
-                                  side: BorderSide.none,
-                                    borderRadius: BorderRadius.circular(10))),
-                            backgroundColor:
-                                const MaterialStatePropertyAll(Colors.green),
-                                
-                          ), child: Text('boock now',style: homep)),
+                    child: ElevatedButton(
+                        onPressed: () {
+                          pymentScreen.makePayment();
+                        },
+                        style: ButtonStyle(
+                          shape:
+                              MaterialStatePropertyAll<RoundedRectangleBorder>(
+                                  RoundedRectangleBorder(
+                                      side: BorderSide.none,
+                                      borderRadius: BorderRadius.circular(10))),
+                          backgroundColor:
+                              const MaterialStatePropertyAll(Colors.green),
+                        ),
+                        child: Text('boock now', style: homep)),
                   )
                 ],
               );

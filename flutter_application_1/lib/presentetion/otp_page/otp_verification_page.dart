@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/controller/provider/otp_authentication_pv/otp_auth.dart';
 import 'package:flutter_application_1/core/core.dart';
 import 'package:flutter_application_1/presentetion/userprofileupdatepage/userprofile.dart';
-import 'package:flutter_application_1/presentetion/veryfypage/veryfeying_page.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:otp_pin_field/otp_pin_field.dart';
 import 'package:provider/provider.dart';
@@ -185,7 +184,7 @@ class _OtpVerificationpScreenState extends State<OtpVerificationpScreen> {
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) =>
-                                        const VeryfyingPageScreen()));
+                                         UserProfileUpadtingPage()));
                           },
                           style: ButtonStyle(
                             shape: MaterialStatePropertyAll<RoundedRectangleBorder>(

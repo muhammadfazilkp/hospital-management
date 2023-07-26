@@ -11,4 +11,6 @@ class SigninPageLogin extends ChangeNotifier {
     await auth.createUserWithEmailAndPassword(email: email, password: password);
     notifyListeners();
   }
+
+  //Userprofile Updating page //
 }
