@@ -43,17 +43,10 @@ class _HomePageScreenState extends State<HomePageScreen> {
                           child: Padding(
                             padding: const EdgeInsets.only(left: 10),
                             child: Consumer<UserProfileUpadtingprovider>(
-                              
-                              
-                              builder:(context, value, child) => 
-                            
-                               Text(
-                                     'kj'
-                               
-                                ,
+                              builder: (context, value, child) => Text(
+                                'kj',
                                 style: homep,
-                                                           ),
-                              
+                              ),
                             ),
                           )),
                       const Row(
@@ -68,12 +61,15 @@ class _HomePageScreenState extends State<HomePageScreen> {
                           )
                         ],
                       ),
-
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: GestureDetector(
                           onTap: () {
-                            Navigator.push(context, MaterialPageRoute(builder: (context) =>  const SearchPage(),));
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => const SearchPage(),
+                                ));
                           },
                           child: Container(
                             height: 40,
@@ -81,20 +77,18 @@ class _HomePageScreenState extends State<HomePageScreen> {
                             decoration: BoxDecoration(
                               color: Colors.grey[300],
                               borderRadius: BorderRadius.circular(20),
-                        
                             ),
-                               // ignore: prefer_const_constructors
-                               child:   Padding(
-                                 padding:  const EdgeInsets.only(left: 325),
-                                 child: const Icon(Icons. search,color: Colors.black,
-                                                         ),
-                               ),
-                                
-                             
+                            // ignore: prefer_const_constructors
+                            child: Padding(
+                              padding: const EdgeInsets.only(left: 325),
+                              child: const Icon(
+                                Icons.search,
+                                color: Colors.black,
+                              ),
+                            ),
                           ),
                         ),
                       ),
-                     
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: SizedBox(
@@ -105,7 +99,7 @@ class _HomePageScreenState extends State<HomePageScreen> {
                             shape: RoundedRectangleBorder(
                                 side: const BorderSide(color: Colors.grey),
                                 borderRadius: BorderRadius.circular(10)),
-                             child: Container(
+                            child: Container(
                               // height: 150,
                               // width: 300,
                               decoration: const BoxDecoration(
@@ -133,8 +127,11 @@ class _HomePageScreenState extends State<HomePageScreen> {
                                   ),
                                   child: TextButton.icon(
                                       onPressed: () {
-
-                                       Navigator.push(context, MaterialPageRoute(builder: (context) =>  Chatpage()   ,));
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (context) => Chatpage(),
+                                            ));
                                       },
                                       icon: const Icon(
                                         Icons.local_hospital_outlined,
@@ -155,7 +152,11 @@ class _HomePageScreenState extends State<HomePageScreen> {
                                   ),
                                   child: TextButton(
                                       onPressed: () {
-                                        Navigator.push(context, MaterialPageRoute(builder: (context)=> const DoctorHomePage()));
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    const DoctorHomePage()));
                                       },
                                       child: Text(
                                         'Cold',
@@ -173,18 +174,16 @@ class _HomePageScreenState extends State<HomePageScreen> {
                                     color: Colors.green[200],
                                   ),
                                   child: TextButton(
-                                      onPressed: () {
-                                        
-                                      },
+                                      onPressed: () {},
                                       child: Text(
                                         'More',
                                         style: fonts,
                                       )),
                                 ),
                               ),
-                                Padding(
-                                  padding: const EdgeInsets.only(left: 20),
-                                  child: Container(
+                              Padding(
+                                padding: const EdgeInsets.only(left: 20),
+                                child: Container(
                                     height: 40,
                                     width: 120,
                                     decoration: BoxDecoration(
@@ -201,7 +200,7 @@ class _HomePageScreenState extends State<HomePageScreen> {
                                           'General',
                                           style: homep,
                                         ))),
-                                ),
+                              ),
                             ],
                           ),
                         ),
@@ -222,7 +221,12 @@ class _HomePageScreenState extends State<HomePageScreen> {
                             padding: const EdgeInsets.only(left: 230),
                             child: TextButton(
                                 onPressed: () {
-                                  Navigator.push(context, MaterialPageRoute(builder: (context) =>  const PymentScreen (),));
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            const PymentScreen(),
+                                      ));
                                 },
                                 child: Text(
                                   'See all',
