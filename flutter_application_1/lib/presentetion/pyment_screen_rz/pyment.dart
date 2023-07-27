@@ -49,7 +49,7 @@ class PymentScreenState extends State<PymentScreen> {
     _razorpay?.on(Razorpay.EVENT_EXTERNAL_WALLET, _handleExternalWallet);
   }
 
-  void makePayment() async {
+  Future<void> makePayment() async {
     var options = {
       'key': 'rzp_test_Djkb2wONIbXz3v',
       'amount': 20000,

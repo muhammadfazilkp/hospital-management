@@ -1,8 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/controller/provider/pyment_provider/rozer_pay.dart';
-import 'package:flutter_application_1/core/core.dart';
-import 'package:flutter_application_1/model/doctor/doctor.dart';
+import 'package:flutter_application_1/core/core.dart';  
 import 'package:provider/provider.dart';
 
 class PaymentDetailsPage extends StatelessWidget {
@@ -12,7 +11,7 @@ class PaymentDetailsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final paymentProvider = Provider.of<PaymentProvider>(context);
     final paymentList = paymentProvider.ditailsList;
-      Doctor? doctor;
+      // Doctor? doctor;
     paymentProvider.getAllPayments();
 
     return Scaffold(
@@ -35,7 +34,7 @@ class PaymentDetailsPage extends StatelessWidget {
                     ListTile(
                       title: Text('userName : ${payment.get('')}'),
                       subtitle:
-                          Text('doctorName :${payment.get(doctor!.doctor)}'),
+                          Text('doctorName :${payment.get('')}'),
                       trailing: TextButton.icon(
                           onPressed: () {},
                           icon: const Icon(Icons.currency_rupee_outlined),
