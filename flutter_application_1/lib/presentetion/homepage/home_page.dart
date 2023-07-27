@@ -221,12 +221,12 @@ class _HomePageScreenState extends State<HomePageScreen> {
                             padding: const EdgeInsets.only(left: 230),
                             child: TextButton(
                                 onPressed: () {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) =>
-                                            const PymentScreen(),
-                                      ));
+                                  // Navigator.push(
+                                  //     context,
+                                  //     MaterialPageRoute(
+                                  //       builder: (context) =>
+                                  //           const PymentScreen(),
+                                  //     ));
                                 },
                                 child: Text(
                                   'See all',

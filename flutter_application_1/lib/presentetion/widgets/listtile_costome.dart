@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/controller/provider/admin_side/admin_adding_side.dart';
-import 'package:flutter_application_1/controller/provider/slot_checking_provider/slot.dart';
 import 'package:provider/provider.dart';
 import '../../core/core.dart';
 import '../slot_screens/view_slot.dart';
 
 class ListileCustome extends StatelessWidget {
-  // final name;
+
+
 
   const ListileCustome({
     super.key,
@@ -15,10 +15,9 @@ class ListileCustome extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Consumer<AdminAddinProvider>(
-      builder: (context, adp, child) => Expanded(
+      builder: (context, adp, child)
+       => Expanded(
         child: ListView.builder(
-            // shrinkWrap: false,
-            // physics:const NeverScrollableScrollPhysics(),
             itemCount: adp.doctors.length,
             itemBuilder: (context, index) {
               final doctor = adp.doctors[index];

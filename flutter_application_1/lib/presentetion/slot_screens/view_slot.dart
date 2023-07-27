@@ -14,9 +14,7 @@ class SloteCheckingScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-   
-    PymentScreenState pymentScreen = PymentScreenState();
-
+   RozzerPayResponse rozzerPayResponse=RozzerPayResponse();
     return Scaffold(
       // appBar: AppBar(
       //   title: Text(
@@ -26,16 +24,19 @@ class SloteCheckingScreen extends StatelessWidget {
       // ),
       body: SafeArea(
           child: StreamBuilder(
-                stream: FirebaseFirestore.instance
+        stream: FirebaseFirestore.instance
             .collection('DoctorSide')
             // .where('type', isEqualTo: type)
             .snapshots(),
-                builder: ((context, snapshot) {
+        builder: ((context, snapshot) {
           if (snapshot.connectionState == ConnectionState.active) {
             if (snapshot.hasData) {
               QuerySnapshot categorrySnapshot = snapshot.data as QuerySnapshot;
-              Provider.of<AuthenticationProvider>(context,listen: false).snapshot(categorrySnapshot);
-             Provider.of<AuthenticationProvider>(context,listen: false).f= List<bool>.generate(snapshot.data!.docs.length, (index) => false);
+              Provider.of<AuthenticationProvider>(context, listen: false)
+                  .snapshot(categorrySnapshot);
+              Provider.of<AuthenticationProvider>(context, listen: false).f =
+                  List<bool>.generate(
+                      snapshot.data!.docs.length, (index) => false);
               return Column(
                 children: [
                   Padding(
@@ -90,27 +91,25 @@ class SloteCheckingScreen extends StatelessWidget {
                         DoctorSide categoryProducts = DoctorSide.fromJson(
                             categorrySnapshot.docs[index].data()
                                 as Map<String, dynamic>);
-                        Provider.of<AuthenticationProvider>(context,listen: false).getTime(categoryProducts);        
-          
-                        final startTime = categoryProducts.strtingtime as String;
-            final endTime = categoryProducts.endingTime as String;
+                        Provider.of<AuthenticationProvider>(context,
+                                listen: false)
+                            .getTime(categoryProducts);
 
-              Provider.of<AuthenticationProvider>(context,listen: false).index=index;
-            // Check if the current time slot is booked
-          
-           List<String>bookedTimeSlots=[];
-          
-          
-            Provider.of<AuthenticationProvider>(context,listen: false).isSlotBooked = bookedTimeSlots.contains(startTime);
-              // BoxDecoration decoration = BoxDecoration(
-              //           borderRadius: BorderRadius.circular(5),
-              //           border: Border.all(
-              //             width: 1,
-              //             color: Provider.of< AuthenticationProvider >(context,listen: false).isSlotBooked==true ? Colors.red : Colors.green,
-              //           ),
-              // );
-           
-                       
+                        final startTime =
+                            categoryProducts.strtingtime as String;
+                        final endTime = categoryProducts.endingTime as String;
+
+                        Provider.of<AuthenticationProvider>(context,
+                                listen: false)
+                            .index = index;
+                        // Check if the current time slot is booked
+
+                        List<String> bookedTimeSlots = [];
+
+                        Provider.of<AuthenticationProvider>(context,
+                                listen: false)
+                            .isSlotBooked = bookedTimeSlots.contains(startTime);
+
                         return Padding(
                           padding: const EdgeInsets.only(
                               left: 25, bottom: 5, top: 5),
@@ -119,50 +118,40 @@ class SloteCheckingScreen extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Consumer<AuthenticationProvider>(
-                                builder:(context, timecheck, child) =>  GestureDetector(
+                                builder: (context, timecheck, child) =>
+                                    GestureDetector(
                                   onTap: () {
-                                    // if(timecheck. isSlotBooked==true){
-                                    //   timecheck. isSlotBooked=false;
-                                    // }else{
-                                    //    timecheck. isSlotBooked=true;
-                                    // }
-                                    // timecheck.f[index]=!timecheck.f[index];
-                                 
                                     timecheck.boolCheck(index);
                                   },
                                   child: Container(
                                     height: 80,
                                     width: 80,
-                                
+
                                     // ignore: sort_child_properties_last
                                     child: Column(
                                       children: [
                                         Text(
-                                          categoryProducts.strtingtime.toString(),
+                                          categoryProducts.strtingtime
+                                              .toString(),
                                           style: homep,
                                         ),
                                         box,
                                         Text(
-                                          categoryProducts.endingTime.toString(),
+                                          categoryProducts.endingTime
+                                              .toString(),
                                           style: homep,
                                         ),
                                       ],
                                     ),
-                                    // decoration: BoxDecoration(
-                                    //   borderRadius: BorderRadius.circular(5),
-                                    //   border: Border.all(
-                                    //     // color: ,
-                                    //     width: 1,
-                                    //   ),
-                                    // ),
-          
+
                                     decoration: BoxDecoration(
-                                       borderRadius: BorderRadius.circular(5),
-                        border: Border.all(
-                         width: 1,
-                         color:timecheck.f[index]==true ? Colors.red : Colors.green,
-                         ),
-          
+                                      borderRadius: BorderRadius.circular(5),
+                                      border: Border.all(
+                                        width: 1,
+                                        color: timecheck.f[index] == true
+                                            ? Colors.red
+                                            : Colors.green,
+                                      ),
                                     ),
                                   ),
                                 ),
@@ -177,24 +166,23 @@ class SloteCheckingScreen extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.fromLTRB(50, 0, 50, 30),
                     child: Consumer<AuthenticationProvider>(
-                      builder:(context, valueIndex, child) => ElevatedButton(
-                          onPressed: ()async {
-                           await pymentScreen.makePayment();
-                          
-                          // print("${valueIndex.categoryProducts?.strtingtime.toString()}:${valueIndex.categoryProducts?.endingTime.toString()}");
-                          DoctorSide categoryProducts = DoctorSide.fromJson(
-                            categorrySnapshot.docs[valueIndex.index!].data()
-                                as Map<String, dynamic>);
-                            print("${categoryProducts.strtingtime.toString()}:${categoryProducts.endingTime.toString()}");    
-                        
-                         
+                      builder: (context, valueIndex, child) => ElevatedButton(
+                          onPressed: () async {
+                              rozzerPayResponse.makePayment();
+
+                            // print("${valueIndex.categoryProducts?.strtingtime.toString()}:${valueIndex.categoryProducts?.endingTime.toString()}");
+                            DoctorSide categoryProducts = DoctorSide.fromJson(
+                                categorrySnapshot.docs[valueIndex.index!].data()
+                                    as Map<String, dynamic>);
+                            print(
+                                "${categoryProducts.strtingtime.toString()}:${categoryProducts.endingTime.toString()}");
                           },
                           style: ButtonStyle(
-                            shape:
-                                MaterialStatePropertyAll<RoundedRectangleBorder>(
-                                    RoundedRectangleBorder(
-                                        side: BorderSide.none,
-                                        borderRadius: BorderRadius.circular(10))),
+                            shape: MaterialStatePropertyAll<
+                                    RoundedRectangleBorder>(
+                                RoundedRectangleBorder(
+                                    side: BorderSide.none,
+                                    borderRadius: BorderRadius.circular(10))),
                             backgroundColor:
                                 const MaterialStatePropertyAll(Colors.green),
                           ),
@@ -220,8 +208,8 @@ class SloteCheckingScreen extends StatelessWidget {
               child: CircularProgressIndicator(),
             );
           }
-                }),
-              )),
+        }),
+      )),
     );
   }
 }

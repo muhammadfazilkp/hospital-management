@@ -30,13 +30,18 @@ List<bool> f=[];
 
   getTime(DoctorSide? category){
     categoryProducts=category;
-    notifyListeners();
+     notifyListeners();
   }
 
   snapshot(QuerySnapshot? snapshot){
     categorrySnapshot=snapshot;
-    notifyListeners();
+    // notifyListeners();
   }
+  
+  // notifyListeners() 
+    
+  
+  
 
   
 
