@@ -4,9 +4,10 @@ import 'package:flutter_application_1/controller/provider/userprofile_updating_p
 import 'package:flutter_application_1/core/core.dart';
 import 'package:flutter_application_1/presentetion/chat/chat_page.dart';
 import 'package:flutter_application_1/presentetion/doctore_side/home_screen/home_screen.dart';
+import 'package:flutter_application_1/presentetion/hospitaladmin/admin_homepage/admin_homepage.dart';
 import 'package:flutter_application_1/presentetion/search_page/search_screen.dart';
+import 'package:flutter_application_1/servises/greeting.dart';
 import 'package:provider/provider.dart';
-import '../pyment_screen_rz/pyment.dart';
 import '../widgets/listtile_costome.dart';
 
 class HomePageScreen extends StatefulWidget {
@@ -15,6 +16,8 @@ class HomePageScreen extends StatefulWidget {
   @override
   State<HomePageScreen> createState() => _HomePageScreenState();
 }
+
+Greetings greetings = Greetings();
 
 class _HomePageScreenState extends State<HomePageScreen> {
   @override
@@ -34,8 +37,8 @@ class _HomePageScreenState extends State<HomePageScreen> {
                           child: Padding(
                             padding: const EdgeInsets.only(left: 10),
                             child: Text(
-                              'Hai!!',
-                              style: homep,
+                              greetings.greeting(),
+                              style: greet,
                             ),
                           )),
                       Align(
@@ -99,9 +102,9 @@ class _HomePageScreenState extends State<HomePageScreen> {
                             shape: RoundedRectangleBorder(
                                 side: const BorderSide(color: Colors.grey),
                                 borderRadius: BorderRadius.circular(10)),
-                            child: Container(
-                              // height: 150,
-                              // width: 300,
+                            child: AnimatedContainer(
+                              duration: const  Duration(seconds: 4),
+                         
                               decoration: const BoxDecoration(
                                   image: DecorationImage(
                                       image: AssetImage(
@@ -130,7 +133,7 @@ class _HomePageScreenState extends State<HomePageScreen> {
                                         Navigator.push(
                                             context,
                                             MaterialPageRoute(
-                                              builder: (context) => Chatpage(),
+                                              builder: (context) => const  AdminHomePage(),
                                             ));
                                       },
                                       icon: const Icon(
@@ -221,12 +224,12 @@ class _HomePageScreenState extends State<HomePageScreen> {
                             padding: const EdgeInsets.only(left: 230),
                             child: TextButton(
                                 onPressed: () {
-                                  // Navigator.push(
-                                  //     context,
-                                  //     MaterialPageRoute(
-                                  //       builder: (context) =>
-                                  //           const PymentScreen(),
-                                  //     ));
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                             ChattingScreen(image: 'd', name: 'df', categorie: 'ffd', doctorId: 'dfd'),
+                                      ));
                                 },
                                 child: Text(
                                   'See all',

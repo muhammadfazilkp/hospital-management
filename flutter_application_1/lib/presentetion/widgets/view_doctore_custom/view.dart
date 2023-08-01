@@ -12,41 +12,64 @@ class Vewdoctors extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Consumer<AdminAddinProvider>(
-      builder:(context, viewProvider, child) =>  Expanded(
+      builder: (context, viewProvider, child) => Expanded(
         child: ListView.builder(
-          itemCount: viewProvider.doctors.length,
-          itemBuilder: (context, index) {
-          return Card(
-            color: Colors.grey,
-            child: ListTile(
-              
-              leading:  CircleAvatar(
-                radius: 40,
-                backgroundImage: NetworkImage(viewProvider.doctors[index].image),
-              ),
-              title: Text(
-                viewProvider.doctors[index].doctor,
-                style: homep,
-              ),
-              subtitle: Align(
-                alignment: Alignment.topLeft,
-                child: Column(
-                  children: [
-                     Text(
-                    viewProvider.doctors[index].category,
+            itemCount: viewProvider.doctors.length,
+            itemBuilder: (context, index) {
+              return Card(
+                color: Colors.grey[200],
+                child: ListTile(
+                  leading: CircleAvatar(
+                    radius: 40,
+                    
+                    backgroundImage:
+                        NetworkImage(viewProvider.doctors[index].image),
+                  ),
+                  title: Text(
+                    viewProvider.doctors[index].doctor,
                     style: homep,
                   ),
-                  Text(viewProvider.doctors[index].experience,style: homep,),
-                  Text(viewProvider.doctors[index].phonenumber,style: homep,),
-                  Text(viewProvider.doctors[index].place),
-                  Text(viewProvider.doctors[index].pyment)
-                  ],
-                  
+                  subtitle: Align(
+                    alignment: Alignment.topLeft,
+                    child: Column(
+                      children: [
+                        Align(
+                          alignment: Alignment.centerLeft,
+                          child: Text(
+                            viewProvider.doctors[index].category,
+                            style: homep,
+                          ),
+                        ),
+                        Align(
+                            alignment: Alignment.centerLeft,
+                            child: Text(
+                              viewProvider.doctors[index].experience,
+                              style: homep,
+                            )),
+                        Align(
+                            alignment: Alignment.centerLeft,
+                            child: Text(
+                              viewProvider.doctors[index].phonenumber,
+                              style: homep,
+                            )),
+                        Align(
+                            alignment: Alignment.centerLeft,
+                            child: Text(
+                              viewProvider.doctors[index].place,
+                              style: homep,
+                            )),
+                        Align(
+                            alignment: Alignment.centerLeft,
+                            child: Text(
+                              viewProvider.doctors[index].pyment,
+                              style: homep,
+                            ))
+                      ],
+                    ),
+                  ),
                 ),
-              ),
-            ),
-          );
-        }),
+              );
+            }),
       ),
     );
   }

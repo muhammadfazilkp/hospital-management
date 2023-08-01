@@ -1,18 +1,21 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class Message{
+class ChatMessage {
+  final String messageId;
+  final String senderId;
+  final String textMessage;
+  final Timestamp time;
 
-  String? messageId;
- String? senderId;
-   String? textMessage;
- Timestamp? time;
+  ChatMessage({
+    required this.messageId,
+    required this.senderId,
+    required this.textMessage,
+    required this.time,
+  });
 
-
-Message({this.messageId,this.senderId,this.textMessage,this.time});
-
-    factory Message.fromSnapshot(QueryDocumentSnapshot snapshot) {
+  factory ChatMessage.fromSnapshot(QueryDocumentSnapshot snapshot) {
     final data = snapshot.data() as Map<String, dynamic>;
-    return Message(
+    return ChatMessage(
       messageId: data['messageId'],
       senderId: data['senderId'],
       textMessage: data['textMessage'],
@@ -28,5 +31,4 @@ Message({this.messageId,this.senderId,this.textMessage,this.time});
       'time': time,
     };
   }
-
 }

@@ -6,7 +6,7 @@ class AuthenticationProvider with ChangeNotifier {
   bool _loading = false;
    int? index;
    DoctorSide? categoryProducts;
-   QuerySnapshot? categorrySnapshot;
+   QuerySnapshot? categorrySnapshot;  
    
 
 List<bool> f=[];
@@ -26,11 +26,12 @@ List<bool> f=[];
     f[index1]=!f[index1];
     index=index1;
     notifyListeners();
+   
   }
 
   getTime(DoctorSide? category){
     categoryProducts=category;
-     notifyListeners();
+     
   }
 
   snapshot(QuerySnapshot? snapshot){

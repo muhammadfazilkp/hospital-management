@@ -13,14 +13,9 @@ class AdminHomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: Colors.white,
-        appBar: AppBar(
-          backgroundColor: Colors.blueGrey,
-          title: Text(
-            'HOSPITAL ADDMINISTRATION',
-            style: homep,
-          ),
-        ),
+       
         body: SafeArea(
+          
             child: GridView.builder(
                     scrollDirection: Axis.vertical,
                     gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
@@ -64,7 +59,9 @@ class AdminPageCostom extends StatelessWidget {
 
   List gestureSelection = [
      DoctorsAddingScreen(),
-    const PaymentDetailsPage(),
+      const AdminPaymentDetailsScreen(),
+    // PaymentDetailsPage(),
+    // const  PaymentList(),
       const  ViewDoctorsScreen()
   ];
 
@@ -81,7 +78,7 @@ class AdminPageCostom extends StatelessWidget {
               fit: BoxFit.cover,
             ),
             TextButton.icon(
-                onPressed: () {
+                onPressed: (){
                   Navigator.push(
                       context,
                       MaterialPageRoute(

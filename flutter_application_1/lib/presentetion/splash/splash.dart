@@ -4,11 +4,10 @@ import 'package:flutter_application_1/presentetion/signinpage/login_page.dart';
 
 class SpalashScreen extends StatelessWidget {
   const SpalashScreen({super.key});
-
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Container(
+    return Scaffold(
+      body: Container(
         height: double.infinity,
         width: double.infinity,
         decoration: const BoxDecoration(

@@ -9,7 +9,6 @@ class SigninPageLogin extends ChangeNotifier {
   GlobalKey<ScaffoldState> scaffoldState = GlobalKey<ScaffoldState>();
   Future<void> signUp(String email, String password) async {
     await auth.createUserWithEmailAndPassword(email: email, password: password);
-    notifyListeners();
   }
 
   //Userprofile Updating page //

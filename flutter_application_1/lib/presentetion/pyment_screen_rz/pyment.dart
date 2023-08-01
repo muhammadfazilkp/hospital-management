@@ -1,110 +1,31 @@
-// import 'package:flutter/material.dart';
-// import 'package:flutter_application_1/core/core.dart';
-// import 'package:fluttertoast/fluttertoast.dart';
-// import 'package:provider/provider.dart';
-// import 'package:razorpay_flutter/razorpay_flutter.dart';
-
-// import '../../controller/provider/pyment_provider/rozer_pay.dart';
-
-// class PymentScreen extends StatefulWidget {
-//   const PymentScreen({Key? key}) : super(key: key);
-
-//   @override
-//   State<PymentScreen> createState() => PymentScreenState();
-// }
-
-// class PymentScreenState extends State<PymentScreen> {
-//   void _handlePaymentSuccess(PaymentSuccessResponse response) {
-//     Fluttertoast.showToast(
-//       msg: 'Success Payment: ${response.paymentId}',
-//       timeInSecForIosWeb: 4,
-//     );
-//     Provider.of<PaymentProvider>(context, listen: false)
-//         .handlePaymentSuccess(response);
-//   }
-
-//   void _handlePaymentError(PaymentFailureResponse response) {
-//     Fluttertoast.showToast(
-//       msg: 'Error ${response.code}- ${response.message}',
-//       timeInSecForIosWeb: 4,
-//     );
-//   }
-
-//   void _handleExternalWallet(ExternalWalletResponse response) {
-//     Fluttertoast.showToast(
-//       msg: 'Wallet ${response.walletName}',
-//       timeInSecForIosWeb: 4,
-//     );
-//   }
-
-//   Razorpay _razorpay = Razorpay();
-
-//   @override
-//   void initState() {
-//     super.initState();
-
-//     _razorpay?.on(Razorpay.EVENT_PAYMENT_SUCCESS, _handlePaymentSuccess);
-//     _razorpay?.on(Razorpay.EVENT_PAYMENT_ERROR, _handlePaymentError);
-//     _razorpay?.on(Razorpay.EVENT_EXTERNAL_WALLET, _handleExternalWallet);
-//   }
-
-//   Future<void>
-
-// makePayment() async {
-//   var options = {
-//     'key': 'rzp_test_Djkb2wONIbXz3v',
-//     'amount': 20000,
-//     'name': 'Fathima Hospital',
-//     'description': 'doctors',
-//     'prefill': {
-//       'contact': '+919074957353',
-//       'email': 'contact@protocoderpoint.cpm',
-//     },
-//   };
-//   try {
-//     _razorpay?.open(options);
-//   } catch (e) {
-//     debugPrint(e.toString());
-//   }
-// }
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       body: ListView(
-//         children: [
-//           ListTile(
-//             title: Text('Doctor', style: homep),
-//             subtitle: Text('Skin Specialist', style: homep),
-//             trailing: ElevatedButton(
-//               onPressed: makePayment,
-//               child: Text('Book Now', style: homep),
-//             ),
-//           ),
-//         ],
-//       ),
-//     );
-//   }
-
-//   @override
-//   void dispose() {
-//     _razorpay?.clear(); // Clear the event listeners to prevent memory leaks.
-//     super.dispose();
-//   }
-// }
-
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:razorpay_flutter/razorpay_flutter.dart';
 
 class RozzerPayResponse {
+  User? user = FirebaseAuth.instance.currentUser;
+
   Razorpay razorpay = Razorpay();
 
-  void _handlePaymentSuccess(PaymentSuccessResponse response) {
+  void handlePaymentSuccess(PaymentSuccessResponse response) {
     Fluttertoast.showToast(
       msg: 'Success Payment: ${response.paymentId}',
+      backgroundColor: Colors.green,
       timeInSecForIosWeb: 4,
     );
+    if (user != null) {
+      FirebaseFirestore.instance 
+          .collection('users')
+          .doc(user?.uid)
+          .collection('Payment')
+          .add({
+         'userid':user!.uid,   
+        'amount': response.paymentId,
+        'timestamp': FieldValue.serverTimestamp(),
+      });
+    }
   }
 
   void _handlePaymentError(PaymentFailureResponse response) {
@@ -135,7 +56,7 @@ class RozzerPayResponse {
 
     try {
       razorpay.open(options);
-      razorpay.on(Razorpay.EVENT_PAYMENT_SUCCESS, _handlePaymentSuccess);
+      razorpay.on(Razorpay.EVENT_PAYMENT_SUCCESS, handlePaymentSuccess);
       razorpay.on(Razorpay.EVENT_PAYMENT_ERROR, _handlePaymentError);
 
       razorpay.on(Razorpay.EVENT_EXTERNAL_WALLET, _handleExternalWallet);

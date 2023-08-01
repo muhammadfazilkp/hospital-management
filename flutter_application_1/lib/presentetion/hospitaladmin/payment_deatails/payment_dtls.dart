@@ -1,49 +1,44 @@
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/controller/provider/pyment_provider/rozer_pay.dart';
-import 'package:flutter_application_1/core/core.dart';  
-import 'package:provider/provider.dart';
 
-class PaymentDetailsPage extends StatelessWidget {
-  const PaymentDetailsPage({super.key});
+class AdminPaymentDetailsScreen extends StatelessWidget {
+  const AdminPaymentDetailsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final paymentProvider = Provider.of<PaymentProvider>(context);
-    final paymentList = paymentProvider.ditailsList;
-      // Doctor? doctor;
-    paymentProvider.getAllPayments();
-
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          'pymentdeatails',
-          style: homep,
-        ),
+        title: const  Text('Admin Payment Details'),
       ),
-      body: SafeArea(
-        child: Consumer<PaymentProvider>(
-          builder: (context, value, child) => ListView.builder(
-              itemCount: paymentList.length,
-              itemBuilder: (context, index) {
-                QueryDocumentSnapshot<Object?> payment = paymentList[index];
+      body: StreamBuilder<QuerySnapshot>(
+        stream: FirebaseFirestore.instance.collection('users').snapshots(),
+        builder: (context, snapshot) {
+          if (snapshot.hasError) {
+            return Text('Error: ${snapshot.error}');
+          }
 
-                return Column(
-                  children: [
-                    box,
-                    ListTile(
-                      title: Text('userName : ${payment.get('')}'),
-                      subtitle:
-                          Text('doctorName :${payment.get('')}'),
-                      trailing: TextButton.icon(
-                          onPressed: () {},
-                          icon: const Icon(Icons.currency_rupee_outlined),
-                          label: const Text('300')),
-                    ),
-                  ],
-                );
-              }),
-        ),
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return  const CircularProgressIndicator();
+          }
+
+          final paymentDocs = snapshot.data?.docs;
+
+          return ListView.builder(
+            itemCount: paymentDocs?.length,
+            itemBuilder: (context, index) {
+              final paymentData = paymentDocs?[index].data();
+              final amount = paymentData;
+              final userId = paymentData;
+              final timestamp = paymentData;
+
+              return ListTile(
+                title: Text('User ID: $userId'),
+                subtitle: Text('Amount: $amount\nTimestamp: $timestamp'),
+              );
+            },
+          );
+        },
       ),
     );
   }

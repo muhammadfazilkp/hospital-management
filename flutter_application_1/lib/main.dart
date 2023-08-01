@@ -8,7 +8,6 @@ import 'package:flutter_application_1/controller/provider/userprofile_updating_p
 import 'package:flutter_application_1/presentetion/splash/splash.dart';
 import 'package:provider/provider.dart';
 import 'controller/provider/otp_loodin_widget/otp.dart';
-import 'controller/provider/pyment_provider/rozer_pay.dart';
 import 'controller/provider/slot_checking_provider/slot.dart';
 import 'firebase_options.dart';
 
@@ -30,7 +29,7 @@ class Myapp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(create:(context) => SigninPageLogin(), ),
         ChangeNotifierProvider(create: (context)=>AdminAddinProvider()),
-        ChangeNotifierProvider(create: (context)=>PaymentProvider()),
+        // ChangeNotifierProvider(create: (context)=>PaymentProvider()),
         ChangeNotifierProvider(create: (context) => OtpAuthenticationRepository('jfhgf'),),
         ChangeNotifierProvider(create: (context) =>  AuthenticationProvider(),),
         ChangeNotifierProvider(create: (context) => DoctorProvider(),),

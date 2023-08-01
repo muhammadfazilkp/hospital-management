@@ -108,21 +108,16 @@ Future<void> _selectTime(BuildContext context, SlotChekingProvider provider,
   final TimeOfDay? picked = await showTimePicker(
     context: context,
     initialTime: provider.selectedTime,
-
   );
-    
 
   if (picked != null) {
     provider.updateSelectedTime(picked, controllerCstm);
     final now = DateTime.now();
-     final selectedTime = DateTime(now.year, now.month, now.day, picked.hour, picked.minute);
-      final formattedTime = DateFormat('h:mm a').format(selectedTime);
-      print(formattedTime);
-
-
-    
+    final selectedTime =
+        DateTime(now.year, now.month, now.day, picked.hour, picked.minute);
+    final formattedTime = DateFormat('h:mm a').format(selectedTime);
+    print(formattedTime);
   }
-
 }
 
 class TimeShedulinngCstm extends StatelessWidget {
