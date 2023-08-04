@@ -74,7 +74,7 @@ class AdminPageCostom extends StatelessWidget {
         child: Column(
           children: [
             Image.asset(
-              'asset/detailed-doctors-nurses_52683-60321.avif',
+              'asset/medical-workers-analyzing-electronic-record_1262-19834-removebg-preview.png',
               fit: BoxFit.cover,
             ),
             TextButton.icon(

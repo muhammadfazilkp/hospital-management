@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/controller/provider/admin_side/admin_adding_side.dart';
 import 'package:flutter_application_1/controller/provider/userprofile_updating_provider/user_profile.dart';
@@ -16,11 +17,23 @@ class HomePageScreen extends StatefulWidget {
   @override
   State<HomePageScreen> createState() => _HomePageScreenState();
 }
+ bool _showFirstImage = true;
 
 Greetings greetings = Greetings();
 
 class _HomePageScreenState extends State<HomePageScreen> {
   @override
+  void initState() {
+  
+  
+    super.initState();
+     Timer.periodic(const Duration(seconds: 2), (timer) {
+      
+      setState(() {
+        _showFirstImage = !_showFirstImage;
+      });
+    });
+  }
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
@@ -44,26 +57,16 @@ class _HomePageScreenState extends State<HomePageScreen> {
                       Align(
                           alignment: Alignment.topLeft,
                           child: Padding(
-                            padding: const EdgeInsets.only(left: 10),
+                            padding: const EdgeInsets.only(left: 20),
                             child: Consumer<UserProfileUpadtingprovider>(
-                              builder: (context, value, child) => Text(
-                                'kj',
+                              builder: (context, userDitail, child) => Text(
+                                
+                                'Welcome, ${userDitail.userProfile!.username}',
                                 style: homep,
                               ),
                             ),
                           )),
-                      const Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          Padding(
-                            padding: EdgeInsets.fromLTRB(0, 2, 20, 20),
-                            child: Icon(
-                              Icons.notification_important_sharp,
-                              color: Colors.black,
-                            ),
-                          )
-                        ],
-                      ),
+                     
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: GestureDetector(
@@ -97,24 +100,31 @@ class _HomePageScreenState extends State<HomePageScreen> {
                         child: SizedBox(
                           height: 250,
                           width: double.infinity,
-                          child: Card(
-                            color: Colors.green,
-                            shape: RoundedRectangleBorder(
-                                side: const BorderSide(color: Colors.grey),
-                                borderRadius: BorderRadius.circular(10)),
-                            child: AnimatedContainer(
-                              duration: const  Duration(seconds: 4),
-                         
-                              decoration: const BoxDecoration(
-                                  image: DecorationImage(
-                                      image: AssetImage(
-                                          'asset/young-handsome-physician-medical-robe-with-stethoscope.jpg'),
-                                      fit: BoxFit.cover)),
-                            ),
+                          child: AnimatedContainer(
+                        duration: const Duration(seconds: 4),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(5),
+                          // color: Colors.amber,
+                          image: DecorationImage(
+                              fit: BoxFit.cover,
+                              image: AssetImage(_showFirstImage
+                                  ? 'asset/9233a9bf83cb10537e8dbe32224739f7.jpg'
+                                  : 'asset/d96044445b34de730fb33959fa2506bd.jpg'))),
+                        height: 300,
+                        width: double.infinity,
+                        child: const  Padding(
+                          padding:  EdgeInsets.fromLTRB(
+                          10,
+                          140,
+                          10,
+                          60,
                           ),
+                         
                         ),
+                          )
+                        )
                       ),
-                      box,
+                       box,
                       Padding(
                         padding: const EdgeInsets.only(left: 20),
                         child: SingleChildScrollView(
@@ -244,7 +254,7 @@ class _HomePageScreenState extends State<HomePageScreen> {
                   ),
                 )),
       ),
-      // bottomNavigationBar: BottomNavigationPage(),
+      
     );
   }
 }

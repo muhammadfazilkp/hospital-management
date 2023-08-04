@@ -96,24 +96,17 @@ class LoginPageScreen extends StatelessWidget {
                   width: 400,
                   child: Consumer<AuthenticationProvider>(
                       builder: (context, value, child) {
-                    return 
-                    value.loading
+                    return value.loading
                         ? const Center(
                             child: CircularProgressIndicator(),
                           )
-                        : 
-                        ElevatedButton(
+                        : ElevatedButton(
                             onPressed: () {
                               if (loginKey.currentState!.validate()) {
                                 value.loading = true;
                                 AuthenticationService.sendPhoneNumber(
                                     phoneController.text, context);
                               }
-                              // Navigator.push(
-                              //     context,
-                              //     MaterialPageRoute(
-                              //         builder: (context) =>
-                              //             const HomePageScreen()));
                             },
                             style: const ButtonStyle(
                                 backgroundColor:
@@ -123,7 +116,6 @@ class LoginPageScreen extends StatelessWidget {
                               style: GoogleFonts.kadwa(
                                   fontSize: 15, color: Colors.black),
                             ));
-                            
                   }),
                 ),
                 const SizedBox(

@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/controller/provider/slot_checking_provider/slot.dart';
 import 'package:flutter_application_1/core/core.dart';
+import 'package:flutter_application_1/presentetion/doctore_side/widget/time_cstm.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
@@ -22,9 +23,11 @@ class TimeShedulingScreen extends StatelessWidget {
               key: keyD,
               child: Column(
                 children: [
-                  boxW,
+                  const SizedBox(
+                    height: 70,
+                  ),
                   Padding(
-                    padding: const EdgeInsets.all(15.0),
+                    padding: const EdgeInsets.all(50.0),
                     child: Container(
                       height: 180,
                       width: double.infinity,
@@ -34,32 +37,6 @@ class TimeShedulingScreen extends StatelessWidget {
                               image: AssetImage(
                                   'asset/doctors-concept-illustration_114360-1515.avif'),
                               fit: BoxFit.cover)),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Container(
-                      height: 50,
-                      width: double.infinity,
-                      decoration: BoxDecoration(
-                        color: Colors.grey[200],
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: TextButton.icon(
-                          onPressed: () {
-                            slote.selectDate(context);
-                          },
-                          icon: Center(
-                              child: Text(
-                            '${slote.currentDate.day}/${slote.currentDate.month}/${slote.currentDate.year} ',
-                            style: homep,
-                          )),
-                          label: const Align(
-                              alignment: Alignment.centerRight,
-                              child: Icon(
-                                Icons.calendar_month,
-                                color: Colors.black,
-                              ))),
                     ),
                   ),
                   Padding(
@@ -81,18 +58,28 @@ class TimeShedulingScreen extends StatelessWidget {
                               : slote.endingTimeController),
                     ),
                   ),
-                  ElevatedButton(
-                      onPressed: () {
-                        if (keyD.currentState!.validate()) {
-                          slote.addToDoctorSideDb();
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: SizedBox(
+                      height: 40,
+                      width: double.infinity,
+                      child: ElevatedButton(
+                          onPressed: () {
+                            if (keyD.currentState!.validate()) {
+                              slote.addToDoctorSideDb();
 
-                          Navigator.pop(context);
-                        }
-                      },
-                      child: Text(
-                        'Submit',
-                        style: homep,
-                      ))
+                              Navigator.pop(context);
+                            }
+                          },
+                          style: const ButtonStyle(
+                              backgroundColor: MaterialStatePropertyAll(
+                                  Color.fromARGB(255, 19, 86, 96))),
+                          child: Text(
+                            'Submit',
+                            style: homep,
+                          )),
+                    ),
+                  )
                 ],
               ),
             ),
@@ -103,67 +90,13 @@ class TimeShedulingScreen extends StatelessWidget {
   }
 }
 
-Future<void> _selectTime(BuildContext context, SlotChekingProvider provider,
-    TextEditingController controllerCstm) async {
-  final TimeOfDay? picked = await showTimePicker(
-    context: context,
-    initialTime: provider.selectedTime,
-  );
+// DateTime currentDate = DateTime.now();
 
-  if (picked != null) {
-    provider.updateSelectedTime(picked, controllerCstm);
-    final now = DateTime.now();
-    final selectedTime =
-        DateTime(now.year, now.month, now.day, picked.hour, picked.minute);
-    final formattedTime = DateFormat('h:mm a').format(selectedTime);
-    print(formattedTime);
-  }
-}
-
-class TimeShedulinngCstm extends StatelessWidget {
-  TimeShedulinngCstm(
-      {super.key, required this.hintText, required this.controllerCstm});
-  String? hintText;
-  TextEditingController controllerCstm;
-  @override
-  Widget build(BuildContext context) {
-    return Consumer<SlotChekingProvider>(
-      builder: (context, value, child) => InkWell(
-        onTap: () => _selectTime(context, value, controllerCstm),
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: SizedBox(
-            height: 50,
-            width: double.infinity,
-            child: TextFormField(
-              // style: const TextStyle(fontSize: 40),
-              textAlign: TextAlign.center,
-              enabled: false,
-              keyboardType: TextInputType.text,
-              controller: value.timeController,
-              decoration: InputDecoration(
-                  hintText: 'Enter Time',
-                  labelText: controllerCstm == value.startingTimecontroller
-                      ? '${value.startingHour} : ${value.startingMinute}'
-                      : '${value.endingHour} : ${value.endingMinute}',
-                  hintMaxLines: 1,
-                  border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(15))),
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-DateTime currentDate = DateTime.now();
-
-Future<void> _selctDate(BuildContext context) async {
-  final DateTime? pickedeDate = await showDatePicker(
-      context: context,
-      initialDate: currentDate,
-      firstDate: DateTime(2023),
-      lastDate: DateTime(2050));
-  if (pickedeDate != null && pickedeDate != currentDate) {}
-}
+// Future<void> _selctDate(BuildContext context) async {
+//   final DateTime? pickedeDate = await showDatePicker(
+//       context: context,
+//       initialDate: currentDate,
+//       firstDate: DateTime(2023),
+//       lastDate: DateTime(2050));
+//   if (pickedeDate != null && pickedeDate != currentDate) {}
+// }

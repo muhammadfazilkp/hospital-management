@@ -1,10 +1,42 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/core/core.dart';
+import 'package:flutter_application_1/presentetion/bottom_nav_page/bottom_nav.dart';
+import 'package:flutter_application_1/presentetion/doctore_side/home_screen/home_screen.dart';
+import 'package:flutter_application_1/presentetion/hospitaladmin/admin_homepage/admin_homepage.dart';
+import 'package:flutter_application_1/presentetion/profile/profile_page.dart';
 import 'package:flutter_application_1/presentetion/signinpage/login_page.dart';
 
-class SpalashScreen extends StatelessWidget {
+class SpalashScreen extends StatefulWidget {
   const SpalashScreen({super.key});
+
   @override
+  State<SpalashScreen> createState() => _SpalashScreenState();
+}
+
+navigation(context) async {
+  FirebaseAuth auth = FirebaseAuth.instance;
+  User? user = auth.currentUser;
+  Navigator.push(context, MaterialPageRoute(builder: (context) {
+    if (user?.email == 'admin1234@gmail.com') {
+      return const AdminHomePage();
+    } else if (user?.email == 'doctor123@gmail.com') {
+      return const DoctorHomePage();
+    } else if (user == null) {
+      return LoginPageScreen();
+    } else {
+      return const BottomNavigatonPage();
+    }
+  }));
+}
+
+class _SpalashScreenState extends State<SpalashScreen> {
+  @override
+  // void initState() {
+  //   super.initState();
+  //   navigation(context);
+  // }
+
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
@@ -36,12 +68,14 @@ class SpalashScreen extends StatelessWidget {
                       right: 30,
                     ),
                     child: ElevatedButton(
-                        onPressed: () {
+                        onPressed: ( )  async{
+                          await navigation(context);
                           Navigator.of(context).pushAndRemoveUntil(
                               MaterialPageRoute(
                                 builder: (context) => LoginPageScreen(),
                               ),
                               (route) => route.isFirst);
+
                         },
                         style: const ButtonStyle(
                           backgroundColor:

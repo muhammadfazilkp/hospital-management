@@ -2,11 +2,11 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/controller/provider/signin_and_login/signin.dart';
 import 'package:flutter_application_1/core/core.dart';
-import 'package:flutter_application_1/presentetion/homepage/home_page.dart';
-import 'package:flutter_application_1/presentetion/signinpage/login_page.dart';
+import 'package:flutter_application_1/presentetion/userprofileupdatepage/userprofile.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
+// ignore: must_be_immutable
 class SigninPage extends StatefulWidget {
   SigninPage({super.key});
 
@@ -34,7 +34,7 @@ class _SigninPageState extends State<SigninPage> {
                 decoration: const BoxDecoration(
                     image: DecorationImage(
                         image: AssetImage(
-                            'asset/man-doctor-woman-nurse-stand-with-patient-card-medical-staff-uniform-study-discuss-examination-result-make-note-therapist-giving-treatment-recommendation-prescription-putting-signature_575670-1316.avif'),
+                            'asset/medical-workers-analyzing-electronic-record_1262-19834-removebg-preview.png'),
                         fit: BoxFit.cover)),
               ),
             ),
@@ -130,7 +130,7 @@ class _SigninPageState extends State<SigninPage> {
                             signinPageLogin.passwordController.text);
                         signinPageLogin.emailController.text = '';
                         signinPageLogin.passwordController.text = '';
-                        Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) =>  const HomePageScreen(),), (route) => false);
+                        Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) =>   UserProfileUpadtingPage(),), (route) => false);
                       }
                     },
                     style: const ButtonStyle(

@@ -230,7 +230,7 @@ class ChattingScreen extends StatelessWidget {
                 children: [
                   const SizedBox(width: 20),
                   Expanded(
-                    child: Container(
+                    child: Container( 
                       decoration: BoxDecoration(
                         color: Colors.grey.shade900,
                         borderRadius: BorderRadius.circular(10),

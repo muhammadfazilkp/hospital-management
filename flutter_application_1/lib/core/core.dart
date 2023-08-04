@@ -22,10 +22,10 @@ TextStyle veryfeyin = GoogleFonts.kadwa(
 
 TextStyle homep = GoogleFonts.kadwa(
     textStyle: const TextStyle(color: Colors.black, fontSize: 14));
-TextStyle booking = GoogleFonts.kadwa(
-    textStyle: const TextStyle(color: Colors.green, fontSize: 14));
+TextStyle booking = GoogleFonts.poppins(
+    textStyle: const TextStyle(color: Colors.black, fontSize: 15));
 
-TextStyle view = GoogleFonts.kadwa(
+TextStyle view = GoogleFonts.poppins(
     textStyle: const TextStyle(
         color: Colors.black, fontSize: 17, fontWeight: FontWeight.bold));
 
@@ -33,6 +33,11 @@ TextStyle view = GoogleFonts.kadwa(
 TextStyle greet = GoogleFonts.kadwa(
     textStyle: const TextStyle(
         color: Colors.green, fontSize: 20, fontWeight: FontWeight.w900));
+
+        TextStyle payment = GoogleFonts.poppins(
+    textStyle: const TextStyle(
+        color: Colors.green, fontSize: 17, fontWeight: FontWeight.w300));
+
     
 //buttons
   // ElevatedButton(onPressed: (){} ,style: const  ButtonStyle(backgroundColor: MaterialStatePropertyAll(Colors.green)), child: Text('submit',style: fonts,))

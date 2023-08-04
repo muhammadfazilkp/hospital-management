@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/model/doctor/doctor_side.dart';
+import 'package:intl/intl.dart';
 
 class SlotChekingProvider extends ChangeNotifier {
   DateTime currentDate = DateTime.now();
@@ -35,6 +36,37 @@ class SlotChekingProvider extends ChangeNotifier {
     }
   }
 
+  Future<void> selectTime(BuildContext context, SlotChekingProvider provider,
+      TextEditingController controllerCstm) async {
+    final TimeOfDay? picked = await showTimePicker(
+      context: context,
+      initialTime: provider.selectedTime,
+    );
+
+    if (picked != null) {
+      provider.updateSelectedTime(picked, controllerCstm);
+      final now = DateTime.now();
+      final selectedTime =
+          DateTime(now.year, now.month, now.day, picked.hour, picked.minute);
+    
+    }
+  }
+
+
+  /// converting the am and pm 
+  String convertTo12HourFormat(String time24Hour) {
+  try {
+    final time =
+        TimeOfDay.fromDateTime(DateTime.parse("2023-08-02 $time24Hour"));
+    final format =
+        DateFormat.jm(); // 'jm' formats time in 12-hour format with AM/PM
+    return format.format(DateTime(2023, 8, 2, time.hour, time.minute));
+  } catch (e) {
+    return 'Error';
+  }
+}
+
+
 //  TimeOfDay selectedTime = TimeOfDay.now();
   String startingHour = '';
   String endingHour = '';
@@ -66,11 +98,11 @@ class SlotChekingProvider extends ChangeNotifier {
       ) async {
     getAllDoctorSide();
     Map<String, dynamic> addingDb = {
-      // 'pickDate':pickedDate,
+     
       'startingtime': '${startingHour}:${startingMinute}',
       ' endingTime': '${endingHour}:${endingMinute}',
-      // ' slotes': '',
-      // 'times': '',
+      
+     
     };
     await firebaseFirestore.add(addingDb);
   }

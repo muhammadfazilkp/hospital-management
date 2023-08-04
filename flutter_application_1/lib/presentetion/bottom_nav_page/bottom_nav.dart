@@ -1,54 +1,61 @@
-
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/presentetion/doctore_side/home_screen/home_screen.dart';
+import 'package:flutter_application_1/presentetion/homepage/home_page.dart';
+import 'package:flutter_application_1/presentetion/hospitaladmin/admin_homepage/admin_homepage.dart';
+import 'package:flutter_application_1/presentetion/profile/profile_page.dart';
 
-class BottomNavigationPage extends StatefulWidget {
-  const BottomNavigationPage({Key? key}) : super(key: key);
+class BottomNavigatonPage extends StatefulWidget {
+  const BottomNavigatonPage({super.key});
 
   @override
-  State<BottomNavigationPage> createState() => _BottomNavigationPageState();
+  State<BottomNavigatonPage> createState() => _BottomNavigatonPageState();
 }
 
-class _BottomNavigationPageState extends State<BottomNavigationPage> {
-  int selectIndex = 0;
-  static const List<Widget>widgetoptions=[
-    Text('Home'),
-    Text('Doctors'),
-    Text('person')
-  ];
-  void iteamTapped(int index){
+int currentIndex=0;
+final List<Widget> pages = [
+  const  HomePageScreen(),
+  const  AdminHomePage(),
+  const ProfilePage()
+];
+
+class _BottomNavigatonPageState extends State<BottomNavigatonPage> {
+  void onTabTapped(int index) {
     setState(() {
-      selectIndex=index;
+      currentIndex = index;
     });
   }
 
   @override
+  @override
   Widget build(BuildContext context) {
-    BottomNavigationBar bottomNavigationBar = BottomNavigationBar(
-      items: const [
-        BottomNavigationBarItem(
-          icon: Icon(Icons.home, color: Colors.deepOrangeAccent),
-          label: 'Home',
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.medical_information_rounded),
-          label: 'Doctors',
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.person_pin),
-          label: 'Profile',
-        ),
-      ],
-      currentIndex: selectIndex,
-      selectedIconTheme: const  IconThemeData(color: Colors.amber),
-      onTap: iteamTapped,
-    
-    );
-
     return Scaffold(
-      body: Center(
-      
-        child: 
-        bottomNavigationBar),
+      body: pages[currentIndex],
+      bottomNavigationBar: BottomNavigationBar(
+          selectedIconTheme: const IconThemeData(color: Colors.black),
+          unselectedItemColor: Colors.white,
+          elevation: 30.8,
+          mouseCursor: MaterialStateMouseCursor.clickable,
+           backgroundColor: Colors.grey[400],
+          fixedColor: Colors.white,
+          type: BottomNavigationBarType.fixed,
+          items: const [
+            BottomNavigationBarItem(
+              icon: Icon(Icons.home),
+              label: 'Home',
+            ),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.medical_information), label: 'Doctors'),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.person_rounded), label: 'profile')
+          ],
+            currentIndex: currentIndex,
+        onTap: (int index) {
+          setState(() {
+            currentIndex = index;
+          });
+        },
+          
+          ),
     );
   }
 }

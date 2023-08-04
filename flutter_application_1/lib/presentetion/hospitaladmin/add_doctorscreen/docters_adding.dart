@@ -63,12 +63,10 @@ class DoctorsAddingScreen extends StatelessWidget {
                                       : index == 2
                                           ? value.yearOldController
                                           : index == 3
-                                            ?value.categoryController
-                                              :index==4
-                                                ?value.placeController
-                                                :value.pymentController,
-                                              // ? value.categoryController
-                                              // : value.placeController,
+                                              ? value.categoryController
+                                              : index == 4
+                                                  ? value.placeController
+                                                  : value.pymentController,
                               hintText1: value.addingDoctorsHintTextes[index])),
                     ),
                   ),
@@ -78,17 +76,14 @@ class DoctorsAddingScreen extends StatelessWidget {
                       onPressed: () async {
                         if (dkey.currentState!.validate()) {
                           await value1.addtToFirebase(
-                            value1.userNameController.text.trim(),
-                            value1.yearOldController.text.trim(),
-                            value1.categoryController.text.trim(),
-                            value1.placeController.text.trim(),
-                            value1.phoneNumberController.text.trim(),
-                            value1.pymentController.text.trim()
-                          
-                 
-                          );
-                              Navigator.pop(context); 
-                        } 
+                              value1.userNameController.text.trim(),
+                              value1.yearOldController.text.trim(),
+                              value1.categoryController.text.trim(),
+                              value1.placeController.text.trim(),
+                              value1.phoneNumberController.text.trim(),
+                              value1.pymentController.text.trim());
+                          Navigator.pop(context);
+                        }
                       },
                       style: const ButtonStyle(
                           backgroundColor:

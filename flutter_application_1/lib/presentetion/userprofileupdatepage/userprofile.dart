@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/controller/provider/userprofile_updating_provider/user_profile.dart';
 import 'package:flutter_application_1/core/core.dart';
+import 'package:flutter_application_1/presentetion/bottom_nav_page/bottom_nav.dart';
 import 'package:flutter_application_1/presentetion/homepage/home_page.dart';
 import 'package:flutter_application_1/presentetion/widgets/custom.dart';
 import 'package:provider/provider.dart';
@@ -17,7 +18,7 @@ class UserProfileUpadtingPage extends StatelessWidget {
         child: SingleChildScrollView(
           scrollDirection: Axis.vertical,
           child: Form(
-            key:fkey ,
+            key: fkey,
             child: Column(
               children: [
                 Padding(
@@ -32,14 +33,15 @@ class UserProfileUpadtingPage extends StatelessWidget {
                                 controller: index == 0
                                     ? value.mobileNumberController
                                     : index == 1
-                                        ? value.userNameController
+                                        ? value.emailController1
                                         : index == 2
-                                            ? value.emailController1
+                                            ? value.userNameController
                                             : index == 3
                                                 ? value.cityController
                                                 : index == 4
                                                     ? value.pinCodeController
-                                                    : value.registerYearController,
+                                                    : value
+                                                        .registerYearController,
                               )),
                     ),
                   ),
@@ -51,39 +53,47 @@ class UserProfileUpadtingPage extends StatelessWidget {
                     width: 150,
                     child: Consumer<UserProfileUpadtingprovider>(
                       builder: (context, userProfileUpadtingprovider, child) =>
-                          ElevatedButton(
-                              onPressed: () async {
-                                if (fkey.currentState!.validate()) {
-                                await  userProfileUpadtingprovider.addUserDiteails(
-                                      userProfileUpadtingprovider
-                                          .mobileNumberController.text
-                                          .trim(),
-                                      userProfileUpadtingprovider
-                                          .emailController1.text,
-                                      userProfileUpadtingprovider
-                                          .userNameController.text,
-                                      userProfileUpadtingprovider
-                                          .cityController.text,
-                                      userProfileUpadtingprovider
-                                          .pinCodeController.text,
-                                      userProfileUpadtingprovider
-                                          .registerYearController.text);
-          
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              const HomePageScreen()));
-                                }
-                              },
-                              style: const ButtonStyle(
-                                backgroundColor:
-                                    MaterialStatePropertyAll(Color.fromARGB(255, 202, 42, 133)),
-                              ),
-                              child: Text(
-                                'Submit',
-                                style: fonts,
-                              )),
+                          SizedBox(
+                        height: 40,
+                        width: double.infinity,
+                        child: ElevatedButton(
+                            onPressed: () async {
+                              if (fkey.currentState!.validate()) {
+                                await userProfileUpadtingprovider
+                                    .addUserDiteails(
+                                        userProfileUpadtingprovider
+                                            .mobileNumberController.text
+                                            .trim(),
+                                        userProfileUpadtingprovider
+                                            .emailController1.text,
+                                        userProfileUpadtingprovider
+                                            .userNameController.text,
+                                        userProfileUpadtingprovider
+                                            .cityController.text,
+                                        userProfileUpadtingprovider
+                                            .pinCodeController.text,
+                                        userProfileUpadtingprovider
+                                            .registerYearController.text);
+                                userProfileUpadtingprovider
+                                    .getUserDetailsByUID()
+                                    .then((value) =>
+                                        Navigator.pushAndRemoveUntil(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    const BottomNavigatonPage()),
+                                            (route) => false));
+                              }
+                            },
+                            style: const ButtonStyle(
+                              backgroundColor: MaterialStatePropertyAll(
+                                  Color.fromARGB(255, 202, 42, 133)),
+                            ),
+                            child: Text(
+                              'Submit',
+                              style: fonts,
+                            )),
+                      ),
                     ),
                   ),
                 )

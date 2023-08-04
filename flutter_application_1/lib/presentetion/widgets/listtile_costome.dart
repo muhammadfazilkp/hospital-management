@@ -57,23 +57,19 @@ class ListileCustome extends StatelessWidget {
                             child: TextButton.icon(
                                 onPressed: () {},
                                 icon: const Icon(
-                                  Icons.currency_bitcoin,
+                                  Icons.currency_rupee_outlined,size: 17,
                                   color: Colors.black,
                                 ),
                                 label: Text(
                                   adp.doctors[index].pyment,
-                                  style: booking,
+                                  style: payment,
                                 )),
                           ),
                           Flexible(
                             flex: 1,
                             child: TextButton.icon(
                                 onPressed: () {
-                                  // Navigator.push(
-                                  //     context,
-                                  //     MaterialPageRoute(
-                                  //         builder: (context) =>
-                                  //             const SloteCheckingScreen()));
+                                 
                                 },
                                 icon: Text(
                                   'check the slot',
