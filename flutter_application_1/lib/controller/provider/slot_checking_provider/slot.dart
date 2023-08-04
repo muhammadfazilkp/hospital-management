@@ -74,6 +74,12 @@ class SlotChekingProvider extends ChangeNotifier {
   String endingMinute = '';
   TextEditingController timeController = TextEditingController();
   TimeOfDay selectedTime = TimeOfDay.now();
+  String? date;
+
+  getDate(String data){
+    date=data;
+    notifyListeners();
+  }
 
   void updateSelectedTime(
       TimeOfDay newTime, TextEditingController controllerCstm) {

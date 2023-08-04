@@ -90,13 +90,3 @@ class TimeShedulingScreen extends StatelessWidget {
   }
 }
 
-// DateTime currentDate = DateTime.now();
-
-// Future<void> _selctDate(BuildContext context) async {
-//   final DateTime? pickedeDate = await showDatePicker(
-//       context: context,
-//       initialDate: currentDate,
-//       firstDate: DateTime(2023),
-//       lastDate: DateTime(2050));
-//   if (pickedeDate != null && pickedeDate != currentDate) {}
-// }

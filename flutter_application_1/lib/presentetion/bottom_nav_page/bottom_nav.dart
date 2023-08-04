@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/presentetion/doctore_side/home_screen/home_screen.dart';
 import 'package:flutter_application_1/presentetion/homepage/home_page.dart';
-import 'package:flutter_application_1/presentetion/hospitaladmin/admin_homepage/admin_homepage.dart';
+
+import 'package:flutter_application_1/presentetion/my_bookings/my_bookings_screen.dart';
 import 'package:flutter_application_1/presentetion/profile/profile_page.dart';
 
 class BottomNavigatonPage extends StatefulWidget {
@@ -14,7 +15,7 @@ class BottomNavigatonPage extends StatefulWidget {
 int currentIndex=0;
 final List<Widget> pages = [
   const  HomePageScreen(),
-  const  AdminHomePage(),
+  const MyBookingsPage(),
   const ProfilePage()
 ];
 
@@ -44,7 +45,7 @@ class _BottomNavigatonPageState extends State<BottomNavigatonPage> {
               label: 'Home',
             ),
             BottomNavigationBarItem(
-                icon: Icon(Icons.medical_information), label: 'Doctors'),
+                icon: Icon(Icons.my_library_books_outlined), label: 'My bookings'),
             BottomNavigationBarItem(
                 icon: Icon(Icons.person_rounded), label: 'profile')
           ],

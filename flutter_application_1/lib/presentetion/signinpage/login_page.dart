@@ -100,22 +100,25 @@ class LoginPageScreen extends StatelessWidget {
                         ? const Center(
                             child: CircularProgressIndicator(),
                           )
-                        : ElevatedButton(
-                            onPressed: () {
-                              if (loginKey.currentState!.validate()) {
-                                value.loading = true;
-                                AuthenticationService.sendPhoneNumber(
-                                    phoneController.text, context);
-                              }
-                            },
-                            style: const ButtonStyle(
-                                backgroundColor:
-                                    MaterialStatePropertyAll(Colors.grey)),
-                            child: Text(
-                              'Login/Signup',
-                              style: GoogleFonts.kadwa(
-                                  fontSize: 15, color: Colors.black),
-                            ));
+                        : Padding(
+                          padding: const EdgeInsets.only(right: 10,left: 10),
+                          child: ElevatedButton(
+                              onPressed: () {
+                                if (loginKey.currentState!.validate()) {
+                                  value.loading = true;
+                                  AuthenticationService.sendPhoneNumber(
+                                      phoneController.text, context);
+                                }
+                              },
+                              style: const ButtonStyle(
+                                  backgroundColor:
+                                      MaterialStatePropertyAll(Colors.grey)),
+                              child: Text(
+                                'Login/Signup',
+                                style: GoogleFonts.kadwa(
+                                    fontSize: 15, color: Colors.black),
+                              )),
+                        );
                   }),
                 ),
                 const SizedBox(
@@ -124,21 +127,24 @@ class LoginPageScreen extends StatelessWidget {
                 SizedBox(
                   height: 50,
                   width: 400,
-                  child: ElevatedButton(
-                      onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => SigninPage()));
-                      },
-                      style: const ButtonStyle(
-                          backgroundColor:
-                              MaterialStatePropertyAll(Colors.grey)),
-                      child: Text(
-                        'Login with password',
-                        style: GoogleFonts.kadwa(
-                            fontSize: 15, color: Colors.black),
-                      )),
+                  child: Padding(
+                    padding: const EdgeInsets.only(right: 10,left: 10),
+                    child: ElevatedButton(
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => SigninPage()));
+                        },
+                        style: const ButtonStyle(
+                            backgroundColor:
+                                MaterialStatePropertyAll(Colors.grey)),
+                        child: Text(
+                          'Login with password',
+                          style: GoogleFonts.kadwa(
+                              fontSize: 15, color: Colors.black),
+                        )),
+                  ),
                 ),
                 const SizedBox(
                   height: 30,

@@ -14,6 +14,7 @@ class AdminAddinProvider extends ChangeNotifier {
   TextEditingController pymentController = TextEditingController();
   File? profileImage;
   List<Doctor> doctors = [];
+  Doctor? doctor;
 
   Future<void> getphoto() async {
     final photo = await ImagePicker().pickImage(source: ImageSource.gallery);
@@ -62,8 +63,8 @@ class AdminAddinProvider extends ChangeNotifier {
         querySnapshot.docs.map((doc) => doc.data()).toSet().toList();
     doctors.clear();
     for (var data in viewlist) {
-      Doctor doctor = Doctor.fromJson(data);
-      doctors.add(doctor);
+     doctor = Doctor.fromJson(data);
+      doctors.add(doctor!);
       notifyListeners();
     }
   } 

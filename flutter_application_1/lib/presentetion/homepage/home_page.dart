@@ -13,7 +13,7 @@ import '../widgets/listtile_costome.dart';
 
 class HomePageScreen extends StatefulWidget {
   const HomePageScreen({super.key});
-
+      
   @override
   State<HomePageScreen> createState() => _HomePageScreenState();
 }
@@ -21,7 +21,10 @@ class HomePageScreen extends StatefulWidget {
 
 Greetings greetings = Greetings();
 
+
 class _HomePageScreenState extends State<HomePageScreen> {
+
+  
   @override
   void initState() {
   
@@ -37,72 +40,72 @@ class _HomePageScreenState extends State<HomePageScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Consumer<AdminAddinProvider>(
-            builder: (context, addingprovider, child) => FutureBuilder(
-                  future: addingprovider.getAllDoctors(),
-                  builder: (context, snapshot) => Column(
-                    children: [
-                      const SizedBox(
-                        height: 40,
-                      ),
-                      Align(
-                          alignment: Alignment.topLeft,
-                          child: Padding(
-                            padding: const EdgeInsets.only(left: 10),
-                            child: Text(
-                              greetings.greeting(),
-                              style: greet,
-                            ),
-                          )),
-                      Align(
-                          alignment: Alignment.topLeft,
-                          child: Padding(
-                            padding: const EdgeInsets.only(left: 20),
-                            child: Consumer<UserProfileUpadtingprovider>(
-                              builder: (context, userDitail, child) => Text(
-                                
-                                'Welcome, ${userDitail.userProfile!.username}',
-                                style: homep,
-                              ),
-                            ),
-                          )),
-                     
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: GestureDetector(
-                          onTap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => const SearchPage(),
-                                ));
-                          },
-                          child: Container(
-                            height: 40,
-                            width: double.infinity,
-                            decoration: BoxDecoration(
-                              color: Colors.grey[300],
-                              borderRadius: BorderRadius.circular(20),
-                            ),
-                            // ignore: prefer_const_constructors
+         
+        child: SingleChildScrollView(
+          scrollDirection: Axis.vertical,
+          child: Consumer<AdminAddinProvider>(
+              builder: (context, addingprovider, child) => FutureBuilder(
+                    future: addingprovider.getAllDoctors(),
+                    builder: (context, snapshot) => Column(
+                      children: [
+                        const SizedBox(
+                          height: 40,
+                        ),
+                        Align(
+                            alignment: Alignment.topLeft,
                             child: Padding(
-                              padding: const EdgeInsets.only(left: 325),
-                              child: const Icon(
-                                Icons.search,
-                                color: Colors.black,
+                              padding: const EdgeInsets.only(left: 10),
+                              child: Text(
+                                greetings.greeting(),
+                                style: greet,
+                              ),
+                            )),
+                        Align(
+                            alignment: Alignment.topLeft,
+                            child: Padding(
+                              padding: const EdgeInsets.only(left: 20),
+                              child: Consumer<UserProfileUpadtingprovider>(
+                                builder: (context, userDitail, child) => Text(
+                                  
+                                  'Hai, ${userDitail.userProfile!.username}',
+                                  style: view,
+                                ),
+                              ),
+                            )),
+                       
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => const SearchPage(),
+                                  ));
+                            },
+                            child: Container(
+                              height: 40,
+                              width: double.infinity,
+                              decoration: BoxDecoration(
+                                color: Colors.grey[300],
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                              // ignore: prefer_const_constructors
+                              child: Padding(
+                                padding: const EdgeInsets.only(left: 325),
+                                child: const Icon(
+                                  Icons.search,
+                                  color: Colors.black,
+                                ),
                               ),
                             ),
                           ),
                         ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: SizedBox(
-                          height: 250,
-                          width: double.infinity,
+                        Padding(
+                          padding: const EdgeInsets.all(7.0),
                           child: AnimatedContainer(
-                        duration: const Duration(seconds: 4),
-                        decoration: BoxDecoration(
+                          duration: const Duration(seconds: 4),
+                          decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(5),
                           // color: Colors.amber,
                           image: DecorationImage(
@@ -110,93 +113,27 @@ class _HomePageScreenState extends State<HomePageScreen> {
                               image: AssetImage(_showFirstImage
                                   ? 'asset/9233a9bf83cb10537e8dbe32224739f7.jpg'
                                   : 'asset/d96044445b34de730fb33959fa2506bd.jpg'))),
-                        height: 300,
-                        width: double.infinity,
-                        child: const  Padding(
+                          height: 300,
+                          width: double.infinity,
+                          child: const  Padding(
                           padding:  EdgeInsets.fromLTRB(
                           10,
                           140,
                           10,
                           60,
                           ),
-                         
+                           
+                          ),
+                          ),
                         ),
-                          )
-                        )
-                      ),
-                       box,
-                      Padding(
-                        padding: const EdgeInsets.only(left: 20),
-                        child: SingleChildScrollView(
-                          scrollDirection: Axis.horizontal,
-                          child: Row(
-                            children: [
-                              Container(
-                                  height: 40,
-                                  width: 120,
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(10),
-                                    color: Colors.green[200],
-                                  ),
-                                  child: TextButton.icon(
-                                      onPressed: () {
-                                        Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                              builder: (context) => const  AdminHomePage(),
-                                            ));
-                                      },
-                                      icon: const Icon(
-                                        Icons.local_hospital_outlined,
-                                        color: Colors.white,
-                                      ),
-                                      label: Text(
-                                        'General',
-                                        style: homep,
-                                      ))),
-                              Padding(
-                                padding: const EdgeInsets.only(left: 20),
-                                child: Container(
-                                  height: 40,
-                                  width: 100,
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(10),
-                                    color: Colors.green[200],
-                                  ),
-                                  child: TextButton(
-                                      onPressed: () {
-                                        Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    const DoctorHomePage()));
-                                      },
-                                      child: Text(
-                                        'Cold',
-                                        style: fonts,
-                                      )),
-                                ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.only(left: 20),
-                                child: Container(
-                                  height: 40,
-                                  width: 100,
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(10),
-                                    color: Colors.green[200],
-                                  ),
-                                  child: TextButton(
-                                      onPressed: () {},
-                                      child: Text(
-                                        'More',
-                                        style: fonts,
-                                      )),
-                                ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.only(left: 20),
-                                child: Container(
+                         box,
+                        Padding(
+                          padding: const EdgeInsets.only(left: 20),
+                          child: SingleChildScrollView(
+                            scrollDirection: Axis.horizontal,
+                            child: Row(
+                              children: [
+                                Container(
                                     height: 40,
                                     width: 120,
                                     decoration: BoxDecoration(
@@ -204,7 +141,13 @@ class _HomePageScreenState extends State<HomePageScreen> {
                                       color: Colors.green[200],
                                     ),
                                     child: TextButton.icon(
-                                        onPressed: () {},
+                                        onPressed: () {
+                                          Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                builder: (context) => const  AdminHomePage(),
+                                              ));
+                                        },
                                         icon: const Icon(
                                           Icons.local_hospital_outlined,
                                           color: Colors.white,
@@ -213,46 +156,110 @@ class _HomePageScreenState extends State<HomePageScreen> {
                                           'General',
                                           style: homep,
                                         ))),
-                              ),
-                            ],
+                                Padding(
+                                  padding: const EdgeInsets.only(left: 20),
+                                  child: Container(
+                                    height: 40,
+                                    width: 100,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(10),
+                                      color: Colors.green[200],
+                                    ),
+                                    child: TextButton(
+                                        onPressed: () {
+                                          Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      const DoctorHomePage()));
+                                        },
+                                        child: Text(
+                                          'Cold',
+                                          style: fonts,
+                                        )),
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(left: 20),
+                                  child: Container(
+                                    height: 40,
+                                    width: 100,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(10),
+                                      color: Colors.green[200],
+                                    ),
+                                    child: TextButton(
+                                        onPressed: () {
+
+                                           Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                               ChattingScreen(image: addingprovider.doctor!.image, name: addingprovider.doctor!.doctor, categorie: addingprovider.doctor!.category, doctorId: 'dfd'),
+                                        ));
+
+                                        },
+                                        child: Text(
+                                          'More',
+                                          style: fonts,
+                                        )),
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(left: 20),
+                                  child: Container(
+                                      height: 40,
+                                      width: 120,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(10),
+                                        color: Colors.green[200],
+                                      ),
+                                      child: TextButton.icon(
+                                          onPressed: () {},
+                                          icon: const Icon(
+                                            Icons.local_hospital_outlined,
+                                            color: Colors.white,
+                                          ),
+                                          label: Text(
+                                            'General',
+                                            style: homep,
+                                          ))),
+                                ),
+                              ],
+                            ),
                           ),
                         ),
-                      ),
-                      box,
-                      Row(
-                        children: [
-                          Align(
-                              alignment: Alignment.centerLeft,
-                              child: Padding(
-                                padding: const EdgeInsets.only(left: 15),
-                                child: Text(
-                                  'Our Docters',
-                                  style: homep,
-                                ),
-                              )),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 230),
-                            child: TextButton(
-                                onPressed: () {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) =>
-                                             ChattingScreen(image: 'd', name: 'df', categorie: 'ffd', doctorId: 'dfd'),
-                                      ));
-                                },
-                                child: Text(
-                                  'See all',
-                                  style: homep,
+                        box,
+                        Row(
+                          children: [
+                            Align(
+                                alignment: Alignment.centerLeft,
+                                child: Padding(
+                                  padding: const EdgeInsets.only(left: 15),
+                                  child: Text(
+                                    'Our Docters',
+                                    style: homep,
+                                  ),
                                 )),
-                          ),
-                        ],
-                      ),
-                      const Divider(),
-                      const ListileCustome(),
-                    ],
-                  ),
-                )),
+                            Padding(
+                              padding: const EdgeInsets.only(left: 230),
+                              child: TextButton(
+                                  onPressed: () {
+                                   
+                                  },
+                                  child: Text(
+                                    'See all',
+                                    style: homep,
+                                  )),
+                            ),
+                          ],
+                        ),
+                        const Divider(),
+                        const ListileCustome(),
+                      ],
+                    ),
+                  )),
+        ),
       ),
       
     );

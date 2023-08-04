@@ -4,6 +4,7 @@ import 'package:flutter_application_1/core/core.dart';
 import 'package:flutter_application_1/presentetion/bottom_nav_page/bottom_nav.dart';
 import 'package:flutter_application_1/presentetion/doctore_side/home_screen/home_screen.dart';
 import 'package:flutter_application_1/presentetion/hospitaladmin/admin_homepage/admin_homepage.dart';
+import 'package:flutter_application_1/presentetion/my_bookings/my_bookings_screen.dart';
 import 'package:flutter_application_1/presentetion/profile/profile_page.dart';
 import 'package:flutter_application_1/presentetion/signinpage/login_page.dart';
 
@@ -72,7 +73,7 @@ class _SpalashScreenState extends State<SpalashScreen> {
                           await navigation(context);
                           Navigator.of(context).pushAndRemoveUntil(
                               MaterialPageRoute(
-                                builder: (context) => LoginPageScreen(),
+                                builder: (context) =>   LoginPageScreen(),
                               ),
                               (route) => route.isFirst);
 

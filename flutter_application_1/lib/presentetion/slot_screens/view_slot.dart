@@ -5,8 +5,8 @@ import 'package:flutter_application_1/controller/provider/slot_checking_provider
 import 'package:flutter_application_1/core/core.dart';
 import 'package:flutter_application_1/model/doctor/doctor.dart';
 import 'package:flutter_application_1/model/doctor/doctor_side.dart';
+import 'package:flutter_application_1/presentetion/my_bookings/my_bookings_screen.dart';
 import 'package:flutter_application_1/presentetion/pyment_screen_rz/pyment.dart';
-import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 class SloteCheckingScreen extends StatelessWidget {
@@ -172,14 +172,17 @@ class SloteCheckingScreen extends StatelessWidget {
                         width: double.infinity,
                         child: ElevatedButton(
                             onPressed: () async {
-                              rozzerPayResponse.makePayment();
+                            await  rozzerPayResponse.makePayment();
 
                               // print("${valueIndex.categoryProducts?.strtingtime.toString()}:${valueIndex.categoryProducts?.endingTime.toString()}");
                               DoctorSide categoryProducts = DoctorSide.fromJson(
                                   categorrySnapshot.docs[valueIndex.index!]
                                       .data() as Map<String, dynamic>);
-                              print(
-                                  "${categoryProducts.strtingtime.toString()}:${categoryProducts.endingTime.toString()}");
+
+                               Provider.of<SlotChekingProvider>(context,listen: false).getDate("${categoryProducts.strtingtime.toString()}:${categoryProducts.endingTime.toString()}");       
+                              // print(
+                              //     "${categoryProducts.strtingtime.toString()}:${categoryProducts.endingTime.toString()}");
+                                  Navigator.push(context, MaterialPageRoute(builder: (context) => const MyBookingsPage(),));
                             },
                             style: ButtonStyle(
                               shape: MaterialStatePropertyAll<
