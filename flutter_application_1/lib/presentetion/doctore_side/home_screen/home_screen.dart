@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/core/core.dart';
 import 'package:flutter_application_1/presentetion/doctore_side/time_sheduling/time_sheduling_page.dart';
 import 'package:flutter_application_1/presentetion/homepage/home_page.dart';
+import 'package:flutter_application_1/presentetion/hospitaladmin/message/chating_screen.dart';
 
 class DoctorHomePage extends StatelessWidget {
   const DoctorHomePage({super.key});
@@ -62,8 +63,11 @@ class GridItem extends StatelessWidget {
     
   });
   List cardSelector=[
+   
     const  HomePageScreen(),
-     const  TimeShedulingScreen()
+     const  TimeShedulingScreen(),
+      DoctorSideChattingScreen(name: "", userid: ''),
+    
 
   ];
 
@@ -87,7 +91,7 @@ class GridItem extends StatelessWidget {
             image: DecorationImage(
                 image: AssetImage(
                     image))),
-        padding: const EdgeInsets.all(20.0),
+        padding: const EdgeInsets.all(8.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -114,6 +118,6 @@ String chcekIndex(int index){
   } else if(index==2){
     return ' Feedbacks';
   }else{
-    return 'dfdf';
+    return 'chats';
   }
 }

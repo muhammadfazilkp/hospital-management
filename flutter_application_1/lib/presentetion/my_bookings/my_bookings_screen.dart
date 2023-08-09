@@ -4,14 +4,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/controller/provider/admin_side/admin_adding_side.dart';
 import 'package:flutter_application_1/controller/provider/slot_checking_provider/slot.dart';
 import 'package:flutter_application_1/core/core.dart';
-import 'package:flutter_application_1/model/doctor/doctor.dart';
 import 'package:provider/provider.dart';
 
+import '../../model/doctor/doctor.dart';
+
 class MyBookingsPage extends StatelessWidget {
-  const MyBookingsPage({super.key,});
+ MyBookingsPage({super.key, this.doctor,});
 
 
-  // final Doctor doctor;
+  Doctor? doctor;
 
   @override
   Widget build(BuildContext context) {
@@ -27,12 +28,14 @@ class MyBookingsPage extends StatelessWidget {
       ),
       body: SafeArea(
         child: Consumer<AdminAddinProvider>(
+          
           builder:(context, value, child) => Column(
+        
             children: [
               box,
               Padding(
                 padding: const EdgeInsets.all(8.0),
-                child:value.doctor!=null? Container(
+                child:doctor!=null? Container(
                   height: 200,
                   width: double.infinity,
                   decoration: BoxDecoration(
@@ -47,7 +50,7 @@ class MyBookingsPage extends StatelessWidget {
                         child: CircleAvatar(
                           backgroundColor: Colors.white,
                           radius: 30,
-                          backgroundImage: NetworkImage(value.doctor!.image),
+                          backgroundImage: NetworkImage(doctor!.image),
                         ),
                       ),
                       Padding(
@@ -57,7 +60,7 @@ class MyBookingsPage extends StatelessWidget {
                             Padding(
                               padding: const EdgeInsets.only(right: 70),
                               child: Text(
-                                value.doctor!.doctor,
+                                doctor!.doctor,
                                 style: homep,
                               ),
                             ),

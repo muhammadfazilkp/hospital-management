@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/presentetion/doctore_side/home_screen/home_screen.dart';
 import 'package:flutter_application_1/presentetion/homepage/home_page.dart';
 
 import 'package:flutter_application_1/presentetion/my_bookings/my_bookings_screen.dart';
@@ -15,8 +14,8 @@ class BottomNavigatonPage extends StatefulWidget {
 int currentIndex=0;
 final List<Widget> pages = [
   const  HomePageScreen(),
-  const MyBookingsPage(),
-  const ProfilePage()
+   MyBookingsPage(),
+  const SettingPage()
 ];
 
 class _BottomNavigatonPageState extends State<BottomNavigatonPage> {

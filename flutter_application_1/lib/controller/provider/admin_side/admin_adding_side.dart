@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/model/doctor/doctor.dart';
@@ -15,6 +16,13 @@ class AdminAddinProvider extends ChangeNotifier {
   File? profileImage;
   List<Doctor> doctors = [];
   Doctor? doctor;
+
+  //seting the currentdoctor data in the my bookings and chat
+  Doctor? currentDoctor;
+  Future<void> setCurrentDoctor(Doctor doctor) async {
+    currentDoctor = doctor;
+    notifyListeners();
+  }
 
   Future<void> getphoto() async {
     final photo = await ImagePicker().pickImage(source: ImageSource.gallery);
@@ -39,8 +47,15 @@ class AdminAddinProvider extends ChangeNotifier {
     'pyment',
   ];
 
-  Future<void> addtToFirebase(String userName, String expriance,
-      String catgagory, String place, String phonenumber, String pyment) async {
+  FirebaseAuth auth = FirebaseAuth.instance;
+  Future<void> addtToFirebase(
+      String userName,
+      String expriance,
+      String catgagory,
+      String place,
+      String phonenumber,
+      String pyment,
+      String uid) async {
     String imageUrl = await cloudAdd(profileImage!);
     Map<String, dynamic> adding = {
       'doctor': userName,
@@ -50,10 +65,12 @@ class AdminAddinProvider extends ChangeNotifier {
       'place': place,
       'pyment': pyment,
       'image': imageUrl,
+      'uid': uid
     };
 
-    await firestoreInstence.add(adding);
-  } 
+    // await firestoreInstence.add(adding);
+    firestoreInstence.doc(auth.currentUser!.uid).set(adding);
+  }
 
   Future<void> getAllDoctors() async {
     final QuerySnapshot<Map<String, dynamic>> querySnapshot =
@@ -63,11 +80,11 @@ class AdminAddinProvider extends ChangeNotifier {
         querySnapshot.docs.map((doc) => doc.data()).toSet().toList();
     doctors.clear();
     for (var data in viewlist) {
-     doctor = Doctor.fromJson(data);
+      doctor = Doctor.fromJson(data);
       doctors.add(doctor!);
       notifyListeners();
     }
-  } 
+  }
 
   Future<String> cloudAdd(File file) async {
     final Reference storegeref = FirebaseStorage.instance

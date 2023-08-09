@@ -1,43 +1,44 @@
-
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter_application_1/core/core.dart';
 
 class AdminPaymentDetailsScreen extends StatelessWidget {
-  const AdminPaymentDetailsScreen({super.key});
+  Future<List<Map<String, dynamic>>> getPaymentData() async {
+    final snapshot = await FirebaseFirestore.instance.collection('users').get();
+    final paymentDocs = snapshot.docs;
+    return paymentDocs.map((doc) => doc.data()).toList();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const  Text('Payment Details'),
+        title: Text('Payment Details',style: homep,),
       ),
-      body: StreamBuilder<QuerySnapshot>(
-        stream: FirebaseFirestore.instance.collection('users').snapshots(),
+      body: FutureBuilder<List<Map<String, dynamic>>>(
+        future: getPaymentData(),
         builder: (context, snapshot) {
-          if (snapshot.hasError) {
-            return Text('Error: ${snapshot.error}');
-          }
-
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return  const CircularProgressIndicator();
+            return const  Center(child: CircularProgressIndicator());
+          } else if (snapshot.hasError) {
+            return Text('Error: ${snapshot.error}');
+          } else {
+            final paymentDocs = snapshot.data;
+            return ListView.builder(
+              itemCount: paymentDocs?.length,
+              itemBuilder: (context, index) {
+                final paymentData = paymentDocs![index];
+                final amount = paymentData['amount'];
+                final userId = paymentData['userid'];
+                final timestamp = paymentData['timestamp'];
+
+                return ListTile(
+                  title: Text('User ID: $userId'),
+                  subtitle: Text('Amount: $amount\nTimestamp: $timestamp'),
+                );
+              },
+            );
           }
-
-          final paymentDocs = snapshot.data?.docs;
-
-          return ListView.builder(
-            itemCount: paymentDocs?.length,
-            itemBuilder: (context, index) {
-              final paymentData = paymentDocs?[index].data();
-              final amount = paymentData;
-              final userId = paymentData;
-              final timestamp = paymentData;
-
-              return ListTile(
-                title: Text('User ID: $userId'),
-                subtitle: Text('Amount: $amount\nTimestamp: $timestamp'),
-              );
-            },
-          );
         },
       ),
     );

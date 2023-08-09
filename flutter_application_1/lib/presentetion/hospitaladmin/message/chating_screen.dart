@@ -2,27 +2,25 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:collection/collection.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/controller/provider/admin_side/admin_adding_side.dart';
-import 'package:flutter_application_1/model/doctor/message.dart';
-import 'package:flutter_application_1/servises/chat_services.dart';
+import 'package:flutter_application_1/core/core.dart';
+import 'package:flutter_application_1/presentetion/hospitaladmin/message/widgets/textform_messege_widget.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
-import 'package:provider/provider.dart';
 
-class ChattingScreen extends StatelessWidget {
+import '../../../model/doctor/doctor_chat_model.dart';
+import '../../../servises/chat_services.dart';
+
+class DoctorSideChattingScreen extends StatelessWidget {
   final chatController = TextEditingController();
-  final String image;
-  final String name;
-  final String categorie;
-  final String doctorId;
 
-  ChattingScreen({
-    Key? key,
-    required this.image,
+  final String name;
+  final String userid;
+
+  DoctorSideChattingScreen({super.key, 
+   
     required this.name,
-    required this.categorie,
-    required this.doctorId,
-  }) : super(key: key);
+    required this.userid,
+  }) ;
 
   @override
   Widget build(BuildContext context) {
@@ -30,33 +28,29 @@ class ChattingScreen extends StatelessWidget {
 
     var w = MediaQuery.of(context).size.width;
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: Color.fromARGB(255, 119, 214, 184),
       appBar: AppBar(
-        // backgroundColor: kDarkBlueButtonsColor,
-        leading: Consumer<AdminAddinProvider>(
-          builder:(context, value, child) =>  Wrap(
-            direction: Axis.vertical,
-            alignment: WrapAlignment.center,
-            children: [
-              IconButton(
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-                icon: const Icon(Icons.arrow_back),
-              ),
-              CircleAvatar(
-                backgroundImage: NetworkImage(value.currentDoctor!.image),
-              ),
-            ],
-          ),
-        ),
-        title: Consumer<AdminAddinProvider>(
-          builder:(context, doc, child) =>  Container(
-            margin: const EdgeInsets.only(left: 30),
-            child: Text(
-              doc.currentDoctor!.doctor,
-              style: GoogleFonts.outfit(),
+        backgroundColor: Colors.white,
+        leading: Wrap(
+          direction: Axis.vertical,
+          alignment: WrapAlignment.center,
+          children: [
+            IconButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              icon: const Icon(Icons.arrow_back),
             ),
+            // CircleAvatar(
+            //   backgroundImage: NetworkImage(image),
+            // ),
+          ],
+        ),
+        title: Container(
+          margin: const EdgeInsets.only(left: 30),
+          child: Text(
+            name,
+            style:homep,
           ),
         ),
       ),
@@ -66,10 +60,10 @@ class ChattingScreen extends StatelessWidget {
             Expanded(
               child: StreamBuilder<QuerySnapshot>(
                 stream: FirebaseFirestore.instance
-                    .collection('userprofile')
+                    .collection('doctorsprofile')
                     .doc(currentuserid)
                     .collection('chats')
-                    .doc(doctorId)
+                    .doc(userid)
                     .collection('messages')
                     .orderBy('time', descending: false)
                     .snapshots(),
@@ -78,7 +72,6 @@ class ChattingScreen extends StatelessWidget {
                     final messages = snapshot.data!.docs
                         .map((doc) => ChatMessage.fromSnapshot(doc))
                         .toList();
-
                     final groupedMessages = groupBy(
                       messages,
                       (message) => DateFormat("dd MMM yyyy")
@@ -86,7 +79,7 @@ class ChattingScreen extends StatelessWidget {
                     );
 
                     return ListView.builder(
-                      reverse: true,
+                      reverse: false,
                       itemCount: groupedMessages.length,
                       itemBuilder: (context, index) {
                         final date = groupedMessages.keys.elementAt(index);
@@ -176,37 +169,31 @@ class ChattingScreen extends StatelessWidget {
                                               child: Text(
                                                 message.textMessage,
                                                 style: GoogleFonts.outfit(
-                                                  color: Colors.yellow,
-                                                ),
+                                                    // color: k,
+                                                    ),
                                               ),
                                             ),
                                             const SizedBox(height: 4),
-                                            Container(
-                                              constraints: const BoxConstraints(
-                                                  maxWidth:
-                                                      60), // Set the maximum width
-                                              child: Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.end,
-                                                children: [
-                                                  Text(
-                                                    DateFormat.jm()
-                                                        .format(message.time
-                                                            .toDate())
-                                                        .toString(),
-                                                    style: GoogleFonts.lato(
-                                                        fontSize: 10,
-                                                        color: Colors.grey),
-                                                  ),
-                                                  if (message.senderId ==
-                                                      currentuserid)
-                                                    const Icon(
-                                                      Icons.done,
-                                                      color: Colors.red,
-                                                      size: 15,
-                                                    ),
-                                                ],
-                                              ),
+                                            Row(
+                                              mainAxisSize: MainAxisSize.min,
+                                              children: [
+                                                Text(
+                                                  DateFormat.jm()
+                                                      .format((message.time
+                                                          .toDate()))
+                                                      .toString(),
+                                                  style: GoogleFonts.lato(
+                                                      fontSize: 10,
+                                                      color: Colors.grey),
+                                                ),
+                                                if (message.senderId ==
+                                                    currentuserid)
+                                                  const Icon(
+                                                    Icons.done,
+                                                    size: 15,
+                                                    color: Colors.white,
+                                                  )
+                                              ],
                                             ),
                                           ],
                                         ),
@@ -215,7 +202,7 @@ class ChattingScreen extends StatelessWidget {
                                   ),
                                 );
                               },
-                            ),
+                            )
                           ],
                         );
                       },
@@ -235,31 +222,14 @@ class ChattingScreen extends StatelessWidget {
               child: Row(
                 children: [
                   const SizedBox(width: 20),
-                  Expanded(
-                    child: Container( 
-                      decoration: BoxDecoration(
-                        color: Colors.grey.shade900,
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: TextField(
-                        controller: chatController,
-                        style: const TextStyle(color: Colors.white),
-                        decoration: InputDecoration(
-                          hintText: 'Enter a Message',
-                          border: const OutlineInputBorder(
-                            borderSide: BorderSide.none,
-                          ),
-                          hintStyle: GoogleFonts.outfit(color: Colors.white),
-                        ),
-                      ),
-                    ),
-                  ),
+                  //?enter a message widget-----------------------------------
+                  TextFormMesasge(chatController: chatController),
                   IconButton(
                     onPressed: () {
                       if (chatController.text.trim().isNotEmpty) {
                         ChatService().sendTextMessage(
                           currentuserid,
-                          doctorId,
+                          userid,
                           chatController.text.trim(),
                         );
                         chatController.clear();

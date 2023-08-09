@@ -81,7 +81,10 @@ class DoctorsAddingScreen extends StatelessWidget {
                               value1.categoryController.text.trim(),
                               value1.placeController.text.trim(),
                               value1.phoneNumberController.text.trim(),
-                              value1.pymentController.text.trim());
+                              value1.pymentController.text.trim(),
+                              value1.auth.currentUser!.uid,
+                              );
+                              
                           Navigator.pop(context);
                         }
                       },

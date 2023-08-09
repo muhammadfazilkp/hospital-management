@@ -23,11 +23,12 @@ class ListileCustome extends StatelessWidget {
               padding: const EdgeInsets.all(4.0),
               child: GestureDetector(
                 onTap: () {
+                  adp.setCurrentDoctor(doctor);
                   Navigator.push(
                       context,
                       MaterialPageRoute(
                           builder: (context) =>
-                              SloteCheckingScreen(doctor: doctor)));
+                              SloteCheckingScreen(doctor: doctor,)));
                 },
                 child: Card(
                   color: Colors.grey[200],

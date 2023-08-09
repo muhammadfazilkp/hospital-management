@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/controller/provider/admin_side/admin_adding_side.dart';
 import 'package:flutter_application_1/controller/provider/userprofile_updating_provider/user_profile.dart';
@@ -6,6 +7,7 @@ import 'package:flutter_application_1/core/core.dart';
 import 'package:flutter_application_1/presentetion/chat/chat_page.dart';
 import 'package:flutter_application_1/presentetion/doctore_side/home_screen/home_screen.dart';
 import 'package:flutter_application_1/presentetion/hospitaladmin/admin_homepage/admin_homepage.dart';
+import 'package:flutter_application_1/presentetion/hospitaladmin/message/chating_screen.dart';
 import 'package:flutter_application_1/presentetion/search_page/search_screen.dart';
 import 'package:flutter_application_1/servises/greeting.dart';
 import 'package:provider/provider.dart';
@@ -190,12 +192,13 @@ class _HomePageScreenState extends State<HomePageScreen> {
                                     ),
                                     child: TextButton(
                                         onPressed: () {
+                                          FirebaseAuth auth=FirebaseAuth.instance;
 
                                            Navigator.push(
                                         context,
                                         MaterialPageRoute(
                                           builder: (context) =>
-                                               ChattingScreen(image: addingprovider.doctor!.image, name: addingprovider.doctor!.doctor, categorie: addingprovider.doctor!.category, doctorId: 'dfd'),
+                                               ChattingScreen(image: addingprovider.doctor!.image, name: addingprovider.doctor!.doctor, categorie: addingprovider.doctor!.category, doctorId:auth.currentUser!.uid),
                                         ));
 
                                         },
@@ -215,7 +218,10 @@ class _HomePageScreenState extends State<HomePageScreen> {
                                         color: Colors.green[200],
                                       ),
                                       child: TextButton.icon(
-                                          onPressed: () {},
+                                          onPressed: ()async {
+                                            FirebaseAuth auth=FirebaseAuth.instance;
+                                        Navigator.push(context, MaterialPageRoute(builder: (context) =>     DoctorSideChattingScreen(name: 'Fazil',userid:auth.currentUser!.uid)));
+                                          },
                                           icon: const Icon(
                                             Icons.local_hospital_outlined,
                                             color: Colors.white,
@@ -241,17 +247,17 @@ class _HomePageScreenState extends State<HomePageScreen> {
                                     style: homep,
                                   ),
                                 )),
-                            Padding(
-                              padding: const EdgeInsets.only(left: 230),
-                              child: TextButton(
-                                  onPressed: () {
+                            // Padding(
+                            //   padding: const EdgeInsets.only(left: 230),
+                            //   child: TextButton(
+                            //       onPressed: () {
                                    
-                                  },
-                                  child: Text(
-                                    'See all',
-                                    style: homep,
-                                  )),
-                            ),
+                            //       },
+                            //       child: Text(
+                            //         'See all',
+                            //         style: homep,
+                            //       )),
+                            // ),
                           ],
                         ),
                         const Divider(),
