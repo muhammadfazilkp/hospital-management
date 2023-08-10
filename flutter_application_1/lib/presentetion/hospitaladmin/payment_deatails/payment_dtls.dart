@@ -1,36 +1,38 @@
-import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter_application_1/core/core.dart';
+import 'package:flutter/material.dart';
 
-class AdminPaymentDetailsScreen extends StatelessWidget {
-  Future<List<Map<String, dynamic>>> getPaymentData() async {
-    final snapshot = await FirebaseFirestore.instance.collection('users').get();
-    final paymentDocs = snapshot.docs;
-    return paymentDocs.map((doc) => doc.data()).toList();
-  }
+class PaymentDetailsPage extends StatelessWidget {
+  const PaymentDetailsPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Payment Details',style: homep,),
-      ),
-      body: FutureBuilder<List<Map<String, dynamic>>>(
-        future: getPaymentData(),
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const  Center(child: CircularProgressIndicator());
-          } else if (snapshot.hasError) {
-            return Text('Error: ${snapshot.error}');
-          } else {
-            final paymentDocs = snapshot.data;
+      body: SafeArea(
+        child: StreamBuilder<DocumentSnapshot>(
+          stream: FirebaseFirestore.instance.collection('users').doc().snapshots(), // Replace with your document ID
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return Center(child: CircularProgressIndicator());
+            }
+            if (snapshot.hasError) {
+              return Center(child: Text('Error: ${snapshot.error}'));
+            }
+
+            if (!snapshot.hasData || !snapshot.data!.exists) {
+              return Center(child: Text('No data available.'));
+            }
+            
+            final paymentDocs = snapshot.data!.data() as Map<String, dynamic>;
+            final paymentData = paymentDocs['payments'] as List<dynamic>; 
+            // Assuming you have a 'payments' field with an array of payment documents
+            
             return ListView.builder(
-              itemCount: paymentDocs?.length,
+              itemCount: paymentData.length,
               itemBuilder: (context, index) {
-                final paymentData = paymentDocs![index];
-                final amount = paymentData['amount'];
-                final userId = paymentData['userid'];
-                final timestamp = paymentData['timestamp'];
+                final payment = paymentData[index] as Map<String, dynamic>;
+                final amount = payment['amount'] ?? 'N/A';
+                final userId = payment['userid'] ?? 'N/A';
+                final timestamp = payment['timestamp']?.toDate() ?? 'N/A';
 
                 return ListTile(
                   title: Text('User ID: $userId'),
@@ -38,8 +40,8 @@ class AdminPaymentDetailsScreen extends StatelessWidget {
                 );
               },
             );
-          }
-        },
+          },
+        ),
       ),
     );
   }

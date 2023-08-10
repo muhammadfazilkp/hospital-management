@@ -59,7 +59,7 @@ class AdminPageCostom extends StatelessWidget {
 
   List gestureSelection = [
      DoctorsAddingScreen(),
-       AdminPaymentDetailsScreen(),
+       const  PaymentDetailsPage(),
     // PaymentDetailsPage(),
     // const  PaymentList(),
       const  ViewDoctorsScreen()

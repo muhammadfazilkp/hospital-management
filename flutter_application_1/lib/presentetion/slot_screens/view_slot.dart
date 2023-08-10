@@ -8,12 +8,16 @@ import 'package:flutter_application_1/controller/provider/slot_checking_provider
 import 'package:flutter_application_1/core/core.dart';
 import 'package:flutter_application_1/model/doctor/doctor.dart';
 import 'package:flutter_application_1/model/doctor/doctor_side.dart';
+import 'package:flutter_application_1/presentetion/hospitaladmin/payment_deatails/payment_dtls.dart';
 import 'package:flutter_application_1/presentetion/my_bookings/my_bookings_screen.dart';
 import 'package:flutter_application_1/presentetion/pyment_screen_rz/pyment.dart';
 import 'package:provider/provider.dart';
 
 class SloteCheckingScreen extends StatelessWidget {
-  const SloteCheckingScreen({super.key, required this.doctor,});
+  const SloteCheckingScreen({
+    super.key,
+    required this.doctor,
+  });
 
   final Doctor doctor;
 
@@ -37,9 +41,8 @@ class SloteCheckingScreen extends StatelessWidget {
                   List<bool>.generate(
                       snapshot.data!.docs.length, (index) => false);
               return Consumer<AdminAddinProvider>(
-                builder:(context, doc, child) =>  Column(
-
-                // var doctor = doc.doctors[index];
+                builder: (context, doc, child) => Column(
+                  // var doctor = doc.doctors[index];
                   children: [
                     Padding(
                       padding: const EdgeInsets.all(8.0),
@@ -101,28 +104,29 @@ class SloteCheckingScreen extends StatelessWidget {
                             Provider.of<AuthenticationProvider>(context,
                                     listen: false)
                                 .getTime(categoryProducts);
-                
+
                             final startTime =
                                 categoryProducts.strtingtime as String;
-                            final endTime = categoryProducts.endingTime as String;
-                
+                            final endTime =
+                                categoryProducts.endingTime as String;
+
                             String formattedStartTime =
                                 timeConvert.convertTo12HourFormat(startTime);
                             String formattedEndTime =
                                 timeConvert.convertTo12HourFormat(endTime);
-                
+
                             Provider.of<AuthenticationProvider>(context,
                                     listen: false)
                                 .index = index;
                             // Check if the current time slot is booked
-                
+
                             List<String> bookedTimeSlots = [];
-                
+
                             Provider.of<AuthenticationProvider>(context,
                                         listen: false)
                                     .isSlotBooked =
                                 bookedTimeSlots.contains(startTime);
-                
+
                             return Padding(
                               padding: const EdgeInsets.only(
                                   left: 25, bottom: 5, top: 5),
@@ -138,7 +142,7 @@ class SloteCheckingScreen extends StatelessWidget {
                                       child: Container(
                                         height: 80,
                                         width: 80,
-                                      
+
                                         // ignore: sort_child_properties_last
                                         child: Column(
                                           children: [
@@ -153,9 +157,10 @@ class SloteCheckingScreen extends StatelessWidget {
                                             ),
                                           ],
                                         ),
-                                      
+
                                         decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(5),
+                                          borderRadius:
+                                              BorderRadius.circular(5),
                                           border: Border.all(
                                             width: 1,
                                             color: timecheck.f[index] == true
@@ -182,31 +187,46 @@ class SloteCheckingScreen extends StatelessWidget {
                           width: double.infinity,
                           child: ElevatedButton(
                               onPressed: () async {
-                              await  rozzerPayResponse.makePayment();
-                
-                                // print("${valueIndex.categoryProducts?.strtingtime.toString()}:${valueIndex.categoryProducts?.endingTime.toString()}");
-                                DoctorSide categoryProducts = DoctorSide.fromJson(
-                                    categorrySnapshot.docs[valueIndex.index!]
-                                        .data() as Map<String, dynamic>);
-                
-                                 Provider.of<SlotChekingProvider>(context,listen: false).getDate("${categoryProducts.strtingtime.toString()}:${categoryProducts.endingTime.toString()}");       
-                                // print(
-                                //     "${categoryProducts.strtingtime.toString()}:${categoryProducts.endingTime.toString()}");4
-                              
-                                await  Provider.of<BookingProvider>(context,listen: false).addtToFirebase(doctor,"${categoryProducts.strtingtime.toString()}:${categoryProducts.endingTime.toString()}");
+                                await rozzerPayResponse.makePayment();
+                                // AdminPaymentDetailsScreen payment =
+                                //     AdminPaymentDetailsScreen();
+                                // await payment.getPaymentData();
 
-                                await  Provider.of<BookingProvider>(context,listen: false).getAllBookings();
-                                
-                                    Navigator.push(context, MaterialPageRoute(builder: (context) => MyBookingsPage(doctor: doctor),));
+                                DoctorSide categoryProducts =
+                                    DoctorSide.fromJson(categorrySnapshot
+                                        .docs[valueIndex.index!]
+                                        .data() as Map<String, dynamic>);
+
+                                Provider.of<SlotChekingProvider>(context,
+                                        listen: false)
+                                    .getDate(
+                                        "${categoryProducts.strtingtime.toString()}:${categoryProducts.endingTime.toString()}");
+
+                                await Provider.of<BookingProvider>(context,
+                                        listen: false)
+                                    .addtToFirebase(doctor,
+                                        "${categoryProducts.strtingtime.toString()}:${categoryProducts.endingTime.toString()}");
+
+                                await Provider.of<BookingProvider>(context,
+                                        listen: false)
+                                    .getAllBookings();
+
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          MyBookingsPage(doctor: doctor),
+                                    ));
                               },
                               style: ButtonStyle(
                                 shape: MaterialStatePropertyAll<
                                         RoundedRectangleBorder>(
                                     RoundedRectangleBorder(
                                         side: BorderSide.none,
-                                        borderRadius: BorderRadius.circular(10))),
-                                backgroundColor:
-                                    const MaterialStatePropertyAll(Colors.green),
+                                        borderRadius:
+                                            BorderRadius.circular(10))),
+                                backgroundColor: const MaterialStatePropertyAll(
+                                    Colors.green),
                               ),
                               child: Text('book now', style: booking)),
                         ),

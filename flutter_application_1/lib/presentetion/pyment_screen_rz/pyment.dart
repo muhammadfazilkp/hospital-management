@@ -1,10 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/controller/provider/slot_checking_provider/slot.dart';
-import 'package:flutter_application_1/model/doctor/doctor.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:provider/provider.dart';
 import 'package:razorpay_flutter/razorpay_flutter.dart';
 
 class RozzerPayResponse {
@@ -22,8 +19,8 @@ class RozzerPayResponse {
       FirebaseFirestore.instance 
           .collection('users')
           .doc(user?.uid)
-          .collection('Payment')
-          .add({
+         
+          .set({
          'userid':user!.uid,   
         'amount': response.paymentId,
         'timestamp': FieldValue.serverTimestamp(),

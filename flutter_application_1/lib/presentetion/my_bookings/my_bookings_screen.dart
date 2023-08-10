@@ -2,9 +2,6 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/controller/provider/admin_side/admin_adding_side.dart';
-import 'package:flutter_application_1/controller/provider/my_booking_provider/my_booking.dart';
-
 import 'package:flutter_application_1/controller/provider/slot_checking_provider/slot.dart';
 import 'package:flutter_application_1/core/core.dart';
 import 'package:provider/provider.dart';
