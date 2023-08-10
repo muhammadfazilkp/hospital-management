@@ -28,17 +28,17 @@ class _HomePageScreenState extends State<HomePageScreen> {
 
   
   @override
-  void initState() {
+  // void initState() {
   
   
-    super.initState();
-     Timer.periodic(const Duration(seconds: 2), (timer) {
+  //   super.initState();
+  //    Timer.periodic(const Duration(seconds: 2), (timer) {
       
-      setState(() {
-        _showFirstImage = !_showFirstImage;
-      });
-    });
-  }
+  //     setState(() {
+  //       _showFirstImage = !_showFirstImage;
+  //     });
+  //   });
+  // }
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
@@ -69,7 +69,7 @@ class _HomePageScreenState extends State<HomePageScreen> {
                               child: Consumer<UserProfileUpadtingprovider>(
                                 builder: (context, userDitail, child) => Text(
                                   
-                                  'Hai, ${userDitail.userProfile!.username}',
+                                  'Welcome, ${userDitail.userProfile?.username}',
                                   style: view,
                                 ),
                               ),

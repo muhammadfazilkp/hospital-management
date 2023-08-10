@@ -1,12 +1,12 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/controller/provider/admin_side/admin_adding_side.dart';
 import 'package:flutter_application_1/core/core.dart';
 import 'package:flutter_application_1/presentetion/bottom_nav_page/bottom_nav.dart';
 import 'package:flutter_application_1/presentetion/doctore_side/home_screen/home_screen.dart';
 import 'package:flutter_application_1/presentetion/hospitaladmin/admin_homepage/admin_homepage.dart';
-import 'package:flutter_application_1/presentetion/my_bookings/my_bookings_screen.dart';
-import 'package:flutter_application_1/presentetion/profile/profile_page.dart';
 import 'package:flutter_application_1/presentetion/signinpage/login_page.dart';
+import 'package:provider/provider.dart';
 
 class SpalashScreen extends StatefulWidget {
   const SpalashScreen({super.key});
@@ -19,7 +19,7 @@ navigation(context) async {
   FirebaseAuth auth = FirebaseAuth.instance;
   User? user = auth.currentUser;
   Navigator.push(context, MaterialPageRoute(builder: (context) {
-    if (user?.email == 'admin1234@gmail.com') {
+    if (user?.email == 'adminlogin@gmail.com') {
       return const AdminHomePage();
     } else if (user?.email == 'doctor123@gmail.com') {
       return const DoctorHomePage();
@@ -39,6 +39,7 @@ class _SpalashScreenState extends State<SpalashScreen> {
   // }
 
   Widget build(BuildContext context) {
+    Provider.of<AdminAddinProvider>(context,listen: false).getAllDoctors();
     return Scaffold(
       body: Container(
         height: double.infinity,
@@ -71,11 +72,11 @@ class _SpalashScreenState extends State<SpalashScreen> {
                     child: ElevatedButton(
                         onPressed: ( )  async{
                           await navigation(context);
-                          Navigator.of(context).pushAndRemoveUntil(
-                              MaterialPageRoute(
-                                builder: (context) =>   LoginPageScreen(),
-                              ),
-                              (route) => route.isFirst);
+                          // Navigator.of(context).pushAndRemoveUntil(
+                          //     MaterialPageRoute(
+                          //       builder: (context) =>   LoginPageScreen(),
+                          //     ),
+                          //     (route) => route.isFirst);
 
                         },
                         style: const ButtonStyle(

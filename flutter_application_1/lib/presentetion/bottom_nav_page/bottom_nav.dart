@@ -11,10 +11,10 @@ class BottomNavigatonPage extends StatefulWidget {
   State<BottomNavigatonPage> createState() => _BottomNavigatonPageState();
 }
 
-int currentIndex=0;
+int currentIndex = 0;
 final List<Widget> pages = [
-  const  HomePageScreen(),
-   MyBookingsPage(),
+  const HomePageScreen(),
+  MyBookingsPage(),
   const SettingPage()
 ];
 
@@ -31,31 +31,30 @@ class _BottomNavigatonPageState extends State<BottomNavigatonPage> {
     return Scaffold(
       body: pages[currentIndex],
       bottomNavigationBar: BottomNavigationBar(
-          selectedIconTheme: const IconThemeData(color: Colors.black),
-          unselectedItemColor: Colors.white,
-          elevation: 30.8,
-          mouseCursor: MaterialStateMouseCursor.clickable,
-           backgroundColor: Colors.grey[400],
-          fixedColor: Colors.white,
-          type: BottomNavigationBarType.fixed,
-          items: const [
-            BottomNavigationBarItem(
-              icon: Icon(Icons.home),
-              label: 'Home',
-            ),
-            BottomNavigationBarItem(
-                icon: Icon(Icons.my_library_books_outlined), label: 'My bookings'),
-            BottomNavigationBarItem(
-                icon: Icon(Icons.person_rounded), label: 'profile')
-          ],
-            currentIndex: currentIndex,
+        selectedIconTheme: const IconThemeData(color: Colors.black),
+        unselectedItemColor: Colors.white,
+        elevation: 30.8,
+        mouseCursor: MaterialStateMouseCursor.clickable,
+        backgroundColor: Colors.grey[400],
+        fixedColor: Colors.white,
+        type: BottomNavigationBarType.fixed,
+        items: const [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'Home',
+          ),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.my_library_books_outlined),
+              label: 'My bookings'),
+          BottomNavigationBarItem(icon: Icon(Icons.settings), label: 'settings')
+        ],
+        currentIndex: currentIndex,
         onTap: (int index) {
           setState(() {
             currentIndex = index;
           });
         },
-          
-          ),
+      ),
     );
   }
 }

@@ -1,6 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_application_1/controller/provider/admin_side/admin_adding_side.dart';
+import 'package:flutter_application_1/controller/provider/my_booking_provider/my_booking.dart';
 import 'package:flutter_application_1/controller/provider/otp_loodin_widget/otp.dart';
 import 'package:flutter_application_1/controller/provider/slot_checking_provider/slot.dart';
 import 'package:flutter_application_1/core/core.dart';
@@ -189,7 +191,12 @@ class SloteCheckingScreen extends StatelessWidget {
                 
                                  Provider.of<SlotChekingProvider>(context,listen: false).getDate("${categoryProducts.strtingtime.toString()}:${categoryProducts.endingTime.toString()}");       
                                 // print(
-                                //     "${categoryProducts.strtingtime.toString()}:${categoryProducts.endingTime.toString()}");
+                                //     "${categoryProducts.strtingtime.toString()}:${categoryProducts.endingTime.toString()}");4
+                              
+                                await  Provider.of<BookingProvider>(context,listen: false).addtToFirebase(doctor,"${categoryProducts.strtingtime.toString()}:${categoryProducts.endingTime.toString()}");
+
+                                await  Provider.of<BookingProvider>(context,listen: false).getAllBookings();
+                                
                                     Navigator.push(context, MaterialPageRoute(builder: (context) => MyBookingsPage(doctor: doctor),));
                               },
                               style: ButtonStyle(

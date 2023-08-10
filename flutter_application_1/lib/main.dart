@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/controller/provider/admin_side/admin_adding_side.dart';
+import 'package:flutter_application_1/controller/provider/my_booking_provider/my_booking.dart';
 import 'package:flutter_application_1/controller/provider/otp_authentication_pv/otp_auth.dart';
 import 'package:flutter_application_1/controller/provider/search/searh.dart';
 import 'package:flutter_application_1/controller/provider/signin_and_login/signin.dart';
@@ -45,7 +46,8 @@ class Myapp extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (context) => UserProfileUpadtingprovider(),
-        )
+        ),
+        ChangeNotifierProvider(create: (context)=>BookingProvider())
       ],
       child: MaterialApp(
         title: 'Hospital Management',

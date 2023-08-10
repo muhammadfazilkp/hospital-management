@@ -34,7 +34,7 @@ class UserProfileUpadtingprovider extends ChangeNotifier {
     User? currentUser = auth.currentUser;
     String uid = currentUser!.uid;
 
-    if (currentUser != null) {
+    // if (currentUser != null) {
       Map<String, dynamic> adding = {
         'mobilnumber': phoneNumber,
         'email': email,
@@ -50,9 +50,9 @@ class UserProfileUpadtingprovider extends ChangeNotifier {
       } catch (e) {
         print('Error adding user details: $e');
       }
-    } else {
-      throw Exception('User not logged in');
-    }
+    // } else {
+    //   throw Exception('User not logged in');
+    // }
     notifyListeners();
   }
 
