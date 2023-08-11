@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/core/core.dart';
 
 class PaymentDetailsPage extends StatelessWidget {
   const PaymentDetailsPage({super.key});
@@ -12,14 +13,14 @@ class PaymentDetailsPage extends StatelessWidget {
           stream: FirebaseFirestore.instance.collection('users').doc().snapshots(), // Replace with your document ID
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
-              return Center(child: CircularProgressIndicator());
+              return  const Center(child: CircularProgressIndicator());
             }
             if (snapshot.hasError) {
               return Center(child: Text('Error: ${snapshot.error}'));
             }
 
             if (!snapshot.hasData || !snapshot.data!.exists) {
-              return Center(child: Text('No data available.'));
+              return   Center(child: Text('No data available.',style: homep,));
             }
             
             final paymentDocs = snapshot.data!.data() as Map<String, dynamic>;

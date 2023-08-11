@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_application_1/controller/provider/admin_side/admin_adding_side.dart';
 import 'package:flutter_application_1/controller/provider/my_booking_provider/my_booking.dart';
 import 'package:flutter_application_1/controller/provider/otp_loodin_widget/otp.dart';
@@ -8,7 +7,6 @@ import 'package:flutter_application_1/controller/provider/slot_checking_provider
 import 'package:flutter_application_1/core/core.dart';
 import 'package:flutter_application_1/model/doctor/doctor.dart';
 import 'package:flutter_application_1/model/doctor/doctor_side.dart';
-import 'package:flutter_application_1/presentetion/hospitaladmin/payment_deatails/payment_dtls.dart';
 import 'package:flutter_application_1/presentetion/my_bookings/my_bookings_screen.dart';
 import 'package:flutter_application_1/presentetion/pyment_screen_rz/pyment.dart';
 import 'package:provider/provider.dart';
@@ -187,10 +185,19 @@ class SloteCheckingScreen extends StatelessWidget {
                           width: double.infinity,
                           child: ElevatedButton(
                               onPressed: () async {
+                                if (!valueIndex.isSlotBooked) {
+                                 
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    const SnackBar(
+                                      backgroundColor: Colors.red,
+                                      content: Text(
+                                          'Please select a time slot before booking.'),
+                                    ),
+                                  );
+                                  return; // Return early if no slot is selected
+                                }
+
                                 await rozzerPayResponse.makePayment();
-                                // AdminPaymentDetailsScreen payment =
-                                //     AdminPaymentDetailsScreen();
-                                // await payment.getPaymentData();
 
                                 DoctorSide categoryProducts =
                                     DoctorSide.fromJson(categorrySnapshot
