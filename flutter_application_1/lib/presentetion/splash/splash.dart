@@ -70,8 +70,8 @@ class _SpalashScreenState extends State<SpalashScreen> {
                       right: 30,
                     ),
                     child: ElevatedButton(
-                        onPressed: ( )  async{
-                          await navigation(context);
+                        onPressed: ( )  {
+                          navigation(context);
                           // Navigator.of(context).pushAndRemoveUntil(
                           //     MaterialPageRoute(
                           //       builder: (context) =>   LoginPageScreen(),

@@ -52,6 +52,7 @@ class AdminHomePage extends StatelessWidget {
   }
 }
 
+// ignore: must_be_immutable
 class AdminPageCostom extends StatelessWidget {
   AdminPageCostom({super.key, required this.text, required this.index});
   String text;

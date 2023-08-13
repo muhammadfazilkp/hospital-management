@@ -8,36 +8,56 @@ class PaymentDetailsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Center(
+          child: Text(
+            'Payment Ditails',
+            style: homep,
+          ),
+        ),
+        backgroundColor: Colors.green[200],
+      ),
       body: SafeArea(
-        child: StreamBuilder<DocumentSnapshot>(
-          stream: FirebaseFirestore.instance.collection('users').doc().snapshots(), // Replace with your document ID
+        child: StreamBuilder<QuerySnapshot>(
+          stream: FirebaseFirestore.instance.collection('users').snapshots(),
+          // Replace with your document ID
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
-              return  const Center(child: CircularProgressIndicator());
+              return const Center(child: CircularProgressIndicator());
             }
             if (snapshot.hasError) {
               return Center(child: Text('Error: ${snapshot.error}'));
             }
 
-            if (!snapshot.hasData || !snapshot.data!.exists) {
-              return   Center(child: Text('No data available.',style: homep,));
+            if (!snapshot.hasData) {
+              return Center(
+                  child: Text(
+                'No data available.',
+                style: homep,
+              ));
             }
-            
-            final paymentDocs = snapshot.data!.data() as Map<String, dynamic>;
-            final paymentData = paymentDocs['payments'] as List<dynamic>; 
-            // Assuming you have a 'payments' field with an array of payment documents
-            
+
             return ListView.builder(
-              itemCount: paymentData.length,
+              itemCount: snapshot.data!.docs.length,
               itemBuilder: (context, index) {
-                final payment = paymentData[index] as Map<String, dynamic>;
+                final document = snapshot.data!.docs[index];
+                final payment = document.data() as Map<String, dynamic>;
                 final amount = payment['amount'] ?? 'N/A';
                 final userId = payment['userid'] ?? 'N/A';
                 final timestamp = payment['timestamp']?.toDate() ?? 'N/A';
 
-                return ListTile(
-                  title: Text('User ID: $userId'),
-                  subtitle: Text('Amount: $amount\nTimestamp: $timestamp'),
+                return Card(
+                  color: Colors.grey[200],
+                  child: ListTile(
+                    title: Text(
+                      'User ID: $userId',
+                      style: homep,
+                    ),
+                    subtitle: Text(
+                      'Amount: $amount\nTimestamp: $timestamp',
+                      style: homep,
+                    ),
+                  ),
                 );
               },
             );

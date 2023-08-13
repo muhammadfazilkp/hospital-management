@@ -136,12 +136,11 @@ class SloteCheckingScreen extends StatelessWidget {
                                         GestureDetector(
                                       onTap: () {
                                         timecheck.boolCheck(index);
+                                        // timecheck.whenSloteSelected();
                                       },
                                       child: Container(
                                         height: 80,
                                         width: 80,
-
-                                        // ignore: sort_child_properties_last
                                         child: Column(
                                           children: [
                                             Text(
@@ -155,7 +154,6 @@ class SloteCheckingScreen extends StatelessWidget {
                                             ),
                                           ],
                                         ),
-
                                         decoration: BoxDecoration(
                                           borderRadius:
                                               BorderRadius.circular(5),
@@ -185,8 +183,8 @@ class SloteCheckingScreen extends StatelessWidget {
                           width: double.infinity,
                           child: ElevatedButton(
                               onPressed: () async {
+                                valueIndex.whenSloteSelected();
                                 if (!valueIndex.isSlotBooked) {
-                                 
                                   ScaffoldMessenger.of(context).showSnackBar(
                                     const SnackBar(
                                       backgroundColor: Colors.red,
@@ -194,36 +192,35 @@ class SloteCheckingScreen extends StatelessWidget {
                                           'Please select a time slot before booking.'),
                                     ),
                                   );
-                                  return; // Return early if no slot is selected
+                                } else {
+                                  await rozzerPayResponse.makePayment();
+
+                                  DoctorSide categoryProducts =
+                                      DoctorSide.fromJson(categorrySnapshot
+                                          .docs[valueIndex.index!]
+                                          .data() as Map<String, dynamic>);
+
+                                  Provider.of<SlotChekingProvider>(context,
+                                          listen: false)
+                                      .getDate(
+                                          "${categoryProducts.strtingtime.toString()}:${categoryProducts.endingTime.toString()}");
+
+                                  await Provider.of<BookingProvider>(context,
+                                          listen: false)
+                                      .addtToFirebase(doctor,
+                                          "${categoryProducts.strtingtime.toString()}:${categoryProducts.endingTime.toString()}");
+
+                                  await Provider.of<BookingProvider>(context,
+                                          listen: false)
+                                      .getAllBookings();
+
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            MyBookingsPage(doctor: doctor),
+                                      ));
                                 }
-
-                                await rozzerPayResponse.makePayment();
-
-                                DoctorSide categoryProducts =
-                                    DoctorSide.fromJson(categorrySnapshot
-                                        .docs[valueIndex.index!]
-                                        .data() as Map<String, dynamic>);
-
-                                Provider.of<SlotChekingProvider>(context,
-                                        listen: false)
-                                    .getDate(
-                                        "${categoryProducts.strtingtime.toString()}:${categoryProducts.endingTime.toString()}");
-
-                                await Provider.of<BookingProvider>(context,
-                                        listen: false)
-                                    .addtToFirebase(doctor,
-                                        "${categoryProducts.strtingtime.toString()}:${categoryProducts.endingTime.toString()}");
-
-                                await Provider.of<BookingProvider>(context,
-                                        listen: false)
-                                    .getAllBookings();
-
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) =>
-                                          MyBookingsPage(doctor: doctor),
-                                    ));
                               },
                               style: ButtonStyle(
                                 shape: MaterialStatePropertyAll<

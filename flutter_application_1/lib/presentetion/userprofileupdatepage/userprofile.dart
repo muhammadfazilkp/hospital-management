@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/controller/provider/userprofile_updating_provider/user_profile.dart';
 import 'package:flutter_application_1/core/core.dart';
 import 'package:flutter_application_1/presentetion/bottom_nav_page/bottom_nav.dart';
-import 'package:flutter_application_1/presentetion/homepage/home_page.dart';
 import 'package:flutter_application_1/presentetion/widgets/custom.dart';
 import 'package:provider/provider.dart';
 

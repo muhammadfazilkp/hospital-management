@@ -15,34 +15,43 @@ import '../widgets/listtile_costome.dart';
 
 class HomePageScreen extends StatefulWidget {
   const HomePageScreen({super.key});
-      
+
   @override
   State<HomePageScreen> createState() => _HomePageScreenState();
 }
- bool _showFirstImage = true;
 
+bool _showFirstImage = true;
+ late Timer _timer;
 Greetings greetings = Greetings();
 
-
 class _HomePageScreenState extends State<HomePageScreen> {
-
-  
   @override
   void initState() {
-  
-  
     super.initState();
-     Timer.periodic(const Duration(seconds: 2), (timer) {
-      
+    
+    Timer.periodic(const Duration(seconds: 2), (timer) {
       setState(() {
         _showFirstImage = !_showFirstImage;
+    if (!mounted) {
+        _timer.cancel();
+        return;
+      } 
+
+
       });
     });
   }
+
+  @override
+  void dispose() {
+    _timer.cancel(); // Cancel the timer when the widget is being disposed
+    super.dispose();
+  }
+
+@override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-         
         child: SingleChildScrollView(
           scrollDirection: Axis.vertical,
           child: Consumer<AdminAddinProvider>(
@@ -67,14 +76,23 @@ class _HomePageScreenState extends State<HomePageScreen> {
                             child: Padding(
                               padding: const EdgeInsets.only(left: 20),
                               child: Consumer<UserProfileUpadtingprovider>(
-                                builder: (context, userDitail, child) => Text(
-                                  
-                                  'Welcome, ${userDitail.userProfile?.username}',
-                                  style: view,
-                                ),
-                              ),
+                                  builder: (context, userDitail, child) {
+                                final isAuthenticated =
+                                    FirebaseAuth.instance.currentUser != null;
+
+                                if (isAuthenticated &&
+                                    userDitail.userProfile != null) {
+                                  return Text(
+                                    'Welcome, ${userDitail.userProfile!.username}',
+                                    style: view,
+                                  );
+                                } else {
+                                  return Text(
+                                      ' Welcome to ConsultEase', // Display a default message
+                                      style: view);
+                                }
+                              }),
                             )),
-                       
                         Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: GestureDetector(
@@ -106,29 +124,28 @@ class _HomePageScreenState extends State<HomePageScreen> {
                         Padding(
                           padding: const EdgeInsets.all(7.0),
                           child: AnimatedContainer(
-                          duration: const Duration(seconds: 4),
-                          decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(5),
-                          // color: Colors.amber,
-                          image: DecorationImage(
-                              fit: BoxFit.cover,
-                              image: AssetImage(_showFirstImage
-                                  ? 'asset/9233a9bf83cb10537e8dbe32224739f7.jpg'
-                                  : 'asset/d96044445b34de730fb33959fa2506bd.jpg'))),
-                          height: 300,
-                          width: double.infinity,
-                          child: const  Padding(
-                          padding:  EdgeInsets.fromLTRB(
-                          10,
-                          140,
-                          10,
-                          60,
-                          ),
-                           
-                          ),
+                            duration: const Duration(seconds: 4),
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(5),
+                                // color: Colors.amber,
+                                image: DecorationImage(
+                                    fit: BoxFit.cover,
+                                    image: AssetImage(_showFirstImage
+                                        ? 'asset/9233a9bf83cb10537e8dbe32224739f7.jpg'
+                                        : 'asset/d96044445b34de730fb33959fa2506bd.jpg'))),
+                            height: 300,
+                            width: double.infinity,
+                            child: const Padding(
+                              padding: EdgeInsets.fromLTRB(
+                                10,
+                                140,
+                                10,
+                                60,
+                              ),
+                            ),
                           ),
                         ),
-                         box,
+                        box,
                         Padding(
                           padding: const EdgeInsets.only(left: 20),
                           child: SingleChildScrollView(
@@ -147,7 +164,8 @@ class _HomePageScreenState extends State<HomePageScreen> {
                                           Navigator.push(
                                               context,
                                               MaterialPageRoute(
-                                                builder: (context) => const  AdminHomePage(),
+                                                builder: (context) =>
+                                                    const AdminHomePage(),
                                               ));
                                         },
                                         icon: const Icon(
@@ -192,15 +210,25 @@ class _HomePageScreenState extends State<HomePageScreen> {
                                     ),
                                     child: TextButton(
                                         onPressed: () {
-                                          FirebaseAuth auth=FirebaseAuth.instance;
+                                          FirebaseAuth auth =
+                                              FirebaseAuth.instance;
 
-                                           Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) =>
-                                               ChattingScreen(image: addingprovider.doctor!.image, name: addingprovider.doctor!.doctor, categorie: addingprovider.doctor!.category, doctorId:auth.currentUser!.uid),
-                                        ));
-
+                                          Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                builder: (context) =>
+                                                    ChattingScreen(
+                                                        image: addingprovider
+                                                            .doctor!.image,
+                                                        name: addingprovider
+                                                            .doctor!.doctor,
+                                                        categorie:
+                                                            addingprovider
+                                                                .doctor!
+                                                                .category,
+                                                        doctorId: auth
+                                                            .currentUser!.uid),
+                                              ));
                                         },
                                         child: Text(
                                           'More',
@@ -218,9 +246,18 @@ class _HomePageScreenState extends State<HomePageScreen> {
                                         color: Colors.green[200],
                                       ),
                                       child: TextButton.icon(
-                                          onPressed: ()async {
-                                            FirebaseAuth auth=FirebaseAuth.instance;
-                                        Navigator.push(context, MaterialPageRoute(builder: (context) =>     DoctorSideChattingScreen(name: 'Fazil',userid:auth.currentUser!.uid)));
+                                          onPressed: () async {
+                                            FirebaseAuth auth =
+                                                FirebaseAuth.instance;
+                                            Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        DoctorSideChattingScreen(
+                                                            name: 'Fazil',
+                                                            userid: auth
+                                                                .currentUser!
+                                                                .uid)));
                                           },
                                           icon: const Icon(
                                             Icons.local_hospital_outlined,
@@ -247,17 +284,6 @@ class _HomePageScreenState extends State<HomePageScreen> {
                                     style: homep,
                                   ),
                                 )),
-                            // Padding(
-                            //   padding: const EdgeInsets.only(left: 230),
-                            //   child: TextButton(
-                            //       onPressed: () {
-                                   
-                            //       },
-                            //       child: Text(
-                            //         'See all',
-                            //         style: homep,
-                            //       )),
-                            // ),
                           ],
                         ),
                         const Divider(),
@@ -267,7 +293,6 @@ class _HomePageScreenState extends State<HomePageScreen> {
                   )),
         ),
       ),
-      
     );
   }
 }

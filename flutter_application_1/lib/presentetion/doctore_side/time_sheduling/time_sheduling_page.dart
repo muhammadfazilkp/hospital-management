@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/controller/provider/slot_checking_provider/slot.dart';
 import 'package:flutter_application_1/core/core.dart';
 import 'package:flutter_application_1/presentetion/doctore_side/widget/time_cstm.dart';
-import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 final keyD = GlobalKey<FormState>();
@@ -12,7 +11,7 @@ class TimeShedulingScreen extends StatelessWidget {
   const TimeShedulingScreen({super.key});
   @override
   Widget build(BuildContext context) {
-    SlotChekingProvider provider = Provider.of<SlotChekingProvider>(context);
+    // SlotChekingProvider provider = Provider.of<SlotChekingProvider>(context);
 
     return Scaffold(
       body: SafeArea(

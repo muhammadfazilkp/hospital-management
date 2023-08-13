@@ -8,6 +8,7 @@ import 'package:provider/provider.dart';
 
 import '../../model/doctor/doctor.dart';
 
+// ignore: must_be_immutable
 class MyBookingsPage extends StatelessWidget {
   MyBookingsPage({
     super.key,
@@ -51,10 +52,10 @@ class MyBookingsPage extends StatelessWidget {
             children: [
               box,
               Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.all(5),
                 child: 
                      Container(
-                        height: 200,
+                        height: 150,
                         width: double.infinity,
                         decoration: BoxDecoration(
                           color: Color.fromARGB(255, 45, 201, 215),
@@ -78,26 +79,26 @@ class MyBookingsPage extends StatelessWidget {
                               child: Column(
                                 children: [
                                   Padding(
-                                    padding: const EdgeInsets.only(right: 70),
+                                    padding: const EdgeInsets.only(right:420),
                                     child: Text(
                                       data['doctor'],
                                       style: homep,
                                     ),
                                   ),
                                   Padding(
-                                    padding: const EdgeInsets.only(right: 80),
+                                    padding: const EdgeInsets.only(right: 450),
                                     child: Text(
                                      data['category'],
                                       style: homep,
                                     ),
                                   ),
                                   Padding(
-                                    padding:
-                                        const EdgeInsets.fromLTRB(10, 50, 5, 5),
+                                    padding: const EdgeInsets.only(right: 200),
                                     child: Container(
                                       height: 40,
-
-                                      // ignore: sort_child_properties_last
+                                      width: 300,
+                                      
+                                  
                                       child: Row(
                                         children: [
                                           const Icon(Icons.calendar_month),
@@ -105,7 +106,7 @@ class MyBookingsPage extends StatelessWidget {
                                             'Today',
                                             style: homep,
                                           ),
-                                          box,
+                                          boxW,
                                           Icon(
                                             Icons.timer_outlined,
                                           ),

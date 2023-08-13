@@ -15,13 +15,10 @@ class RozzerPayResponse {
       backgroundColor: Colors.green,
       timeInSecForIosWeb: 4,
     );
+
     if (user != null) {
-      FirebaseFirestore.instance 
-          .collection('users')
-          .doc(user?.uid)
-         
-          .set({
-         'userid':user!.uid,   
+      FirebaseFirestore.instance.collection('users').doc(user?.uid).set({
+        'userid': user!.uid,
         'amount': response.paymentId,
         'timestamp': FieldValue.serverTimestamp(),
       });
@@ -64,8 +61,4 @@ class RozzerPayResponse {
       debugPrint(e.toString());
     }
   }
-
-
-
-
 }

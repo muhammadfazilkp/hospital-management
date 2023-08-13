@@ -4,6 +4,7 @@ import 'package:flutter_application_1/controller/provider/signin_and_login/signi
 import 'package:flutter_application_1/core/core.dart';
 import 'package:flutter_application_1/presentetion/userprofileupdatepage/userprofile.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 
 // ignore: must_be_immutable
@@ -25,17 +26,15 @@ class _SigninPageState extends State<SigninPage> {
         Column(
           children: [
             box,
-          
-            Align(
-              alignment: Alignment.center,
-              child: Container(
-                height: 340,
-                width: 350,
-                decoration: const BoxDecoration(
-                    image: DecorationImage(
-                        image: AssetImage(
-                            'asset/medical-workers-analyzing-electronic-record_1262-19834-removebg-preview.png'),
-                        fit: BoxFit.cover)),
+            Padding(
+              padding: const EdgeInsets.all(80.0),
+              child: Center(
+                child:Container(
+                  height: 150,
+                  width: 150,
+                  child: Lottie.asset('asset/animation/animation_ll7u1avc.json',
+                      fit: BoxFit.cover),
+                ),
               ),
             ),
             Padding(
@@ -108,8 +107,6 @@ class _SigninPageState extends State<SigninPage> {
                               value!.length < 6 ? 'Password to Short' : null,
                           onSaved: (value) => value1.passwordController,
                           obscureText: true,
-
-                        
                         ),
                       ),
                     ),
@@ -117,7 +114,6 @@ class _SigninPageState extends State<SigninPage> {
                 ],
               ),
             ),
-          
             SizedBox(
               height: 40,
               width: 150,
@@ -130,6 +126,7 @@ class _SigninPageState extends State<SigninPage> {
                             signinPageLogin.passwordController.text);
                         signinPageLogin.emailController.text = '';
                         signinPageLogin.passwordController.text = '';
+                        // navigation(context);
                         Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) =>   UserProfileUpadtingPage(),), (route) => false);
                       }
                     },
@@ -138,7 +135,7 @@ class _SigninPageState extends State<SigninPage> {
                           MaterialStatePropertyAll(Colors.blueGrey),
                     ),
                     child: Text(
-                      'Sign in',
+                      'Sign Up',
                       style: GoogleFonts.kadwa(
                           textStyle: const TextStyle(fontSize: 15)),
                     )),
