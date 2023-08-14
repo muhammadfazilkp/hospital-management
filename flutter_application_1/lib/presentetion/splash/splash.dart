@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/controller/provider/admin_side/admin_adding_side.dart';
+import 'package:flutter_application_1/controller/provider/userprofile_updating_provider/user_profile.dart';
 import 'package:flutter_application_1/core/core.dart';
 import 'package:flutter_application_1/presentetion/bottom_nav_page/bottom_nav.dart';
 import 'package:flutter_application_1/presentetion/doctore_side/home_screen/home_screen.dart';
@@ -40,6 +41,7 @@ class _SpalashScreenState extends State<SpalashScreen> {
 
   Widget build(BuildContext context) {
     Provider.of<AdminAddinProvider>(context,listen: false).getAllDoctors();
+    Provider.of<UserProfileUpadtingprovider>(context,listen: false).getUserDetailsByUID();
     return Scaffold(
       body: Container(
         height: double.infinity,
@@ -47,7 +49,7 @@ class _SpalashScreenState extends State<SpalashScreen> {
         decoration: const BoxDecoration(
             image: DecorationImage(
                 image: AssetImage(
-                    'asset/young-handsome-physician-medical-robe-with-stethoscope.jpg'),
+                    'asset/edited.jpg'),
                 fit: BoxFit.cover)),
         child: SingleChildScrollView(
           scrollDirection: Axis.vertical,

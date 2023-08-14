@@ -8,10 +8,11 @@ import 'package:otp_pin_field/otp_pin_field.dart';
 import 'package:provider/provider.dart';
 
 class OtpVerificationpScreen extends StatefulWidget {
-  
-final String verificationId;
-  const OtpVerificationpScreen({Key? key, required this.verificationId, })
-      : super(key: key);
+  final String verificationId;
+  const OtpVerificationpScreen({
+    Key? key,
+    required this.verificationId,
+  }) : super(key: key);
 
   @override
   State<OtpVerificationpScreen> createState() => _OtpVerificationpScreenState();
@@ -20,7 +21,7 @@ final String verificationId;
 class _OtpVerificationpScreenState extends State<OtpVerificationpScreen> {
   Timer? _timer;
 
-  final int _timerDuration = 60;      
+  final int _timerDuration = 60;
   @override
   void initState() {
     super.initState();
@@ -47,7 +48,6 @@ class _OtpVerificationpScreenState extends State<OtpVerificationpScreen> {
 
   @override
   Widget build(BuildContext context) {
-      
     // OtpFieldController otpcontroller = OtpFieldController();
     return ChangeNotifierProvider<OtpAuthenticationRepository>(
       create: (context) => OtpAuthenticationRepository(widget.verificationId),
@@ -56,7 +56,6 @@ class _OtpVerificationpScreenState extends State<OtpVerificationpScreen> {
           child: SingleChildScrollView(
             scrollDirection: Axis.vertical,
             child: Expanded(
-              
               child: Column(
                 // mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -85,7 +84,8 @@ class _OtpVerificationpScreenState extends State<OtpVerificationpScreen> {
                           child: Text(
                             'Enter your OTP code',
                             style: GoogleFonts.poppins(
-                                textStyle: const TextStyle(color: Colors.black)),
+                                textStyle:
+                                    const TextStyle(color: Colors.black)),
                           ),
                         ),
                       ),
@@ -108,7 +108,6 @@ class _OtpVerificationpScreenState extends State<OtpVerificationpScreen> {
                     ],
                   ),
                   Row(
-                   
                     children: [
                       Consumer<OtpAuthenticationRepository>(
                           builder: (context, provider, _) {
@@ -116,22 +115,25 @@ class _OtpVerificationpScreenState extends State<OtpVerificationpScreen> {
                           child: OtpPinField(
                             onSubmit: (String text) async {
                               bool verificationSuccess =
-                                  await provider.verifyOtp(context: context,userOtp: text,);
+                                  await provider.verifyOtp(
+                                context: context,
+                                userOtp: text,
+                              );
                               if (verificationSuccess) {
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) =>  UserProfileUpadtingPage()));
+                                        builder: (context) =>
+                                            UserProfileUpadtingPage()));
                               }
                             },
                             onChange: (String text) {
                               provider.clearErrorMessage();
                             },
+                            otpPinFieldDecoration:
+                                OtpPinFieldDecoration.defaultPinBoxDecoration,
                             textInputAction: TextInputAction.done,
-                            otpPinFieldStyle: const OtpPinFieldStyle(
-                              defaultFieldBorderColor:
-                                  Color.fromARGB(255, 0, 27, 177),
-                            ),
+                            otpPinFieldStyle: const OtpPinFieldStyle(),
                             maxLength: 6,
                           ),
                         );
@@ -146,7 +148,10 @@ class _OtpVerificationpScreenState extends State<OtpVerificationpScreen> {
                     ),
                   ),
                   Center(
-                    child: Text('to your number',style: terms,),
+                    child: Text(
+                      'to your number',
+                      style: terms,
+                    ),
                   ),
                   Consumer<OtpAuthenticationRepository>(
                     builder: (context, providerO, _) {
@@ -158,7 +163,7 @@ class _OtpVerificationpScreenState extends State<OtpVerificationpScreen> {
                       } else if (providerO.currentSeconds > 0) {
                         final reaminingseconds =
                             _timerDuration - providerO.currentSeconds;
-              
+
                         return Text(
                           'please enter your OTP $reaminingseconds before time out',
                           style: terms,
@@ -178,16 +183,16 @@ class _OtpVerificationpScreenState extends State<OtpVerificationpScreen> {
                       width: 160,
                       child: ElevatedButton(
                           onPressed: () {
-              
-                          //  AuthenticationService.sendPhoneNumber(phoneNumber, context)
+                            //  AuthenticationService.sendPhoneNumber(phoneNumber, context)
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) =>
-                                         UserProfileUpadtingPage()));
+                                        UserProfileUpadtingPage()));
                           },
                           style: ButtonStyle(
-                            shape: MaterialStatePropertyAll<RoundedRectangleBorder>(
+                            shape: MaterialStatePropertyAll<
+                                    RoundedRectangleBorder>(
                                 RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(18))),
                             backgroundColor:

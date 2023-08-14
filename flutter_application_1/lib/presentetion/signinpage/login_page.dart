@@ -121,7 +121,7 @@ class LoginPageScreen extends StatelessWidget {
                         );
                   }),
                 ),
-                const SizedBox(
+                const SizedBox(     
                   height: 10,
                 ),
                 SizedBox(
