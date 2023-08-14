@@ -58,7 +58,7 @@ class UserProfileUpadtingprovider extends ChangeNotifier {
     User? currentUser = auth.currentUser;
     String uid = currentUser!.uid;
 
-    notifyListeners();
+    // notifyListeners();
     try {
       DocumentSnapshot<Map<String, dynamic>> querySnapshot =
           await firebaseFirestore.doc(uid).get();

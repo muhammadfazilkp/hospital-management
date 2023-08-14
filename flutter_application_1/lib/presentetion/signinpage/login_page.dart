@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/controller/provider/otp_loodin_widget/otp.dart';
 import 'package:flutter_application_1/presentetion/hospitaladmin/admin_homepage/admin_homepage.dart';
 import 'package:flutter_application_1/presentetion/signinpage/signin.dart';
+import 'package:flutter_application_1/presentetion/terms_&_condtion/terms.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
@@ -101,34 +102,34 @@ class LoginPageScreen extends StatelessWidget {
                             child: CircularProgressIndicator(),
                           )
                         : Padding(
-                          padding: const EdgeInsets.only(right: 10,left: 10),
-                          child: ElevatedButton(
-                              onPressed: () {
-                                if (loginKey.currentState!.validate()) {
-                                  value.loading = true;
-                                  AuthenticationService.sendPhoneNumber(
-                                      phoneController.text, context);
-                                }
-                              },
-                              style: const ButtonStyle(
-                                  backgroundColor:
-                                      MaterialStatePropertyAll(Colors.grey)),
-                              child: Text(
-                                'Login/Signup',
-                                style: GoogleFonts.kadwa(
-                                    fontSize: 15, color: Colors.black),
-                              )),
-                        );
+                            padding: const EdgeInsets.only(right: 10, left: 10),
+                            child: ElevatedButton(
+                                onPressed: () {
+                                  if (loginKey.currentState!.validate()) {
+                                    value.loading = true;
+                                    AuthenticationService.sendPhoneNumber(
+                                        phoneController.text, context);
+                                  }
+                                },
+                                style: const ButtonStyle(
+                                    backgroundColor:
+                                        MaterialStatePropertyAll(Colors.grey)),
+                                child: Text(
+                                  'Login/Signup',
+                                  style: GoogleFonts.kadwa(
+                                      fontSize: 15, color: Colors.black),
+                                )),
+                          );
                   }),
                 ),
-                const SizedBox(     
+                const SizedBox(
                   height: 10,
                 ),
                 SizedBox(
                   height: 50,
                   width: 400,
                   child: Padding(
-                    padding: const EdgeInsets.only(right: 10,left: 10),
+                    padding: const EdgeInsets.only(right: 10, left: 10),
                     child: ElevatedButton(
                         onPressed: () {
                           Navigator.push(
@@ -165,7 +166,8 @@ class LoginPageScreen extends StatelessWidget {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => const AdminHomePage()));
+                                  builder: (context) =>
+                                      const TermsAndConditionScreen()));
                         },
                         child: Text(
                           'Terms & Condtions',

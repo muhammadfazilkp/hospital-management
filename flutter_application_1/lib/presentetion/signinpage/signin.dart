@@ -2,6 +2,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/controller/provider/signin_and_login/signin.dart';
 import 'package:flutter_application_1/core/core.dart';
+import 'package:flutter_application_1/presentetion/second_splash/second_splash.dart';
+import 'package:flutter_application_1/presentetion/terms_&_condtion/terms.dart';
 import 'package:flutter_application_1/presentetion/userprofileupdatepage/userprofile.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
@@ -92,7 +94,7 @@ class _SigninPageState extends State<SigninPage> {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.all(8.0),
+                    padding: const EdgeInsets.all(7.0),
                     child: Consumer<SigninPageLogin>(
                       builder: (context, value1, child) => SizedBox(
                         height: 80,
@@ -111,6 +113,7 @@ class _SigninPageState extends State<SigninPage> {
                       ),
                     ),
                   ),
+                 
                 ],
               ),
             ),
@@ -153,7 +156,9 @@ class _SigninPageState extends State<SigninPage> {
             Padding(
               padding: const EdgeInsets.only(bottom: 15),
               child: TextButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(context, MaterialPageRoute(builder: (context)=> const SecondSplashScreen()));
+                  },
                   child: Text(
                     'Terms & Condtions',
                     style: GoogleFonts.kadwa(
