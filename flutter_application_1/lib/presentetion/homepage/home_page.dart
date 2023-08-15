@@ -21,23 +21,21 @@ class HomePageScreen extends StatefulWidget {
 }
 
 bool _showFirstImage = true;
- late Timer _timer;
+late Timer _timer;
 Greetings greetings = Greetings();
 
 class _HomePageScreenState extends State<HomePageScreen> {
   @override
   void initState() {
     super.initState();
-    
+
     Timer.periodic(const Duration(seconds: 2), (timer) {
       setState(() {
         _showFirstImage = !_showFirstImage;
-    if (!mounted) {
-        _timer.cancel();
-        return;
-      } 
-
-
+        if (!mounted) {
+          _timer.cancel();
+          return;
+        }
       });
     });
   }
@@ -48,7 +46,7 @@ class _HomePageScreenState extends State<HomePageScreen> {
     super.dispose();
   }
 
-@override
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(

@@ -22,7 +22,7 @@ navigation(context) async {
   Navigator.push(context, MaterialPageRoute(builder: (context) {
     if (user?.email == 'adminlogin@gmail.com') {
       return const AdminHomePage();
-    } else if (user?.email == 'doctor123@gmail.com') {
+    } else if (user?.email == 'doctorlogin@gmail.com') {
       return const DoctorHomePage();
     } else if (user == null) {
       return LoginPageScreen();

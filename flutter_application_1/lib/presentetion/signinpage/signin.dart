@@ -122,7 +122,7 @@ class _SigninPageState extends State<SigninPage> {
               width: 150,
               child: Consumer<SigninPageLogin>(
                 builder: (context, signinPageLogin, child) => ElevatedButton(
-                    onPressed: () {
+                    onPressed: () async {
                       if (formkey.currentState!.validate()) {
                         signinPageLogin.signUp(
                             signinPageLogin.emailController.text,
@@ -130,7 +130,7 @@ class _SigninPageState extends State<SigninPage> {
                         signinPageLogin.emailController.text = '';
                         signinPageLogin.passwordController.text = '';
                         // navigation(context);
-                        Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) =>   UserProfileUpadtingPage(),), (route) => false);
+                       await   Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) =>   UserProfileUpadtingPage(),), (route) => false);
                       }
                     },
                     style: const ButtonStyle(
@@ -144,20 +144,23 @@ class _SigninPageState extends State<SigninPage> {
                     )),
               ),
             ),
-            const SizedBox(
-              height: 8,
-            ),
+           
+             TextButton(onPressed: (){
+              Navigator.push(context, MaterialPageRoute(builder: (context)=>  SecondSplashScreen()));
+
+             }, child: Text('I have alredy account?',style: GoogleFonts.poppins(fontSize: 10,color: Colors.black),)),
             Text(
               'By Clicking proceed, I agree to the',
               style: GoogleFonts.kadwa(
                   textStyle:
                       const TextStyle(color: Colors.black45, fontSize: 12)),
             ),
+           
             Padding(
               padding: const EdgeInsets.only(bottom: 15),
               child: TextButton(
                   onPressed: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context)=> const SecondSplashScreen()));
+                    Navigator.push(context, MaterialPageRoute(builder: (context)=> const TermsAndConditionScreen()));
                   },
                   child: Text(
                     'Terms & Condtions',

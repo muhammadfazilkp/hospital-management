@@ -28,7 +28,7 @@ class DoctorSideChattingScreen extends StatelessWidget {
 
     var w = MediaQuery.of(context).size.width;
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 119, 214, 184),
+      backgroundColor: const  Color.fromARGB(255, 119, 214, 184),
       appBar: AppBar(
         backgroundColor: Colors.white,
         leading: Wrap(

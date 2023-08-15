@@ -1,4 +1,5 @@
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/core/core.dart';
 import 'package:flutter_application_1/presentetion/doctore_side/time_sheduling/time_sheduling_page.dart';
@@ -55,6 +56,7 @@ class GridItem extends StatelessWidget {
   final String image;
   // final String content;
   int index;
+  
 
 
   GridItem({
@@ -66,7 +68,8 @@ class GridItem extends StatelessWidget {
    
     const  HomePageScreen(),
      const  TimeShedulingScreen(),
-      DoctorSideChattingScreen(name: "", userid: ''),
+      DoctorSideChattingScreen(name: 'fazil', userid:  FirebaseAuth.instance.currentUser!.uid)
+     
     
 
   ];

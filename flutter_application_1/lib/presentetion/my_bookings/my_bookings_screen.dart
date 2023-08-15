@@ -49,73 +49,79 @@ class MyBookingsPage extends StatelessWidget {
                 box,
                 Padding(
                   padding: const EdgeInsets.all(5),
-                  child: Container(
-                    height: 150,
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                      color: const Color.fromARGB(255, 45, 201, 215),
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.all(10.0),
-                          child: CircleAvatar(
-                            backgroundColor: Colors.white,
-                            radius: 30,
-                            backgroundImage: NetworkImage(data['image']),
-                          ),
-                        ),
-                        Expanded(
-                          child: Padding(
-                            padding: const EdgeInsets.only(left: 10, top: 10),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  data['doctor'],
-                                  style: homep,
-                                ),
-                                Text(
-                                  data['category'],
-                                  style: homep,
-                                ),
-                                const SizedBox(height: 10),
-                                Container(
-                                  height: 40,
-                                  child: Row(
-                                    children: [
-                                      const Icon(
-                                        Icons.today_outlined,
-                                        color: Colors.white,
-                                      ),
-                                      Text(
-                                        'Today',
-                                        style: homep,
-                                      ),
-                                      boxW,
-                                      const Icon(
-                                        Icons.timer_outlined,
-                                        color: Colors.white,
-                                      ),
-                                      Flexible(
-                                        child: Consumer<SlotChekingProvider>(
-                                          builder: (context, value1, child) =>
-                                              Text(
-                                            data['time'] ?? 'No bookings',
-                                            style: homep,
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ],
+                  child: GestureDetector(
+                    onTap: () {
+                      
+                      
+                    },
+                    child: Container(
+                      height: 150,
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                        color: const Color.fromARGB(255, 45, 201, 215),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.all(10.0),
+                            child: CircleAvatar(
+                              backgroundColor: Colors.white,
+                              radius: 30,
+                              backgroundImage: NetworkImage(data['image']), 
                             ),
                           ),
-                        ),
-                      ],
+                          Expanded(
+                            child: Padding(
+                              padding: const EdgeInsets.only(left: 10, top: 10),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    data['doctor'],
+                                    style: homep,
+                                  ),
+                                  Text(
+                                    data['category'],
+                                    style: homep,
+                                  ),
+                                  const SizedBox(height: 10),
+                                  Container(
+                                    height: 40,
+                                    child: Row(
+                                      children: [
+                                        const Icon(
+                                          Icons.today_outlined,
+                                          color: Colors.white,
+                                        ),
+                                        Text(
+                                          'Today',
+                                          style: homep,
+                                        ),
+                                        boxW,
+                                        const Icon(
+                                          Icons.timer_outlined,
+                                          color: Colors.white,
+                                        ),
+                                        Flexible(
+                                          child: Consumer<SlotChekingProvider>(
+                                            builder: (context, value1, child) =>
+                                                Text(
+                                              data['time'] ?? 'No bookings',
+                                              style: homep,
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ),
