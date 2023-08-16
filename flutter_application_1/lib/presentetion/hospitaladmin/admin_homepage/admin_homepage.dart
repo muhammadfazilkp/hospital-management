@@ -13,24 +13,22 @@ class AdminHomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: Colors.white,
-       
         body: SafeArea(
-          
             child: GridView.builder(
-                    scrollDirection: Axis.vertical,
-                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          scrollDirection: Axis.vertical,
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2,
-            crossAxisSpacing: 6,
-                    ),
-                    itemCount: 6,
-                    itemBuilder: (BuildContext context, index) {
+            crossAxisSpacing: 4,
+          ),
+          itemCount: 4,
+          itemBuilder: (BuildContext context, index) {
             String names = checkIndex(index);
             return AdminPageCostom(
               text: names,
               index: index,
             );
-                    },
-                  )));
+          },
+        )));
   }
 
   String checkIndex(int index) {
@@ -42,11 +40,14 @@ class AdminHomePage extends StatelessWidget {
       return 'View Doctors';
     } else if (index == 3) {
       return 'View Patients ';
-    } else if (index == 4) {
-      return 'View feedback';
-    } else if (index == 5) {
-      return 'Time Shedule';
-    } else {
+    }
+    // else if (index == 4) {
+    //   return 'View feedback';
+    // } else if (index == 5) {
+    //   return 'Time Shedule';
+    // }
+
+    else {
       return 'ggh';
     }
   }
@@ -59,11 +60,11 @@ class AdminPageCostom extends StatelessWidget {
   int index;
 
   List gestureSelection = [
-     DoctorsAddingScreen(),
-       const  PaymentDetailsPage(),
+    DoctorsAddingScreen(),
+    const PaymentDetailsPage(),
     // PaymentDetailsPage(),
     // const  PaymentList(),
-      const  ViewDoctorsScreen()
+    const ViewDoctorsScreen()
   ];
 
   @override
@@ -79,7 +80,7 @@ class AdminPageCostom extends StatelessWidget {
               fit: BoxFit.cover,
             ),
             TextButton.icon(
-                onPressed: (){
+                onPressed: () {
                   Navigator.push(
                       context,
                       MaterialPageRoute(

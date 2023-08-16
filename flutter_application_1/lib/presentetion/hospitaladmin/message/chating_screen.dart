@@ -2,10 +2,12 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:collection/collection.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/controller/provider/admin_side/admin_adding_side.dart';
 import 'package:flutter_application_1/core/core.dart';
 import 'package:flutter_application_1/presentetion/hospitaladmin/message/widgets/textform_messege_widget.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 
 import '../../../model/doctor/doctor_chat_model.dart';
 import '../../../servises/chat_services.dart';
@@ -16,11 +18,11 @@ class DoctorSideChattingScreen extends StatelessWidget {
   final String name;
   final String userid;
 
-  DoctorSideChattingScreen({super.key, 
-   
+  DoctorSideChattingScreen({
+    super.key,
     required this.name,
     required this.userid,
-  }) ;
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -28,9 +30,9 @@ class DoctorSideChattingScreen extends StatelessWidget {
 
     var w = MediaQuery.of(context).size.width;
     return Scaffold(
-      backgroundColor: const  Color.fromARGB(255, 119, 214, 184),
+      backgroundColor: Colors.black,
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.blue,
         leading: Wrap(
           direction: Axis.vertical,
           alignment: WrapAlignment.center,
@@ -41,16 +43,13 @@ class DoctorSideChattingScreen extends StatelessWidget {
               },
               icon: const Icon(Icons.arrow_back),
             ),
-            // CircleAvatar(
-            //   backgroundImage: NetworkImage(image),
-            // ),
           ],
         ),
         title: Container(
           margin: const EdgeInsets.only(left: 30),
           child: Text(
             name,
-            style:homep,
+            style: homep,
           ),
         ),
       ),
@@ -60,10 +59,12 @@ class DoctorSideChattingScreen extends StatelessWidget {
             Expanded(
               child: StreamBuilder<QuerySnapshot>(
                 stream: FirebaseFirestore.instance
-                    .collection('doctorsprofile')
-                    .doc(currentuserid)
-                    .collection('chats')
-                    .doc(userid)
+                    // .collection('userprofile')
+                    // .doc(currentuserid)
+                    .collection('chat')
+                    .doc(Provider.of<AdminAddinProvider>(context, listen: false)
+                        .doctor!
+                        .phonenumber)
                     .collection('messages')
                     .orderBy('time', descending: false)
                     .snapshots(),
@@ -72,6 +73,7 @@ class DoctorSideChattingScreen extends StatelessWidget {
                     final messages = snapshot.data!.docs
                         .map((doc) => ChatMessage.fromSnapshot(doc))
                         .toList();
+
                     final groupedMessages = groupBy(
                       messages,
                       (message) => DateFormat("dd MMM yyyy")
@@ -79,7 +81,7 @@ class DoctorSideChattingScreen extends StatelessWidget {
                     );
 
                     return ListView.builder(
-                      reverse: false,
+                      reverse: true,
                       itemCount: groupedMessages.length,
                       itemBuilder: (context, index) {
                         final date = groupedMessages.keys.elementAt(index);
@@ -169,31 +171,37 @@ class DoctorSideChattingScreen extends StatelessWidget {
                                               child: Text(
                                                 message.textMessage,
                                                 style: GoogleFonts.outfit(
-                                                    // color: k,
-                                                    ),
+                                                  color: Colors.yellow,
+                                                ),
                                               ),
                                             ),
                                             const SizedBox(height: 4),
-                                            Row(
-                                              mainAxisSize: MainAxisSize.min,
-                                              children: [
-                                                Text(
-                                                  DateFormat.jm()
-                                                      .format((message.time
-                                                          .toDate()))
-                                                      .toString(),
-                                                  style: GoogleFonts.lato(
-                                                      fontSize: 10,
-                                                      color: Colors.grey),
-                                                ),
-                                                if (message.senderId ==
-                                                    currentuserid)
-                                                  const Icon(
-                                                    Icons.done,
-                                                    size: 15,
-                                                    color: Colors.white,
-                                                  )
-                                              ],
+                                            Container(
+                                              constraints: const BoxConstraints(
+                                                  maxWidth:
+                                                      60), // Set the maximum width
+                                              child: Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.end,
+                                                children: [
+                                                  Text(
+                                                    DateFormat.jm()
+                                                        .format(message.time
+                                                            .toDate())
+                                                        .toString(),
+                                                    style: GoogleFonts.lato(
+                                                        fontSize: 10,
+                                                        color: Colors.grey),
+                                                  ),
+                                                  if (message.senderId ==
+                                                      currentuserid)
+                                                    const Icon(
+                                                      Icons.done,
+                                                      color: Colors.red,
+                                                      size: 15,
+                                                    ),
+                                                ],
+                                              ),
                                             ),
                                           ],
                                         ),
@@ -202,7 +210,7 @@ class DoctorSideChattingScreen extends StatelessWidget {
                                   ),
                                 );
                               },
-                            )
+                            ),
                           ],
                         );
                       },
@@ -228,10 +236,13 @@ class DoctorSideChattingScreen extends StatelessWidget {
                     onPressed: () {
                       if (chatController.text.trim().isNotEmpty) {
                         ChatService().sendTextMessage(
-                          currentuserid,
-                          userid,
-                          chatController.text.trim(),
-                        );
+                            currentuserid,
+                            userid,
+                            chatController.text.trim(),
+                            Provider.of<AdminAddinProvider>(context,
+                                    listen: false)
+                                .doctor!
+                                .phonenumber);
                         chatController.clear();
                       }
                     },

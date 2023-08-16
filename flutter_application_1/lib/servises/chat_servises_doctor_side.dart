@@ -4,7 +4,7 @@ import '../model/doctor/doctor_chat_model.dart';
 
 class ChatService {
   final CollectionReference doctorCollectionReference =
-      FirebaseFirestore.instance.collection("doctorsprofile");
+      FirebaseFirestore.instance.collection("chat");
 
   Future<void> sendTextMessage(
     String senderId,
@@ -12,7 +12,7 @@ class ChatService {
     String message,
   ) async {
     final senderChatCollectionReference =
-        doctorCollectionReference.doc(senderId).collection("chats");
+        doctorCollectionReference.doc().collection("chats");
     final senderChatDocumentReference =
         senderChatCollectionReference.doc(receiverId);
     await senderChatDocumentReference.set(

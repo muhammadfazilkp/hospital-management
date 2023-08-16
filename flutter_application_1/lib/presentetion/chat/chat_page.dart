@@ -66,9 +66,9 @@ class ChattingScreen extends StatelessWidget {
             Expanded(
               child: StreamBuilder<QuerySnapshot>(
                 stream: FirebaseFirestore.instance
-                    .collection('userprofile')
-                    .doc(currentuserid)
-                    .collection('chats')
+                    // .collection('userprofile')
+                    // .doc(currentuserid)
+                    .collection('chat')
                     .doc(doctorId)
                     .collection('messages')
                     .orderBy('time', descending: false)
@@ -257,11 +257,7 @@ class ChattingScreen extends StatelessWidget {
                   IconButton(
                     onPressed: () {
                       if (chatController.text.trim().isNotEmpty) {
-                        ChatService().sendTextMessage(
-                          currentuserid,
-                          doctorId,
-                          chatController.text.trim(),
-                        );
+                        ChatService().sendTextMessage(currentuserid,doctorId, chatController.text.trim(),Provider.of<AdminAddinProvider>(context,listen: false).doctor!.phonenumber);
                         chatController.clear();
                       }
                     },

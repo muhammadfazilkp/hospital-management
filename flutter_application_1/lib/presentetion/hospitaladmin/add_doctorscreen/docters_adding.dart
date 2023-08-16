@@ -23,7 +23,7 @@ class DoctorsAddingScreen extends StatelessWidget {
                 Center(
                   child: CircleAvatar(
                     radius: 88,
-                    backgroundColor: Colors.black,
+                    backgroundColor: Colors.white,
                     child: CircleAvatar(
                       radius: 77,
                       backgroundImage: provider.profileImage != null

@@ -5,13 +5,17 @@ import 'package:flutter_application_1/model/doctor/message.dart';
 
 class ChatService {
   final CollectionReference userCollectionReference =
-      FirebaseFirestore.instance.collection("userprofile");
+      FirebaseFirestore.instance.collection("chat");
 
   Future<void> sendTextMessage(
     String senderId,
     String receiverId,
     String message,
+    String doctorNumber
   ) async {
+
+   
+    
     final senderChatCollectionReference =
         userCollectionReference.doc(senderId).collection("chats");
     final senderChatDocumentReference =
@@ -27,14 +31,22 @@ class ChatService {
     final senderMessageDocumentReference = senderMessagesReference.doc();
     final senderMessageId = senderMessageDocumentReference.id;
 
-    final senderChatMessage = ChatMessage(
-      messageId: senderMessageId,
-      senderId: senderId,
-      textMessage: message,
-      time: Timestamp.now(),
-    );
+    // final senderChatMessage = ChatMessage(
+    //   messageId: senderMessageId,
+    //   senderId: senderId,
+    //   textMessage: message,
+    //   time: Timestamp.now(),
+    // );
+    Map<String,dynamic>data={
+       'messageId': senderMessageId,
+      'senderId': senderId,
+      'textMessage': message,
+      'time': Timestamp.now(),
+    };
 
-    await senderMessageDocumentReference.set(senderChatMessage.toSnapshot());
+    await FirebaseFirestore.instance.collection("chat").doc(doctorNumber).collection('messages').doc().set(data);
+
+    // await senderMessageDocumentReference.set(senderChatMessage.toSnapshot());
 
     final CollectionReference doctorCollectionReference =
         FirebaseFirestore.instance.collection("doctorsprofile");
