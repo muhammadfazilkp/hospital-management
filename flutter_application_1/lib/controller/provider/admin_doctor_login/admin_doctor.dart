@@ -6,7 +6,8 @@ class AdminDoctorLogin extends ChangeNotifier {
   TextEditingController passwordController = TextEditingController();
   FirebaseAuth auth = FirebaseAuth.instance;
 
-  Future<void> signIn(String email, String password, BuildContext context) async {
+  Future<void> signIn(
+      String email, String password, BuildContext context) async {
     try {
       await auth.signInWithEmailAndPassword(email: email, password: password);
     } catch (e) {
@@ -24,7 +25,8 @@ class AdminDoctorLogin extends ChangeNotifier {
   }
 
   void _showErrorSnackbar(String errorMessage, BuildContext context) {
-    final snackBar = SnackBar(  backgroundColor: Colors.red, content: Text(errorMessage));
+    final snackBar =
+        SnackBar(backgroundColor: Colors.red, content: Text(errorMessage));
     ScaffoldMessenger.of(context).showSnackBar(snackBar);
   }
 }

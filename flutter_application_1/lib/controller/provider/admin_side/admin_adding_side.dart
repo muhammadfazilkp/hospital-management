@@ -97,4 +97,35 @@ class AdminAddinProvider extends ChangeNotifier {
     notifyListeners();
     return dowloadUrl;
   }
+
+  Future<void> editDoctor(
+    String docId,
+    String userName,
+    String expriance,
+    String catgagory,
+    String place,
+    String phonenumber,
+    String pyment,
+    String uid) async {
+  String imageUrl = await cloudAdd(profileImage!);
+  Map<String, dynamic> updatedData = {
+    'doctor': userName,
+    'phonenumber': phonenumber,
+    'experience': expriance,
+    'category': catgagory,
+    'place': place,
+    'pyment': pyment,
+    'image': imageUrl,
+    'uid': uid
+  };
+
+  await firestoreInstence.doc(docId).update(updatedData);
+}
+
+Future<void> deleteDoctor(String docId) async {
+  await firestoreInstence.doc(docId).delete();
+}
+
+
+
 }

@@ -20,7 +20,9 @@ navigation(context) async {
   FirebaseAuth auth = FirebaseAuth.instance;
   User? user = auth.currentUser;
   Navigator.push(context, MaterialPageRoute(builder: (context) {
-    if (user?.email == 'adminlogin@gmail.com') {
+    if (user?.email == 'adminlogin123@gmail.com') {
+      //adminlogin123@gmail.com
+      //password 9746521767
       return const AdminHomePage();
     } else if (user?.email == 'doctorlogin@gmail.com') {
       return const DoctorHomePage();
@@ -49,7 +51,7 @@ class _SpalashScreenState extends State<SpalashScreen> {
         decoration: const BoxDecoration(
             image: DecorationImage(
                 image: AssetImage(
-                    'asset/edited.jpg'),
+                    'asset/young-handsome-physician-medical-robe-with-stethoscope.jpg'),
                 fit: BoxFit.cover)),
         child: SingleChildScrollView(
           scrollDirection: Axis.vertical,

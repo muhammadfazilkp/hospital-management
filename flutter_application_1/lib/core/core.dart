@@ -38,9 +38,10 @@ TextStyle greet = GoogleFonts.kadwa(
     textStyle: const TextStyle(
         color: Colors.green, fontSize: 17, fontWeight: FontWeight.w300));
 
-    
-//buttons
-  // ElevatedButton(onPressed: (){} ,style: const  ButtonStyle(backgroundColor: MaterialStatePropertyAll(Colors.green)), child: Text('submit',style: fonts,))
+     TextStyle settings = GoogleFonts.poppins(
+    textStyle: const TextStyle(
+        color: Colors.black, fontSize: 17, fontWeight: FontWeight.w300));
+ 
 
     //color
    

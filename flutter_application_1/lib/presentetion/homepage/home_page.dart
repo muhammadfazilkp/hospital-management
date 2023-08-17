@@ -7,7 +7,6 @@ import 'package:flutter_application_1/core/core.dart';
 import 'package:flutter_application_1/presentetion/chat/chat_page.dart';
 import 'package:flutter_application_1/presentetion/doctore_side/home_screen/home_screen.dart';
 import 'package:flutter_application_1/presentetion/hospitaladmin/admin_homepage/admin_homepage.dart';
-import 'package:flutter_application_1/presentetion/hospitaladmin/message/chating_screen.dart';
 import 'package:flutter_application_1/presentetion/search_page/search_screen.dart';
 import 'package:flutter_application_1/servises/greeting.dart';
 import 'package:provider/provider.dart';
@@ -159,16 +158,13 @@ class _HomePageScreenState extends State<HomePageScreen> {
                                     ),
                                     child: TextButton.icon(
                                         onPressed: () {
-                                          Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                builder: (context) =>
-                                                    const AdminHomePage(),
-                                              ));
+                                          Navigator.push(context, MaterialPageRoute(builder: (context)=> const AdminHomePage()));
+                                         
                                         },
                                         icon: const Icon(
                                           Icons.local_hospital_outlined,
-                                          color: Colors.white,
+                                          color: Colors.black,
+                                          size: 18,
                                         ),
                                         label: Text(
                                           'General',
@@ -245,24 +241,24 @@ class _HomePageScreenState extends State<HomePageScreen> {
                                       ),
                                       child: TextButton.icon(
                                           onPressed: () async {
-                                            FirebaseAuth auth =
-                                                FirebaseAuth.instance;
-                                            Navigator.push(
-                                                context,
-                                                MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        DoctorSideChattingScreen(
-                                                            name: 'Fazil',
-                                                            userid: auth
-                                                                .currentUser!
-                                                                .uid)));
+                                            // FirebaseAuth auth =
+                                            //     FirebaseAuth.instance;
+                                            // Navigator.push(
+                                            //     context,
+                                            //     MaterialPageRoute(
+                                            //         builder: (context) =>
+                                            //             DoctorSideChattingScreen(
+                                            //                 name: Provider.of<UserProfileUpadtingprovider>(context,listen: false).userProfile!.username!,
+                                            //                 userid: auth
+                                            //                     .currentUser!
+                                            //                     .uid)));
                                           },
                                           icon: const Icon(
-                                            Icons.local_hospital_outlined,
-                                            color: Colors.white,
+                                            Icons.horizontal_split_sharp,
+                                            color: Colors.black,
                                           ),
                                           label: Text(
-                                            'General',
+                                            'More',
                                             style: homep,
                                           ))),
                                 ),
