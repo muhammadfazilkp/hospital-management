@@ -102,7 +102,7 @@ class Vewdoctors extends StatelessWidget {
               onPressed: () {
                 // Call the delete method from the provider
                 Provider.of<AdminAddinProvider>(context, listen: false)
-                    .deleteDoctor(doctor.phonenumber);
+                    .deleteDoctor(doctor.id.toString());
                 // Assuming you have a docId property in Doctor class
                 Navigator.of(context).pop();
               },

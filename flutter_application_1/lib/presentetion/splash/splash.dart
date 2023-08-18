@@ -51,7 +51,7 @@ class _SpalashScreenState extends State<SpalashScreen> {
         decoration: const BoxDecoration(
             image: DecorationImage(
                 image: AssetImage(
-                    'asset/young-handsome-physician-medical-robe-with-stethoscope.jpg'),
+                    'asset/spalash.jpg'),
                 fit: BoxFit.cover)),
         child: SingleChildScrollView(
           scrollDirection: Axis.vertical,
@@ -60,12 +60,13 @@ class _SpalashScreenState extends State<SpalashScreen> {
             child: Padding(
               padding: const EdgeInsets.only(left: 20, top: 30),
               child: Column(
+               
                 children: [
                   const Text(
                     "The Complete\nHealth \nSolution",
                     style: TextStyle(
                         decoration: TextDecoration.none,
-                        color: Colors.white30,
+                        color: Color.fromARGB(179, 72, 181, 202),
                         fontSize: 35),
                   ),
                   Padding(
