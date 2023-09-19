@@ -17,8 +17,41 @@ class SigninPage extends StatefulWidget {
   State<SigninPage> createState() => _SigninPageState();
   FirebaseAuth auth = FirebaseAuth.instance;
 }
+final SigninPageLogin signinPage = SigninPageLogin();
+
+  // void showErrorMessage(String message) {
+  //   showDialog(
+  //     context: context,
+  //     builder: (BuildContext context) {
+  //       return AlertDialog(
+  //         title: Text("Error"),
+  //         content: Text(message),
+  //         actions: <Widget>[
+  //           TextButton(
+  //             onPressed: () {
+  //               Navigator.of(context).pop();
+  //             },
+  //             child: Text("OK"),
+  //           ),
+  //         ],
+  //       );
+  //     },
+  //   );
+  // }
+
+  // void handleSignUp() async {
+  //   String email = signinPage.emailController.text;
+  //   String password = signinPage.passwordController.text;
+
+  //   signinPage.signUp(email, password, showErrorMessage);
+  // }
+
+
+
+
 
 final formkey = GlobalKey<FormState>();
+
 
 class _SigninPageState extends State<SigninPage> {
   @override

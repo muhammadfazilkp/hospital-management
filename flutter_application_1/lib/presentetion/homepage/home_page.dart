@@ -4,9 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/controller/provider/admin_side/admin_adding_side.dart';
 import 'package:flutter_application_1/controller/provider/userprofile_updating_provider/user_profile.dart';
 import 'package:flutter_application_1/core/core.dart';
-import 'package:flutter_application_1/presentetion/chat/chat_page.dart';
-import 'package:flutter_application_1/presentetion/doctore_side/home_screen/home_screen.dart';
-import 'package:flutter_application_1/presentetion/hospitaladmin/admin_homepage/admin_homepage.dart';
 import 'package:flutter_application_1/presentetion/search_page/search_screen.dart';
 import 'package:flutter_application_1/servises/greeting.dart';
 import 'package:provider/provider.dart';
@@ -157,10 +154,7 @@ class _HomePageScreenState extends State<HomePageScreen> {
                                       color: Colors.green[200],
                                     ),
                                     child: TextButton.icon(
-                                        onPressed: () {
-                                          Navigator.push(context, MaterialPageRoute(builder: (context)=> const AdminHomePage()));
-                                         
-                                        },
+                                        onPressed: () {},
                                         icon: const Icon(
                                           Icons.local_hospital_outlined,
                                           color: Colors.black,
@@ -180,13 +174,7 @@ class _HomePageScreenState extends State<HomePageScreen> {
                                       color: Colors.green[200],
                                     ),
                                     child: TextButton(
-                                        onPressed: () {
-                                          Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      const DoctorHomePage()));
-                                        },
+                                        onPressed: () {},
                                         child: Text(
                                           'Cold',
                                           style: fonts,
@@ -203,27 +191,7 @@ class _HomePageScreenState extends State<HomePageScreen> {
                                       color: Colors.green[200],
                                     ),
                                     child: TextButton(
-                                        onPressed: () {
-                                          FirebaseAuth auth =
-                                              FirebaseAuth.instance;
-
-                                          Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                builder: (context) =>
-                                                    ChattingScreen(
-                                                        image: addingprovider
-                                                            .doctor!.image,
-                                                        name: addingprovider
-                                                            .doctor!.doctor,
-                                                        categorie:
-                                                            addingprovider
-                                                                .doctor!
-                                                                .category,
-                                                        doctorId: auth
-                                                            .currentUser!.uid),
-                                              ));
-                                        },
+                                        onPressed: () {},
                                         child: Text(
                                           'More',
                                           style: fonts,
@@ -240,19 +208,7 @@ class _HomePageScreenState extends State<HomePageScreen> {
                                         color: Colors.green[200],
                                       ),
                                       child: TextButton.icon(
-                                          onPressed: () async {
-                                            // FirebaseAuth auth =
-                                            //     FirebaseAuth.instance;
-                                            // Navigator.push(
-                                            //     context,
-                                            //     MaterialPageRoute(
-                                            //         builder: (context) =>
-                                            //             DoctorSideChattingScreen(
-                                            //                 name: Provider.of<UserProfileUpadtingprovider>(context,listen: false).userProfile!.username!,
-                                            //                 userid: auth
-                                            //                     .currentUser!
-                                            //                     .uid)));
-                                          },
+                                          onPressed: () async {},
                                           icon: const Icon(
                                             Icons.horizontal_split_sharp,
                                             color: Colors.black,

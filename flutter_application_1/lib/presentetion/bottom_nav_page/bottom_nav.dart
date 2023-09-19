@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/presentetion/api/api.dart';
 import 'package:flutter_application_1/presentetion/homepage/home_page.dart';
 
 import 'package:flutter_application_1/presentetion/my_bookings/my_bookings_screen.dart';
 import 'package:flutter_application_1/presentetion/profile/profile_page.dart';
+
 
 class BottomNavigatonPage extends StatefulWidget {
   const BottomNavigatonPage({super.key});
@@ -14,8 +16,9 @@ class BottomNavigatonPage extends StatefulWidget {
 int currentIndex = 0;
 final List<Widget> pages = [
   const HomePageScreen(),
-  MyBookingsPage(),
-  const SettingPage()
+  const MyBookingsPage(),
+    const SettingPage()
+  // const ApiScreen()
 ];
 
 class _BottomNavigatonPageState extends State<BottomNavigatonPage> {
@@ -46,7 +49,8 @@ class _BottomNavigatonPageState extends State<BottomNavigatonPage> {
           BottomNavigationBarItem(
               icon: Icon(Icons.my_library_books_outlined),
               label: 'My bookings'),
-          BottomNavigationBarItem(icon: Icon(Icons.settings), label: 'settings')
+          BottomNavigationBarItem(
+              icon: Icon(Icons.settings), label: 'settings'),
         ],
         currentIndex: currentIndex,
         onTap: (int index) {

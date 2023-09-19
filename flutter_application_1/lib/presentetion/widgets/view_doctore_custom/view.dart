@@ -1,5 +1,7 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/controller/provider/admin_side/admin_adding_side.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 import '../../../core/core.dart';
@@ -89,24 +91,25 @@ class Vewdoctors extends StatelessWidget {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: const Text('Confirm Deletion'),
-          content: const Text('Are you sure you want to delete this doctor?'),
+          title:  Text('Confirm Deletion',style: GoogleFonts.poppins(color: Colors.black)),
+          content: Text('Are you sure you want to delete this doctor?',style: homep,),
           actions: [
             TextButton(
               onPressed: () {
                 Navigator.of(context).pop();
               },
-              child: const Text('Cancel'),
+              child:  Text('Cancel',style: GoogleFonts.poppins(color: Colors.green) ),
             ),
             TextButton(
               onPressed: () {
-                // Call the delete method from the provider
+               
+                
                 Provider.of<AdminAddinProvider>(context, listen: false)
-                    .deleteDoctor(doctor.id.toString());
-                // Assuming you have a docId property in Doctor class
+                    .deleteDoctor(doctor.phonenumber.toString());
+                
                 Navigator.of(context).pop();
               },
-              child: const Text('Delete'),
+              child:  Text('Delete',style: GoogleFonts.poppins(color: Colors.red),),
             ),
           ],
         );

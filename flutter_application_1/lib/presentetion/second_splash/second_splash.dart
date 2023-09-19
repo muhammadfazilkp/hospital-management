@@ -22,16 +22,13 @@ class SecondSplashScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    SizedBox(
-                      // height: 150,
-                      // width: 3 0,
+                    Container(
+                     
+                     
 
-                      child: Padding(
-                        padding: const EdgeInsets.only(bottom: 10),
-                        child: Lottie.asset(
-                            'asset/animation/animation_ll7u1avc.json',
-                            fit: BoxFit.fill),
-                      ),
+                      child: Lottie.asset(
+                          'asset/animation/animation_ll7u1avc.json',
+                          fit: BoxFit.fill),
                     ),
                     TextFormField(
                       decoration: const InputDecoration(
