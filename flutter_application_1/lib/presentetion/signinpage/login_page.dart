@@ -111,12 +111,12 @@ class LoginPageScreen extends StatelessWidget {
                                         phoneController.text, context);
                                   }
                                 },
-                                style: const ButtonStyle(
+                                style:  ButtonStyle(
                                     backgroundColor:
-                                        MaterialStatePropertyAll(Colors.grey)),
+                                        MaterialStatePropertyAll(Colors.blue[300])),
                                 child: Text(
-                                  'Login/Signup',
-                                  style: GoogleFonts.kadwa(
+                                  'Login',
+                                  style: GoogleFonts.poppins(
                                       fontSize: 15, color: Colors.black),
                                 )),
                           );
@@ -137,12 +137,12 @@ class LoginPageScreen extends StatelessWidget {
                               MaterialPageRoute(
                                   builder: (context) => SigninPage()));
                         },
-                        style: const ButtonStyle(
+                        style:  ButtonStyle(
                             backgroundColor:
-                                MaterialStatePropertyAll(Colors.grey)),
+                                MaterialStatePropertyAll(Colors.green[100])),
                         child: Text(
-                          'Login with password',
-                          style: GoogleFonts.kadwa(
+                          'Login with Password',
+                          style: GoogleFonts.poppins(
                               fontSize: 15, color: Colors.black),
                         )),
                   ),
