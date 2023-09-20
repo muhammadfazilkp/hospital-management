@@ -69,7 +69,7 @@ class AdminAddinProvider extends ChangeNotifier {
     };
 
     // await firestoreInstence.add(adding);
-    firestoreInstence.doc(auth.currentUser!.uid).set(adding);
+    firestoreInstence.doc(phonenumber).set(adding);
   }
 
   Future<void> getAllDoctors() async {
