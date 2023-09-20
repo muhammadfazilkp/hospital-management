@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/controller/provider/admin_side/admin_adding_side.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -35,7 +34,8 @@ class Vewdoctors extends StatelessWidget {
                   alignment: Alignment.topLeft,
                   child: Column(
                     crossAxisAlignment:
-                        CrossAxisAlignment.start, // Align text to the left
+                        CrossAxisAlignment.start, 
+                        // Align text to the left
                     children: [
                       Text(
                         doctor.category,
@@ -63,11 +63,19 @@ class Vewdoctors extends StatelessWidget {
                 trailing: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    IconButton(
-                      icon: const Icon(Icons.edit),
-                      onPressed: () {
-                        _showDeleteConfirmationDialog(context, doctor);
-                      },
+                    Consumer<AdminAddinProvider>(
+                      builder: (context, value, child) => IconButton(
+                        icon: const Icon(Icons.edit),
+                        onPressed: () {
+                          value.editDoctor(
+                              value.doctor!.doctor,
+                              value.doctor!.experience,
+                              value.doctor!.category,
+                              value.doctor!.place,
+                              value.doctor!.phonenumber,
+                              value.doctor!.pyment);
+                        },
+                      ),
                     ),
                     IconButton(
                       icon: const Icon(Icons.delete),
@@ -91,25 +99,31 @@ class Vewdoctors extends StatelessWidget {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title:  Text('Confirm Deletion',style: GoogleFonts.poppins(color: Colors.black)),
-          content: Text('Are you sure you want to delete this doctor?',style: homep,),
+          title: Text('Confirm Deletion',
+              style: GoogleFonts.poppins(color: Colors.black)),
+          content: Text(
+            'Are you sure you want to delete this doctor?',
+            style: homep,
+          ),
           actions: [
             TextButton(
               onPressed: () {
                 Navigator.of(context).pop();
               },
-              child:  Text('Cancel',style: GoogleFonts.poppins(color: Colors.green) ),
+              child: Text('Cancel',
+                  style: GoogleFonts.poppins(color: Colors.green)),
             ),
             TextButton(
               onPressed: () {
-               
-                
                 Provider.of<AdminAddinProvider>(context, listen: false)
                     .deleteDoctor(doctor.phonenumber.toString());
-                
+
                 Navigator.of(context).pop();
               },
-              child:  Text('Delete',style: GoogleFonts.poppins(color: Colors.red),),
+              child: Text(
+                'Delete',
+                style: GoogleFonts.poppins(color: Colors.red),
+              ),
             ),
           ],
         );

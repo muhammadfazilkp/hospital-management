@@ -99,14 +99,15 @@ class AdminAddinProvider extends ChangeNotifier {
   }
 
   Future<void> editDoctor(
-    String docId,
+    // String docId,
     String userName,
     String expriance,
     String catgagory,
     String place,
     String phonenumber,
     String pyment,
-    String uid) async {
+    // String uid
+    ) async {
   String imageUrl = await cloudAdd(profileImage!);
   Map<String, dynamic> updatedData = {
     'doctor': userName,
@@ -116,10 +117,10 @@ class AdminAddinProvider extends ChangeNotifier {
     'place': place,
     'pyment': pyment,
     'image': imageUrl,
-    'uid': uid
+    // 'uid': uid
   };
 
-  await firestoreInstence.doc(docId).update(updatedData);
+  await firestoreInstence.doc(phonenumber).update(updatedData);
 }
 
 Future<void> deleteDoctor(String docId) async {

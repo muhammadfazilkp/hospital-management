@@ -36,10 +36,7 @@ navigation(context) async {
 
 class _SpalashScreenState extends State<SpalashScreen> {
   @override
-  // void initState() {
-  //   super.initState();
-  //   navigation(context);
-  // }
+ 
 
   Widget build(BuildContext context) {
     Provider.of<AdminAddinProvider>(context,listen: false).getAllDoctors();

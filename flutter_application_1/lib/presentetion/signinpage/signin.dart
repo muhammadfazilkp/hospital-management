@@ -17,43 +17,13 @@ class SigninPage extends StatefulWidget {
   State<SigninPage> createState() => _SigninPageState();
   FirebaseAuth auth = FirebaseAuth.instance;
 }
+
 final SigninPageLogin signinPage = SigninPageLogin();
-
-  // void showErrorMessage(String message) {
-  //   showDialog(
-  //     context: context,
-  //     builder: (BuildContext context) {
-  //       return AlertDialog(
-  //         title: Text("Error"),
-  //         content: Text(message),
-  //         actions: <Widget>[
-  //           TextButton(
-  //             onPressed: () {
-  //               Navigator.of(context).pop();
-  //             },
-  //             child: Text("OK"),
-  //           ),
-  //         ],
-  //       );
-  //     },
-  //   );
-  // }
-
-  // void handleSignUp() async {
-  //   String email = signinPage.emailController.text;
-  //   String password = signinPage.passwordController.text;
-
-  //   signinPage.signUp(email, password, showErrorMessage);
-  // }
-
-
-
-
 
 final formkey = GlobalKey<FormState>();
 
-
 class _SigninPageState extends State<SigninPage> {
+  bool passwordVisible = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -64,7 +34,7 @@ class _SigninPageState extends State<SigninPage> {
             Padding(
               padding: const EdgeInsets.all(80.0),
               child: Center(
-                child:Container(
+                child: Container(
                   height: 150,
                   width: 150,
                   child: Lottie.asset('asset/animation/animation_ll7u1avc.json',
@@ -135,18 +105,29 @@ class _SigninPageState extends State<SigninPage> {
                         child: TextFormField(
                           controller: value1.passwordController,
                           decoration: InputDecoration(
+                              suffixIcon: IconButton(
+                                  onPressed: () {
+                                    setState(() {
+                                      passwordVisible = !passwordVisible;
+                                    });
+                                  },
+                                  icon: Icon(
+                                    passwordVisible == true
+                                        ? Icons.visibility
+                                        : Icons.visibility_off,
+                                    color: Colors.black,
+                                  )),
                               labelText: 'password',
                               border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(10))),
                           validator: (value) =>
                               value!.length < 6 ? 'Password to Short' : null,
                           onSaved: (value) => value1.passwordController,
-                          obscureText: true,
+                          obscureText: passwordVisible,
                         ),
                       ),
                     ),
                   ),
-                 
                 ],
               ),
             ),
@@ -163,7 +144,12 @@ class _SigninPageState extends State<SigninPage> {
                         signinPageLogin.emailController.text = '';
                         signinPageLogin.passwordController.text = '';
                         // navigation(context);
-                       await   Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) =>   UserProfileUpadtingPage(),), (route) => false);
+                        await Navigator.pushAndRemoveUntil(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => UserProfileUpadtingPage(),
+                            ),
+                            (route) => false);
                       }
                     },
                     style: const ButtonStyle(
@@ -177,23 +163,32 @@ class _SigninPageState extends State<SigninPage> {
                     )),
               ),
             ),
-           
-             TextButton(onPressed: (){
-              Navigator.push(context, MaterialPageRoute(builder: (context)=>  SecondSplashScreen()));
-
-             }, child: Text('I have alredy account?',style: GoogleFonts.poppins(fontSize: 10,color: Colors.black),)),
+            TextButton(
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => SecondSplashScreen()));
+                },
+                child: Text(
+                  'I have alredy account?',
+                  style: GoogleFonts.poppins(fontSize: 10, color: Colors.black),
+                )),
             Text(
               'By Clicking proceed, I agree to the',
               style: GoogleFonts.kadwa(
                   textStyle:
                       const TextStyle(color: Colors.black45, fontSize: 12)),
             ),
-           
             Padding(
               padding: const EdgeInsets.only(bottom: 15),
               child: TextButton(
                   onPressed: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context)=> const TermsAndConditionScreen()));
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                const TermsAndConditionScreen()));
                   },
                   child: Text(
                     'Terms & Condtions',
