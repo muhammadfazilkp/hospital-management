@@ -113,8 +113,8 @@ class _SigninPageState extends State<SigninPage> {
                                   },
                                   icon: Icon(
                                     passwordVisible == true
-                                        ? Icons.visibility
-                                        : Icons.visibility_off,
+                                        ? Icons.visibility_off
+                                        : Icons.visibility,
                                     color: Colors.black,
                                   )),
                               labelText: 'password',

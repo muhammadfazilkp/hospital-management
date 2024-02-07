@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/controller/provider/admin_side/admin_adding_side.dart';
@@ -97,126 +98,98 @@ class _HomePageScreenState extends State<HomePageScreen> {
                                     builder: (context) => const SearchPage(),
                                   ));
                             },
-                            child: Container(
-                              height: 40,
-                              width: double.infinity,
-                              decoration: BoxDecoration(
-                                color: Colors.grey[300],
-                                borderRadius: BorderRadius.circular(20),
-                              ),
-                              // ignore: prefer_const_constructors
-                              child: Padding(
-                                padding: const EdgeInsets.only(left: 325),
-                                child: const Icon(
-                                  Icons.search,
-                                  color: Colors.black,
-                                ),
+                            child: const TextField(
+                              textInputAction: TextInputAction.next,
+                              decoration: InputDecoration(
+                                hintText: 'Serch Your Doctor....',
+                                prefixIcon: Icon(Icons.search),
                               ),
                             ),
                           ),
                         ),
                         Padding(
                           padding: const EdgeInsets.all(7.0),
-                          child: AnimatedContainer(
-                            duration: const Duration(seconds: 4),
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(5),
-                                // color: Colors.amber,
-                                image: DecorationImage(
-                                    fit: BoxFit.cover,
-                                    image: AssetImage(_showFirstImage
-                                        ? 'asset/9233a9bf83cb10537e8dbe32224739f7.jpg'
-                                        : 'asset/d96044445b34de730fb33959fa2506bd.jpg'))),
-                            height: 300,
-                            width: double.infinity,
-                            child: const Padding(
-                              padding: EdgeInsets.fromLTRB(
-                                10,
-                                140,
-                                10,
-                                60,
+                          child: CarouselSlider(
+                            items: [
+                              // Add your carousel items here
+                              Container(
+                                decoration: BoxDecoration(
+                                    border: Border.all(),
+                                    // color: Colors.blue,
+                                    borderRadius: BorderRadius.circular(10),
+                                    image: const DecorationImage(
+                                        image: AssetImage(
+                                            'asset/d96044445b34de730fb33959fa2506bd.jpg'),
+                                        fit: BoxFit.cover)),
+                                child: const Align(
+                                    alignment: Alignment.bottomCenter,
+                                    child: Text('Item 1')),
                               ),
+                              Container(
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                  border: Border.all(),
+                                  // color: Colors.green,
+                                  image: const DecorationImage(
+                                      image: AssetImage(
+                                          'asset/d96044445b34de730fb33959fa2506bd.jpg'),
+                                      fit: BoxFit.cover),
+                                ),
+                                child: const Center(
+                                  child: Text('Item 2'),
+                                ),
+                              ),
+                              // Add more items as needed
+                            ],
+                            options: CarouselOptions(
+                              height: 200,
+                              aspectRatio: 16 / 9,
+                              viewportFraction: 0.8,
+                              initialPage: 0,
+                              enableInfiniteScroll: true,
+                              reverse: false,
+                              autoPlay: true,
+                              autoPlayInterval: const Duration(seconds: 3),
+                              autoPlayAnimationDuration:
+                                  const Duration(milliseconds: 800),
+                              autoPlayCurve: Curves.fastOutSlowIn,
+                              enlargeCenterPage: true,
+                              enlargeFactor: 0.3,
+                              // onPageChanged: callbackFunction,
+                              scrollDirection: Axis.horizontal,
                             ),
                           ),
                         ),
                         box,
-                        Padding(
-                          padding: const EdgeInsets.only(left: 20),
+                        const Padding(
+                          padding: EdgeInsets.only(left: 20),
                           child: SingleChildScrollView(
                             scrollDirection: Axis.horizontal,
                             child: Row(
                               children: [
-                                Container(
-                                    height: 40,
-                                    width: 120,
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(10),
-                                      color: Colors.green[200],
-                                    ),
-                                    child: TextButton.icon(
-                                        onPressed: () {},
-                                        icon: const Icon(
-                                          Icons.local_hospital_outlined,
-                                          color: Colors.black,
-                                          size: 18,
-                                        ),
-                                        label: Text(
-                                          'General',
-                                          style: homep,
-                                        ))),
-                                Padding(
-                                  padding: const EdgeInsets.only(left: 20),
-                                  child: Container(
-                                    height: 40,
-                                    width: 100,
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(10),
-                                      color: Colors.green[200],
-                                    ),
-                                    child: TextButton(
-                                        onPressed: () {},
-                                        child: Text(
-                                          'Cold',
-                                          style: fonts,
-                                        )),
-                                  ),
+                                CustomeScroll(
+                                  icon: Icon(Icons.more_horiz),
+                                  text: Text('data'),
                                 ),
-                                Padding(
-                                  padding: const EdgeInsets.only(left: 20),
-                                  child: Container(
-                                    height: 40,
-                                    width: 100,
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(10),
-                                      color: Colors.green[200],
-                                    ),
-                                    child: TextButton(
-                                        onPressed: () {},
-                                        child: Text(
-                                          'More',
-                                          style: fonts,
-                                        )),
-                                  ),
+                                boxW,
+                                CustomeScroll(
+                                  icon: Icon(Icons.more_horiz),
+                                  text: Text('data'),
                                 ),
-                                Padding(
-                                  padding: const EdgeInsets.only(left: 20),
-                                  child: Container(
-                                      height: 40,
-                                      width: 120,
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(10),
-                                        color: Colors.green[200],
-                                      ),
-                                      child: TextButton.icon(
-                                          onPressed: () async {},
-                                          icon: const Icon(
-                                            Icons.horizontal_split_sharp,
-                                            color: Colors.black,
-                                          ),
-                                          label: Text(
-                                            'More',
-                                            style: homep,
-                                          ))),
+                                boxW,
+                                CustomeScroll(
+                                  icon: Icon(Icons.more_horiz),
+                                  text: Text('data'),
+                                ),
+                                boxW,
+                                CustomeScroll(
+                                  icon: Icon(Icons.more_horiz),
+                                  text: Text('data'),
+                                ),
+                                boxW,
+                                CustomeScroll(
+                                  icon: Icon(Icons.more_horiz),
+                                  text: Text('data'),
                                 ),
                               ],
                             ),
@@ -244,5 +217,35 @@ class _HomePageScreenState extends State<HomePageScreen> {
         ),
       ),
     );
+  }
+}
+
+class CustomeScroll extends StatelessWidget {
+  const CustomeScroll({
+    super.key,
+    required this.icon,
+    required this.text,
+  });
+  final Icon icon;
+  final Text text;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+        height: 40,
+        width: 120,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(10),
+          color: const Color.fromARGB(255, 241, 237, 235),
+        ),
+        child: TextButton.icon(
+            onPressed: () {},
+            icon: icon,
+            label: text,
+        ));
+            
+
+            
+            
   }
 }

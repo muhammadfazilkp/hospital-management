@@ -125,50 +125,46 @@ class SloteCheckingScreen extends StatelessWidget {
                                     .isSlotBooked =
                                 bookedTimeSlots.contains(startTime);
 
-                            return Padding(
-                              padding: const EdgeInsets.only(
-                                  left: 25, bottom: 5, top: 5),
-                              child: Row(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Consumer<AuthenticationProvider>(
-                                    builder: (context, timecheck, child) =>
-                                        GestureDetector(
-                                      onTap: () {
-                                        timecheck.boolCheck(index);
-                                        // timecheck.whenSloteSelected();
-                                      },
-                                      child: Container(
-                                        height: 80,
-                                        width: 80,
-                                        child: Column(
-                                          children: [
-                                            Text(
-                                              formattedStartTime.toString(),
-                                              style: homep,
-                                            ),
-                                            box,
-                                            Text(
-                                              formattedEndTime.toString(),
-                                              style: homep,
-                                            ),
-                                          ],
-                                        ),
-                                        decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(5),
-                                          border: Border.all(
-                                            width: 1,
-                                            color: timecheck.f[index] == true
-                                                ? Colors.red
-                                                : Colors.green,
-                                          ),
+                            return Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Consumer<AuthenticationProvider>(
+                                  builder: (context, timecheck, child) =>
+                                      GestureDetector(
+                                    onTap: () {
+                                      timecheck.boolCheck(index);
+                                      // timecheck.whenSloteSelected();
+                                    },
+                                    child: Container(
+                                      height: 80,
+                                      width: 80,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(5),
+                                        border: Border.all(
+                                          width: 1,
+                                          color: timecheck.f[index] == true
+                                              ? Colors.red
+                                              : Colors.green,
                                         ),
                                       ),
+                                      child: Column(
+                                        children: [
+                                          Text(
+                                            formattedStartTime.toString(),
+                                            style: homep,
+                                          ),
+                                          box,
+                                          Text(
+                                            formattedEndTime.toString(),
+                                            style: homep,
+                                          ),
+                                        ],
+                                      ),
                                     ),
-                                  )
-                                ],
-                              ),
+                                  ),
+                                )
+                              ],
                             );
                           },
                           itemCount: categorrySnapshot.docs.length,
