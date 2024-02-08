@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "411671297625",
+    "project_id": "fathima-hospial",
+    "storage_bucket": "fathima-hospial.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:411671297625:android:fe311c862ac740a99fbb48",
+        "android_client_info": {
+          "package_name": "com.example.flutter_application_1"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "411671297625-8ef3qbrn8o03f69tdoifg4k157lk10pr.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.flutter_application_1",
+            "certificate_hash": "8d8f85f8379af1cf4186a76334386e73402c3517"
+          }
+        },
+        {
+          "client_id": "411671297625-ih5k2922popg9jok1o1n718gu5ot27b7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDfGaIv_T8VReGeXZkoj9gWblT19GpP-OI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "411671297625-ih5k2922popg9jok1o1n718gu5ot27b7.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "411671297625-5lh4m6p9g4fqnom6e3cuig9ajtgao6c5.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.flutterApplication1"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
