@@ -18,7 +18,8 @@ class _GoogleAdScreenState extends State<GoogleAdScreen> {
  
   // TODO: Load a banner ad
   BannerAd(
-    adUnitId: AdHelper.bannerAdUnitId,
+    adUnitId:'ca-app-pub-3940256099942544/6300978111',
+    //choosing banner chategory side then we can pest unitId uniq id 
     request:  const AdRequest(),
     size: AdSize.banner,
     listener: BannerAdListener(

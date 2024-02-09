@@ -1,4 +1,3 @@
-import 'dart:async';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -11,41 +10,12 @@ import 'package:flutter_application_1/servises/greeting.dart';
 import 'package:provider/provider.dart';
 import '../widgets/listtile_costome.dart';
 
-class HomePageScreen extends StatefulWidget {
+class HomePageScreen extends StatelessWidget {
   const HomePageScreen({super.key});
 
   @override
-  State<HomePageScreen> createState() => _HomePageScreenState();
-}
-
-bool _showFirstImage = true;
-late Timer _timer;
-Greetings greetings = Greetings();
-
-class _HomePageScreenState extends State<HomePageScreen> {
-  @override
-  void initState() {
-    super.initState();
-
-    Timer.periodic(const Duration(seconds: 2), (timer) {
-      setState(() {
-        _showFirstImage = !_showFirstImage;
-        if (!mounted) {
-          _timer.cancel();
-          return;
-        }
-      });
-    });
-  }
-
-  @override
-  void dispose() {
-    _timer.cancel(); // Cancel the timer when the widget is being disposed
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
+    Greetings greetings = Greetings();
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
@@ -104,9 +74,9 @@ class _HomePageScreenState extends State<HomePageScreen> {
                               textInputAction: TextInputAction.next,
                               decoration: InputDecoration(
                                 border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(15),
-                                  borderSide: const  BorderSide(color: Colors.black)
-                                ),
+                                    borderRadius: BorderRadius.circular(15),
+                                    borderSide:
+                                        const BorderSide(color: Colors.black)),
                                 hintText: 'Serch Your Doctor....',
                                 prefixIcon: const Icon(Icons.search),
                               ),
@@ -120,32 +90,28 @@ class _HomePageScreenState extends State<HomePageScreen> {
                               // Add your carousel items here
                               Container(
                                 decoration: BoxDecoration(
-                                    border: Border.all(),
-                                    // color: Colors.blue,
                                     borderRadius: BorderRadius.circular(10),
                                     image: const DecorationImage(
                                         image: AssetImage(
                                             'asset/9233a9bf83cb10537e8dbe32224739f7.jpg'),
                                         fit: BoxFit.cover)),
-                               
                               ),
                               Container(
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(10),
-                                 
+
                                   // color: Colors.green,
                                   image: const DecorationImage(
                                       image: AssetImage(
                                           'asset/d96044445b34de730fb33959fa2506bd.jpg'),
                                       fit: BoxFit.cover),
                                 ),
-                                
                               ),
                               // Add more items as needed
                             ],
                             options: CarouselOptions(
                               height: 200,
-                              aspectRatio: 15/ 9,
+                              aspectRatio: 15 / 9,
                               viewportFraction: 0.8,
                               initialPage: 0,
                               enableInfiniteScroll: true,
@@ -163,40 +129,40 @@ class _HomePageScreenState extends State<HomePageScreen> {
                           ),
                         ),
                         box,
-                        const Padding(
-                          padding: EdgeInsets.only(left: 20),
-                          child: SingleChildScrollView(
-                            scrollDirection: Axis.horizontal,
-                            child: Row(
-                              children: [
-                                CustomeScroll(
-                                  icon: Icon(Icons.more_horiz),
-                                  text: Text('data'),
-                                ),
-                                boxW,
-                                CustomeScroll(
-                                  icon: Icon(Icons.more_horiz),
-                                  text: Text('data'),
-                                ),
-                                boxW,
-                                CustomeScroll(
-                                  icon: Icon(Icons.more_horiz),
-                                  text: Text('data'),
-                                ),
-                                boxW,
-                                CustomeScroll(
-                                  icon: Icon(Icons.more_horiz),
-                                  text: Text('data'),
-                                ),
-                                boxW,
-                                CustomeScroll(
-                                  icon: Icon(Icons.more_horiz),
-                                  text: Text('data'),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
+                        // const  Padding(
+                        //   padding: EdgeInsets.only(left: 20),
+                        //   child: SingleChildScrollView(
+                        //     scrollDirection: Axis.horizontal,
+                        //     child: Row(
+                        //       children: [
+                        //         CustomeScroll(
+                        //           icon: Icon(Icons.more_horiz),
+                        //           text: Text('d'),
+                        //         ),
+                        //         boxW,
+                        //         CustomeScroll(
+                        //           icon: Icon(Icons.more_horiz),
+                        //           text: Text('data'),
+                        //         ),
+                        //         boxW,
+                        //         CustomeScroll(
+                        //           icon: Icon(Icons.more_horiz),
+                        //           text: Text('data'),
+                        //         ),
+                        //         boxW,
+                        //         CustomeScroll(
+                        //           icon: Icon(Icons.more_horiz),
+                        //           text: Text('data'),
+                        //         ),
+                        //         boxW,
+                        //         CustomeScroll(
+                        //           icon: Icon(Icons.more_horiz),
+                        //           text: Text('data'),
+                        //         ),
+                        //       ],
+                        //     ),
+                        //   ),
+                        // ),
                         box,
                         Row(
                           children: [
@@ -207,7 +173,11 @@ class _HomePageScreenState extends State<HomePageScreen> {
                                   child: GestureDetector(
                                     behavior: HitTestBehavior.translucent,
                                     onTap: () {
-                                      Navigator.push(context, MaterialPageRoute(builder: (context)=> const GoogleAdScreen()));
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  const GoogleAdScreen()));
                                     },
                                     child: Text(
                                       'Our Docters',
@@ -228,6 +198,10 @@ class _HomePageScreenState extends State<HomePageScreen> {
   }
 }
 
+// bool _showFirstImage = true;
+// late Timer _timer;
+Greetings greetings = Greetings();
+
 class CustomeScroll extends StatelessWidget {
   const CustomeScroll({
     super.key,
@@ -247,13 +221,9 @@ class CustomeScroll extends StatelessWidget {
           color: const Color.fromARGB(255, 241, 237, 235),
         ),
         child: TextButton.icon(
-            onPressed: () {},
-            icon: icon,
-            label: text,
+          onPressed: () {},
+          icon: icon,
+          label: text,
         ));
-            
-
-            
-            
   }
 }

@@ -1,22 +1,13 @@
-// import 'package:flutter/material.dart';
 
-// TextEditingController userNameController = TextEditingController();
-// TextEditingController phoneNumberController = TextEditingController();
-// TextEditingController yearOldController = TextEditingController();
-// TextEditingController categoryController = TextEditingController();
-// TextEditingController placeController = TextEditingController();
+ 
+ void lists(List<String>sections,int? index){
+  sections=[
+  "Fever",
+  "News",
+  "Hospitality",
+  "vegons"
 
-// List<String> addingDoctorsHintTextes = [
-//   'username',
-//   'phonenumber',
-//   'expiriance',
-//   'catagory',
-//   'place',
-// ];
-// List<TextEditingController> updatingDoctorsControllers = [
-//   userNameController,
-//   phoneNumberController,
-//   yearOldController,
-//   categoryController,
-//   placeController
-// ];
+ ];
+
+ }
+
