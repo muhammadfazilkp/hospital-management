@@ -129,41 +129,7 @@ class HomePageScreen extends StatelessWidget {
                           ),
                         ),
                         box,
-                        // const  Padding(
-                        //   padding: EdgeInsets.only(left: 20),
-                        //   child: SingleChildScrollView(
-                        //     scrollDirection: Axis.horizontal,
-                        //     child: Row(
-                        //       children: [
-                        //         CustomeScroll(
-                        //           icon: Icon(Icons.more_horiz),
-                        //           text: Text('d'),
-                        //         ),
-                        //         boxW,
-                        //         CustomeScroll(
-                        //           icon: Icon(Icons.more_horiz),
-                        //           text: Text('data'),
-                        //         ),
-                        //         boxW,
-                        //         CustomeScroll(
-                        //           icon: Icon(Icons.more_horiz),
-                        //           text: Text('data'),
-                        //         ),
-                        //         boxW,
-                        //         CustomeScroll(
-                        //           icon: Icon(Icons.more_horiz),
-                        //           text: Text('data'),
-                        //         ),
-                        //         boxW,
-                        //         CustomeScroll(
-                        //           icon: Icon(Icons.more_horiz),
-                        //           text: Text('data'),
-                        //         ),
-                        //       ],
-                        //     ),
-                        //   ),
-                        // ),
-                        box,
+                   
                         Row(
                           children: [
                             Align(

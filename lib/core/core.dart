@@ -8,7 +8,6 @@ const SizedBox boxW = SizedBox(
   width: 20,
 );
 
-//  fonts
 
 TextStyle fonts = GoogleFonts.kadwa(
     textStyle: const TextStyle(color: Colors.black, fontSize: 13));

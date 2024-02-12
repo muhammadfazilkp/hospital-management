@@ -156,7 +156,7 @@ class LoginPageScreen extends StatelessWidget {
                       alignment: Alignment.bottomCenter,
                       child: Text(
                         'By Clicking proceed, I agree to the',
-                        style: GoogleFonts.kadwa(
+                        style: GoogleFonts.poppins(
                             textStyle: const TextStyle(
                                 color: Colors.black, fontSize: 12)),
                       ),
@@ -171,7 +171,7 @@ class LoginPageScreen extends StatelessWidget {
                         },
                         child: Text(
                           'Terms & Condtions',
-                          style: GoogleFonts.kadwa(
+                          style: GoogleFonts.poppins(
                               textStyle: const TextStyle(
                                   color: Colors.black, fontSize: 10)),
                         ))

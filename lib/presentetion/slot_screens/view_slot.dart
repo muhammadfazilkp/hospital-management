@@ -196,6 +196,7 @@ class SloteCheckingScreen extends StatelessWidget {
                                           .docs[valueIndex.index!]
                                           .data() as Map<String, dynamic>);
 
+                                  // ignore: use_build_context_synchronously
                                   Provider.of<SlotChekingProvider>(context,
                                           listen: false)
                                       .getDate(

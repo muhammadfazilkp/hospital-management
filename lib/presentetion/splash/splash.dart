@@ -47,20 +47,17 @@ class _SpalashScreenState extends State<SpalashScreen> {
         height: double.infinity,
         width: double.infinity,
         decoration: const BoxDecoration(
-          image: DecorationImage(
-              image: AssetImage(
-                  'asset/happy-doctor-holding-clipboard-with-patients_1098-2176.avif'),
-              fit: BoxFit.scaleDown),
-        ),
-        child:  const SingleChildScrollView(
-          scrollDirection: Axis.vertical,
-          child: Align(
-            alignment: Alignment.topLeft,
-            
-          ),
-        ),
+          color: Colors.white
+        //   image: DecorationImage(
+
+        //       image: AssetImage(
+        //           'asset/happy-doctor-holding-clipboard-with-patients_1098-2176.avif'),
+        //       fit: BoxFit.scaleDown),
+        // ),
+       
       ),
-    );
+      )
+      );
   }
 }
 

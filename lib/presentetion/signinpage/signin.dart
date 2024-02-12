@@ -46,8 +46,8 @@ class _SigninPageState extends State<SigninPage> {
               padding: const EdgeInsets.fromLTRB(20, 20, 0, 0),
               child: Align(
                 alignment: Alignment.bottomLeft,
-                child: Text('Sign Up',
-                    style: GoogleFonts.kadwa(
+                child: Text('SignUp',
+                    style: GoogleFonts.poppins(
                       textStyle: const TextStyle(
                         decoration: TextDecoration.none,
                         fontSize: 30,
@@ -152,14 +152,14 @@ class _SigninPageState extends State<SigninPage> {
                             (route) => false);
                       }
                     },
-                    style: const ButtonStyle(
+                    style: ButtonStyle(
                       backgroundColor:
-                          MaterialStatePropertyAll(Colors.blueGrey),
+                          MaterialStatePropertyAll(Colors.green[100]),
                     ),
                     child: Text(
-                      'Sign Up',
-                      style: GoogleFonts.kadwa(
-                          textStyle: const TextStyle(fontSize: 15)),
+                      'SignUp',
+                      style: GoogleFonts.poppins(
+                          textStyle: const TextStyle(fontSize: 15,color: Colors.black)),
                     )),
               ),
             ),
