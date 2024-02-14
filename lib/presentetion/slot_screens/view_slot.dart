@@ -44,20 +44,37 @@ class SloteCheckingScreen extends StatelessWidget {
                   children: [
                     Padding(
                       padding: const EdgeInsets.all(8.0),
+                      child: Align(
+                          alignment: Alignment.topLeft,
+                          child: GestureDetector(
+                              behavior: HitTestBehavior.translucent,
+                              onTap: () {
+                                Navigator.pop(context);
+                              },
+                              child: const Icon(
+                                Icons.arrow_back_ios,
+                                size: 17,
+                              ))),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
                       child: Container(
                         height: 300,
                         width: double.infinity,
                         // color:Colors.amber,
                         decoration: BoxDecoration(
-                            image: DecorationImage(
-                                image: NetworkImage(doctor.image),
-                                fit: BoxFit.cover)),
+                          image: DecorationImage(
+                              image: NetworkImage(doctor.image),
+                              fit: BoxFit.cover),
+                          borderRadius: BorderRadiusDirectional.circular(10),
+                        ),
                       ),
                     ),
                     box,
                     Align(
                       alignment: Alignment.centerLeft,
                       child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           Padding(
                             padding: const EdgeInsets.only(left: 15),
@@ -92,6 +109,7 @@ class SloteCheckingScreen extends StatelessWidget {
                     Consumer<SlotChekingProvider>(
                       builder: (context, timeConvert, child) => Expanded(
                         child: GridView.builder(
+                          physics: const NeverScrollableScrollPhysics(),
                           gridDelegate:
                               const SliverGridDelegateWithFixedCrossAxisCount(
                                   crossAxisCount: 4),
@@ -229,7 +247,8 @@ class SloteCheckingScreen extends StatelessWidget {
                                 backgroundColor: const MaterialStatePropertyAll(
                                     Colors.green),
                               ),
-                              child: Text('book now', style: booking)),
+                              child:
+                                  Text('book your slote now', style: booking)),
                         ),
                       ),
                     )

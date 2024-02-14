@@ -1,7 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/controller/provider/admin_side/admin_adding_side.dart';
-import 'package:flutter_application_1/controller/provider/signin_and_login/signin.dart';
 import 'package:flutter_application_1/controller/provider/userprofile_updating_provider/user_profile.dart';
 import 'package:flutter_application_1/core/core.dart';
 import 'package:flutter_application_1/presentetion/bottom_nav_page/bottom_nav.dart';
@@ -43,21 +42,25 @@ class _SpalashScreenState extends State<SpalashScreen> {
         .getUserDetailsByUID();
     doubleCheck(context);
     return Scaffold(
-      body: Container(
-        height: double.infinity,
-        width: double.infinity,
-        decoration: const BoxDecoration(
-          color: Colors.white
-        //   image: DecorationImage(
+        body: Container(
+      height: double.infinity,
+      width: double.infinity,
+      decoration: const BoxDecoration(color: Colors.white
+          //   image: DecorationImage(
 
-        //       image: AssetImage(
-        //           'asset/happy-doctor-holding-clipboard-with-patients_1098-2176.avif'),
-        //       fit: BoxFit.scaleDown),
-        // ),
-       
+          //       image: AssetImage(
+          //           'asset/happy-doctor-holding-clipboard-with-patients_1098-2176.avif'),
+          //       fit: BoxFit.scaleDown),
+          // ),
+
+          ),
+      child: Center(
+        child: Text(
+          'data',
+          style: homep,
+        ),
       ),
-      )
-      );
+    ));
   }
 }
 
